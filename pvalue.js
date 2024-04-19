@@ -1,7 +1,4 @@
-var sd = 0.5
-var x_max = 5
-var x_step = 0.01
-var x_range = d3.range(-x_max, x_max, x_step)
+import { drawDistribution } from "./utils/graph.js"
 
 var margin = ({
     top: 40,
@@ -12,12 +9,20 @@ var margin = ({
 var width = 700
 var height = 500
 
-var svg = d3.select('#graph').append("svg").attr("width", width).attr("height", height);
+var introSvg = d3.select("#intro-graph").append("svg").attr("width", width).attr("height", height);
+var nullHypothesisMu = 35
+var nullHypothesisSd = 2
+var nullHypothesisXmin = nullHypothesisMu - (5 * nullHypothesisSd)
+var nullHypothesisXmax = nullHypothesisMu + (5 * nullHypothesisSd)
+var introData = generateData(d3.range(nullHypothesisXmin, nullHypothesisXmax, 0.01), nullHypothesisMu, nullHypothesisSd)
+drawDistribution(introSvg, introData, width, height, margin)
+
+var svg = d3.select('#experimental-graph').append("svg").attr("width", width).attr("height", height);
 var g = svg.append("g")
 
-function normal_pdf(input, current_mu) {
-    let expression_1 = 1/(Math.sqrt(2*Math.PI*sd))
-    let z = (input - current_mu) / sd
+function normal_pdf(input, currentMu, currentSd) {
+    let expression_1 = 1/(Math.sqrt(2*Math.PI*currentSd))
+    let z = (input - currentMu) / currentSd
     let expression_2 = Math.exp(-0.5*(z**2))
   
     return expression_1 * expression_2
@@ -27,8 +32,8 @@ function z_score(mu, observed, sd) {
     return (observed - mu) / sd
 }
 
-function generateData(current_mu) {
-    var data = x_range.map(function(d) {return {"x": d, "z": z_score(current_mu, d, sd), "y": normal_pdf(d, current_mu)}})
+function generateData(xRange, currentMu, currentSd) {
+    var data = xRange.map(function(d) {return {"x": d, "z": z_score(currentMu, d, currentSd), "y": normal_pdf(d, currentMu, currentSd)}})
     return data
 }
 
@@ -86,11 +91,15 @@ printMu.innerHTML = scrubber_mu.value;
 var printSd = document.getElementById("current_sd");
 printSd.innerHTML = scrubber_sd.value;
 
-drawGraph(generateData(scrubber_mu.value))
+var sd = 0.5
+var x_max = 5
+var x_step = 0.01
+var x_range = d3.range(-x_max, x_max, x_step)
+drawGraph(generateData(x_range, scrubber_mu.value, sd))
 
 scrubber_mu.oninput = function() {
     let scrubbedMu = parseFloat(this.value)
     printMu.innerHTML = scrubbedMu;
-    var data = generateData(this.value)
+    var data = generateData(x_range, this.value, sd)
     drawGraph(data)
 }

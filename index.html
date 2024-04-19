@@ -4,10 +4,22 @@
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistics Interactive</title>
+    <title>P-Value</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <h1>P-Value</h1>
+    <br>
+    <p class="inline-block">Your local pizzeria advertises an average delivery time of exactly 30 minutes. 
+        You're pretty sure it takes longer than that, so you collect some
+        data from 40 neighbors on how long it took to deliver their pizzas.</p>
+    <br>
+    <p class="inline-block">The average time of their deliveries is 35 minutes, with a standard
+        deviation of 2 minutes. Is your pizzeria's advertising accurate?</p>
+    <br>
+    <p class="inline-block">Let's say the pizzeria is correct that the average delivery time is 30 minutes.</p>
+    <div id="intro-graph"></div>
+
     <div class="inline-block">
         <p>μ</p>
         <input type="range" class="scrubber" id="scrubber_mu">
@@ -20,7 +32,8 @@
         <p id="current_sd"></p>
     </div>
 
-    <div id="graph"></div>
-    <script src="pvalue.js"></script>
+    <div id="experimental-graph"></div>
+    <script src="pvalue.js" type="module"></script>
+    <script src="utils/graph.js" type="module"></script>
 </body>
 </html>

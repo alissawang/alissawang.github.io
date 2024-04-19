@@ -12,11 +12,25 @@ body {
     font-family: monospace;
 }
 
-.inline-block{
-    display: flex;
-    column-gap: 5px;
+h1 {
+    margin: auto;
+    width: 50%;
 }
 
-.inline-block-sd {
-    display: inline-block;
+.inline-block {
+    display: flex;
+    column-gap: 5px;
+    margin: auto;
+    width: 50%;
+}
+
+.multiline {
+    white-space: pre-wrap;
+    margin: auto;
+    width: 50%;
+}
+
+#graph {
+    margin: auto;
+    width: 50%;
 }

@@ -30,6 +30,16 @@ h1 {
     width: 50%;
 }
 
+.coordinate-display {
+    display: blocks;
+    position: absolute;
+}
+
+#intro-graph {
+    margin: auto;
+    width: 50%;
+}
+
 #graph {
     margin: auto;
     width: 50%;

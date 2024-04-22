@@ -1,5 +1,4 @@
 export function drawDistribution(svg, dataArray, width, height, margins) {
-    console.log(dataArray)
     let xDomain = d3.extent(dataArray, d => d.x)
     let xGraphValues = d3.scaleLinear()
         .domain(xDomain)
@@ -31,8 +30,45 @@ export function drawDistribution(svg, dataArray, width, height, margins) {
         .data([dataArray])
         .attr("fill", "none")
         .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
+        .attr("stroke-width", 5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("d", line);
+        .attr("d", line)
+    svg.append("path")
+        .attr("class", "curve")
+        .data([dataArray])
+        .attr("fill", "none")
+        .attr("stroke-opacity", 0)
+        .attr("stroke", "white")
+        .attr("stroke-width", 50)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", line)
+        .on("mousemove", function(event, d) {
+            d3.select(this)
+
+            svg.selectAll(".coord-circle").remove()
+
+            let coords = d3.mouse(this)
+            let xRaw = xGraphValues.invert(coords[0])
+            let x = d3.format(".2f")(xRaw)
+            let yRaw = dataArray.find(d => d.x == x).y
+            let y = d3.format(".2f")(yRaw)
+            let coordsText = "Observed mean: " + x + " mins <br>Probability: " + y
+
+            d3.select(".coordinate-display")
+                .style("opacity", 1)
+                .html(coordsText)
+                .style("left", coords[0] + 100 + "px")
+                .style("top", coords[1] + 150 + "px")
+
+            svg
+                .append("circle")
+                .attr("class", "coord-circle")
+                .attr("cx",  coords[0] + "px")
+                .attr("cy", yGraphValues(yRaw) + "px")
+                .attr("r", "10px")
+                .style("fill", "steelblue")
+        })
+
 }

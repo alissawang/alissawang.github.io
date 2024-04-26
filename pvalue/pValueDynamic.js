@@ -1,5 +1,5 @@
-import { drawDistribution } from "./utils/graph.js"
-import { generateData } from "./utils/data.js"
+import { drawDistribution } from "../utils/graph.js"
+import { generateData } from "../utils/data.js"
 
 var margin = ({
     top: 40,

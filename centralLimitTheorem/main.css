@@ -1,0 +1,34 @@
+body {
+    font-family: Arial;
+    /* font-weight: light; */
+}
+
+#beta-graph {
+    margin: auto;
+    width: 50%;
+}
+
+#sampled-graph {
+    margin: auto;
+    width: 50%;
+}
+
+#random-sample {
+    display: flex;
+    justify-content: center;
+}
+
+#random-sample button {
+    padding: 0.5em 0.5em;
+    background-color: steelblue;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: inherit;
+}
+
+#random-sample button:active {
+    background-color: #b9d4eb
+}

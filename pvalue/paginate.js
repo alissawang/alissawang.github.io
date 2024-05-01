@@ -1,12 +1,14 @@
 const page1 = document.querySelector("#page1");
 const page2 = document.querySelector("#page2");
+const page3 = document.querySelector("#page3");
+
 const prevButton = document.querySelector("#prev");
 const nextButton = document.querySelector("#next");
 const pageNumberValue = document.querySelector("#page-number")
 
 let index = 0;
 
-const pages = [page1, page2]
+const pages = [page1, page2, page3]
 
 function hidePage() {
     let pageToHide = pages[index];

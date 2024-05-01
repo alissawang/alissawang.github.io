@@ -1,12 +1,12 @@
 import { mean, betaPdf } from "../utils/math.js"
 import { drawDistribution, emptyGraph } from "../utils/graph.js"
-import { randomSample, randomChoice } from "../utils/data.js"
+import { arraySampleDistribution } from "../utils/data.js"
 
+var xStep = 0.001
 var xRange = d3.range(0, 1, 0.001)
-var alpha = 8
+var alpha = 14
 var beta = 4
 var dataArray = xRange.map(function(d) {return {"x": d, "y": betaPdf(d, alpha, beta)}})
-
 
 var margins = ({
     top: 40,
@@ -26,16 +26,24 @@ var svg2 = d3.select('#sampled-graph').append("svg").attr("width", width2).attr(
 svg2.append("g")
 
 var [betaGraphXValues, betaGraphYValues] = drawDistribution(svg1, dataArray, width1, height1, margins, false)
-var sampleXRange = dataArray.map(d => d.x)
-var sampleYRange = dataArray.map(d => d.y)
-var [mainGraphXValues, mainGraphYValues] = emptyGraph(svg2, sampleXRange, sampleYRange, width2, height2, margins)
+var histXRange = d3.range(0.6, 1, 0.05)
+var histYRange = d3.range(0, 15)
+var [mainGraphXValues, mainGraphYValues] = emptyGraph(svg2, histXRange, histYRange, width2, height2, margins)
+
 
 var samplingButton = document.querySelector("#sampling-button")
+let samplingArray = []
+let meanBins = d3.histogram()
+    .domain(mainGraphXValues.domain())
+    .thresholds(50)
+
 samplingButton.addEventListener("click", () => {
-    // let rand = randomChoice()
-    let sampledPoints = randomSample(dataArray, 10)
+    let sampledPoints = arraySampleDistribution(dataArray, 30)
     let sampledX = sampledPoints.map(d => d.x)
     let sampleMean = mean(sampledX)
+
+    samplingArray.push(sampleMean)
+    var sampleMeanBins = meanBins(samplingArray)
 
     var plottedPoints = svg1.selectAll(".sampled-points")
         .data([sampledPoints])
@@ -62,11 +70,16 @@ samplingButton.addEventListener("click", () => {
         .attr("cx", d => betaGraphXValues(sampleMean))
         .attr("cy", d => betaGraphYValues(betaPdf(sampleMean, alpha, beta)))
 
-    svg2.append("circle")
-        .attr("class", "sample-mean")
-        .attr("fill", "green")
-        .attr("r", "10")
-        .attr("cx", d => mainGraphXValues(sampleMean))
-        .attr("cy", d => mainGraphYValues(betaPdf(sampleMean, alpha, beta)))
+    svg2.selectAll("rect")
+        .data([sampleMeanBins]).exit().remove()
+    svg2.selectAll("rect")
+        .data(sampleMeanBins)
+        .enter()
+        .append("rect")
+            .style("fill", "green")
+            .attr("x", 1)
+            .attr("transform", function(d) { return "translate(" + mainGraphXValues(d.x0) + "," + mainGraphYValues(d.length) + ")"; })
+            .attr("width", function(d) { return mainGraphXValues(d.x1) - mainGraphXValues(d.x0); })
+            .attr("height", function(d) { return height2 - margins.bottom - mainGraphYValues(d.length); })
 })
 

@@ -1,11 +1,33 @@
 body {
-    font-family: Arial;
-    /* font-weight: light; */
+    font-family: "lato";
+    font-weight: 200;
+}
+
+h1 {
+    color: #95cbf5;
+}
+
+.example-distributions {
+    display: inline-block;
+}
+
+p {
+    color: #95cbf5;
 }
 
 #beta-graph {
-    margin: auto;
-    width: 50%;
+    float: left;
+    cursor: pointer;
+}
+
+#uniform-graph {
+    float: right;
+    cursor: pointer;
+}
+
+#bernoulli-graph {
+    float: right;
+    cursor: pointer;
 }
 
 #sampled-graph {

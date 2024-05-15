@@ -15,6 +15,14 @@ export function betaPdf(x, a, b) {
     return (Math.pow(x, a - 1) * Math.pow(1 - x, b - 1)) / betaFunc(a, b)
 }
 
+export function bernoulliPdf(x, p) {
+    return (p ** x) * ((1-p) ** (1-x))
+}
+
+export function uniformPdf(x, a, b) {
+    return 1/Math.abs(b-a)
+}
+
 export function betaFunc(a, b) {
     return (factorial(a - 1) * factorial(b-1))/factorial(a + b -1)
 }

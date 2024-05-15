@@ -11,6 +11,12 @@ class distributionGraph {
         this.graphXValues = graphXValues
         this.graphYValues = graphYValues
     }
+
+    clear() {
+        this.svg.style("outline", "none")
+        this.svg.selectAll("circle").remove()
+        this.svg.select("#sample-mean-text").remove()
+    }
 }
 
 var xRange = d3.range(0, 1, 0.001)
@@ -39,14 +45,11 @@ var betaSvg = d3.select('#beta-graph')
     .attr("height", height)
     .style("outline", "thin solid steelblue")
     .on("click", function() {
-        d3.select(this).style("outline", "thin solid steelblue")
-        selectedDistribution.svg.style("outline", "none")
-        selectedDistribution.svg.selectAll("circle")
-            .data([]).exit().remove()
-        sampleMeansSvg.selectAll("rect")
-            .data([]).exit().remove()
+        selectedDistribution.clear()
+        sampleMeansSvg.selectAll("rect").remove()
         samplingArray = []
         selectedDistribution = betaGraph
+        d3.select(this).style("outline", "thin solid steelblue")
     });
 
 var uniSvg = d3.select('#uniform-graph')
@@ -55,14 +58,11 @@ var uniSvg = d3.select('#uniform-graph')
     .attr("height", height)
     .style("outline", "none")
     .on("click", function() {
-        d3.select(this).style("outline", "thin solid steelblue")
-        selectedDistribution.svg.style("outline", "none")
-        selectedDistribution.svg.selectAll("circle")
-            .data([]).exit().remove()
-        sampleMeansSvg.selectAll("rect")
-            .data([]).exit().remove()
+        selectedDistribution.clear()
+        sampleMeansSvg.selectAll("rect").remove()
         samplingArray = []
         selectedDistribution = uniformGraph
+        d3.select(this).style("outline", "thin solid steelblue")
     });
 
 var bernoulliSvg = d3.select('#bernoulli-graph')
@@ -71,14 +71,11 @@ var bernoulliSvg = d3.select('#bernoulli-graph')
     .attr("height", height)
     .style("outline", "none")
     .on("click", function() {
-        d3.select(this).style("outline", "thin solid steelblue")
-        selectedDistribution.svg.style("outline", "none")
-        selectedDistribution.svg.selectAll("circle")
-            .data([]).exit().remove()
-        sampleMeansSvg.selectAll("rect")
-            .data([]).exit().remove()
+        selectedDistribution.clear()
+        sampleMeansSvg.selectAll("rect").remove()
         samplingArray = []
         selectedDistribution = bernoulliGraph
+        d3.select(this).style("outline", "thin solid steelblue")
     });
 
 var [betaGraphXValues, betaGraphYValues] = drawDistribution(betaSvg, betaDataArray, width, height, margins, false)
@@ -123,29 +120,84 @@ samplingButton.addEventListener("mousedown", () => {
         .data([sampledPoints])
     plottedPoints.exit().remove()
 
-    var plottedMean = selectedDistribution.svg.selectAll(".sample-mean")
-        .data(sampleMean)
-    plottedMean.exit().remove()
+    selectedDistribution.svg.selectAll(".sample-mean").remove()
 
-    var newPlottedPoints = plottedPoints
-        .data(sampledPoints)
-        .enter()
-        .append("circle")
-        .attr("class", "sampled-points")
-        .style("fill", "steelblue")
-        .attr("r", "7")
-        .attr("cx", d => selectedDistribution.graphXValues(d.x))
-        .attr("cy", d => selectedDistribution.graphYValues(d.y))
+    selectedDistribution.svg.selectAll("#sample-mean-text").remove()
 
-    selectedDistribution.svg.append("circle")
-        .attr("class", "sample-mean")
+    if (selectedDistribution == bernoulliGraph) {
+        let sampleClass0 = sampledPoints.filter(d => d.x == 0).length
+        let sampleClass1 = sampledPoints.filter(d => d.x == 1).length
+        let sampledPoints0 = d3.range(0, sampleClass0).map((idx) => {
+            let row = Math.floor(idx/5)
+            return {"x": 0.17 + (0.05 * (idx - row * 5)), "y": 0.06 + (row * 0.09)}
+        })
+        let sampledPoints1 = d3.range(0, sampleClass1).map((idx) => {
+            let row = Math.floor(idx/5)
+            return {"x": 0.62 + (0.05 * (idx - row * 5)), "y": 0.06 + (row * 0.09)}
+        })
+
+        let xGraphValues = d3.scaleLinear()
+            .domain([0, 1])
+            .range([margins.left, width - margins.right])
+        let yGraphValues = d3.scaleLinear()
+            .domain([0, 1])
+            .range([height - margins.bottom, margins.top])
+    
+        selectedDistribution.svg.append("g")
+            .attr("transform", `translate(0,${height - margins.bottom})`)
+            .call(d3.axisBottom(xGraphValues).tickValues([]));
+        selectedDistribution.svg.append("g")
+            .attr("transform", `translate(${margins.left},0)`)
+            .call(d3.axisLeft(yGraphValues).tickValues([]))
+
+        selectedDistribution.svg.selectAll("#class0")
+            .data(sampledPoints0)
+            .enter()
+            .append("circle")
+            .attr("class", "sampled-points")
+            .attr("id", "class0")
+            .style("fill", "lightblue")
+            .attr("r", "8")
+            .attr("cx", d => xGraphValues(d.x))
+            .attr("cy", d => yGraphValues(d.y))
+        selectedDistribution.svg.selectAll("#class1")
+            .data(sampledPoints1)
+            .enter()
+            .append("circle")
+            .attr("class", "sampled-points")
+            .attr("id", "class1")
+            .style("fill", "#0e3c54")
+            .attr("r", "8")
+            .attr("cx", d => xGraphValues(d.x))
+            .attr("cy", d => yGraphValues(d.y))
+    } else {
+        plottedPoints
+            .data(sampledPoints)
+            .enter()
+            .append("circle")
+            .attr("class", "sampled-points")
+            .style("fill", "steelblue")
+            .attr("r", "7")
+            .attr("cx", d => selectedDistribution.graphXValues(d.x))
+            .attr("cy", d => selectedDistribution.graphYValues(d.y))
+
+        selectedDistribution.svg.append("circle")
+            .attr("class", "sample-mean")
+            .attr("fill", "green")
+            .attr("r", "7")
+            .attr("cx", d => selectedDistribution.graphXValues(sampleMean))
+            .attr("cy", d => selectedDistribution.graphYValues(selectedDistribution.pdf(sampleMean, alpha, beta)))
+    }
+
+    selectedDistribution.svg.append("text")
+        .attr("id", "sample-mean-text")
+        .attr("x", width / 2)
+        .attr("y", height - (margins.bottom / 3))
         .attr("fill", "green")
-        .attr("r", "7")
-        .attr("cx", d => selectedDistribution.graphXValues(sampleMean))
-        .attr("cy", d => selectedDistribution.graphYValues(selectedDistribution.pdf(sampleMean, alpha, beta)))
+        .attr("text-anchor", "middle")
+        .text(`x̄ = ${Math.round(sampleMean * 100, 2) / 100}`)
 
-    sampleMeansSvg.selectAll("rect")
-        .data([sampleMeanBins]).exit().remove()
+    sampleMeansSvg.selectAll("rect").remove()
     sampleMeansSvg.selectAll("rect")
         .data(sampleMeanBins)
         .enter()

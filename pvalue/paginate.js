@@ -12,13 +12,11 @@ const pages = [page1, page2, page3]
 
 function hidePage() {
     let pageToHide = pages[index];
-    console.log(index)
     pageToHide.style.display = "none";
 }
 
 function showPage() {
     let pageToDisplay = pages[index];
-    console.log(index)
     pageToDisplay.style.display = "block"
     console.log(pageToDisplay.display)
 

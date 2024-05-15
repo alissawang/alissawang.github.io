@@ -27,7 +27,7 @@ export function sampleDistribution(probabilities) {
         cumProbabilities += probabilities[idx].y
         idx ++;
     }
-    return probabilities[idx]
+    return probabilities[idx - 1]
 }
 
 export function arraySampleDistribution(probabilities, n) {

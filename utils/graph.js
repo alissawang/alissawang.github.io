@@ -105,3 +105,33 @@ export function drawDistribution(svg, dataArray, width, height, margins, mouseov
     }
     return [xGraphValues, yGraphValues]
 }
+
+export function drawBarGraph(svg, dataArray, maxY, width, height, margins) {
+    var xValues = [... new Set(dataArray.map(d => d.x))]
+    var yRange = [0, maxY]
+
+    var xAxis = d3.scaleBand()
+        .domain(xValues)
+        .range([margins.left, width - margins.right])
+        .padding(0.2);
+    var yAxis = d3.scaleLinear()
+        .domain(yRange)
+        .range([height - margins.bottom, margins.top])
+    svg.append("g")
+        .attr("transform", `translate(0, ${height - margins.bottom})`)
+        .call(d3.axisBottom(xAxis));
+    svg.append("g")
+        .attr("transform", `translate(${margins.left},0)`)
+        .call(d3.axisLeft(yAxis));
+    svg.selectAll()
+        .data(dataArray)
+        .enter()
+        .append("rect")
+            .attr("x", (d) => xAxis(d.x))
+            .attr("y", (d) => yAxis(d.y))
+            .attr("width", xAxis.bandwidth())
+            .attr("height", (d) => {return height - margins.bottom - yAxis(d.y)})
+            .attr("fill", "steelblue")
+
+    return [xAxis, yAxis]
+    }

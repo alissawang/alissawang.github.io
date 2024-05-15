@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
 <head>
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distributions</title>
+    <title>Central Limit Theorem</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 </head>
 <body>
-    <div id="beta-graph">
+    <h1>The Central Limit Theorem</h1>
+    <p>Choose a distribution to sample from:</p>
+    <div class = "example-distributions">
+        <div id="beta-graph"></div>
+        <div id="uniform-graph"></div>
+        <div id="bernoulli-graph"></div>
     </div>
     <div id="random-sample">
         <button id="sampling-button">Random Sample</button>
     </div>
     <div id="sampled-graph">
     </div>
-    <script src="betaDistribution.js" type="module"></script>
+    <script src="clt.js" type="module"></script>
 </body>

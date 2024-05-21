@@ -59,7 +59,7 @@ export function drawDistribution(svg, dataArray, width, height, margins, mouseov
         .attr("class", "curve")
         .data([dataArray])
         .attr("fill", "none")
-        .attr("stroke", "steelblue")
+        .attr("stroke", "#6bbfe3")
         .attr("stroke-width", 5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -100,7 +100,7 @@ export function drawDistribution(svg, dataArray, width, height, margins, mouseov
                 .attr("cx",  coords[0] + "px")
                 .attr("cy", yGraphValues(yRaw) + "px")
                 .attr("r", "10px")
-                .style("fill", "steelblue")
+                .style("fill", "#6bbfe3")
         })
     }
     return [xGraphValues, yGraphValues]
@@ -131,7 +131,7 @@ export function drawBarGraph(svg, dataArray, maxY, width, height, margins) {
             .attr("y", (d) => yAxis(d.y))
             .attr("width", xAxis.bandwidth())
             .attr("height", (d) => {return height - margins.bottom - yAxis(d.y)})
-            .attr("fill", "steelblue")
+            .attr("fill", "#6bbfe3")
 
     return [xAxis, yAxis]
     }

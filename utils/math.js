@@ -1,6 +1,9 @@
+export function sum(numberArray) {
+    return numberArray.reduce((partialSum, x) => partialSum + x, 0) 
+}
+
 export function mean(numberArray) {
-    let sum = numberArray.reduce((partialSum, x) => partialSum + x, 0) 
-    return sum / numberArray.length
+    return sum(numberArray) / numberArray.length
 }
 
 export function normalPdf(input, currentMu, currentSd) {

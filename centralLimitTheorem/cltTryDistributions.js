@@ -101,7 +101,6 @@ var histXRange = d3.range(0, 1, 0.05)
 var histYRange = d3.range(0, 20)
 var [mainGraphXValues, mainGraphYValues] = emptyGraph(sampleMeansSvg, histXRange, histYRange, width2, height2, margins, 2)
 
-
 var samplingButton = document.querySelector("#sampling-button")
 let samplingArray = []
 let meanBins = d3.histogram()
@@ -119,9 +118,7 @@ samplingButton.addEventListener("mousedown", () => {
     var plottedPoints = selectedDistribution.svg.selectAll(".sampled-points")
         .data([sampledPoints])
     plottedPoints.exit().remove()
-
-    selectedDistribution.svg.selectAll(".sample-mean").remove()
-
+    selectedDistribution.svg.selectAll("#sample-mean").remove()
     selectedDistribution.svg.selectAll("#sample-mean-text").remove()
 
     if (selectedDistribution == bernoulliGraph) {
@@ -156,7 +153,7 @@ samplingButton.addEventListener("mousedown", () => {
             .append("circle")
             .attr("class", "sampled-points")
             .attr("id", "class0")
-            .style("fill", "lightblue")
+            .style("fill", "#9fe2f5")
             .attr("r", "8")
             .attr("cx", d => xGraphValues(d.x))
             .attr("cy", d => yGraphValues(d.y))
@@ -176,14 +173,14 @@ samplingButton.addEventListener("mousedown", () => {
             .enter()
             .append("circle")
             .attr("class", "sampled-points")
-            .style("fill", "steelblue")
+            .style("fill", "#79caed")
             .attr("r", "7")
             .attr("cx", d => selectedDistribution.graphXValues(d.x))
             .attr("cy", d => selectedDistribution.graphYValues(d.y))
 
         selectedDistribution.svg.append("circle")
-            .attr("class", "sample-mean")
-            .attr("fill", "green")
+            .attr("id", "sample-mean")
+            .attr("fill", "#91ba6a")
             .attr("r", "7")
             .attr("cx", d => selectedDistribution.graphXValues(sampleMean))
             .attr("cy", d => selectedDistribution.graphYValues(selectedDistribution.pdf(sampleMean, alpha, beta)))
@@ -193,7 +190,6 @@ samplingButton.addEventListener("mousedown", () => {
         .attr("id", "sample-mean-text")
         .attr("x", width / 2)
         .attr("y", height - (margins.bottom / 3))
-        .attr("fill", "green")
         .attr("text-anchor", "middle")
         .text(`x̄ = ${Math.round(sampleMean * 100, 2) / 100}`)
 
@@ -202,10 +198,9 @@ samplingButton.addEventListener("mousedown", () => {
         .data(sampleMeanBins)
         .enter()
         .append("rect")
-            .style("fill", "green")
+            .attr("id", "sample-hist-rects")
             .attr("x", 1)
             .attr("transform", function(d) { return "translate(" + mainGraphXValues(d.x0) + "," + mainGraphYValues(d.length) + ")"; })
             .attr("width", function(d) { return mainGraphXValues(d.x1) - mainGraphXValues(d.x0) - 0.4; })
-            .attr("height", function(d) { return height2 - margins.bottom - mainGraphYValues(d.length); })
+            .attr("height", function(d) { return height2 - margins.bottom - mainGraphYValues(d.length); })    
 })
-

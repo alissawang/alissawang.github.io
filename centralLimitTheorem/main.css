@@ -1,33 +1,48 @@
 body {
-    font-family: "lato";
-    font-weight: 200;
+    font-family: "Space Grotesk";
+    color: #399ed4;
 }
 
 h1 {
-    color: #95cbf5;
+    color: #399ed4;
+    padding-left: 5%;
+}
+
+span {
+    padding: 3%;
+}
+
+p {
+    color: #399ed4;
+    padding-left: 5%;
+    padding-right: 20%;
+}
+
+ol {
+    padding-left: 10%;
 }
 
 .example-distributions {
     display: inline-block;
+    padding-left: 5%;
 }
 
-p {
-    color: #95cbf5;
-}
-
-#beta-graph {
+.graph {
     float: left;
     cursor: pointer;
 }
 
-#uniform-graph {
-    float: right;
+.scrubber {
+    width: 50%;
     cursor: pointer;
+    outline: none;
+    vertical-align: middle;
 }
 
-#bernoulli-graph {
-    float: right;
-    cursor: pointer;
+#sample-size-n {
+    vertical-align: middle;
+    font-size: 20px;
+    font-family: "Arial";
 }
 
 #sampled-graph {
@@ -53,4 +68,79 @@ p {
 
 #random-sample button:active {
     background-color: #b9d4eb
+}
+
+#sample-mean {
+    fill: #4cb009;
+}
+
+#sample-mean-text {
+    font-family: "Arial";
+    fill: #76cc2f;
+}
+
+#sample-hist-rects {
+    fill: #76cc2f;
+}
+
+#avg-sample-mean-text {
+    font-family: "Arial";
+    fill: #76cc2f;
+}
+
+#sample-size-selector {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#sample-size-graph {
+    margin: auto;
+    width: 50%;
+}
+
+#page1 {
+    display: block;
+}
+
+#page2 {
+    display: none;
+}
+
+#page3 {
+    display: none;
+}
+
+.page-buttons{
+    display:flex;
+    justify-content:center;
+    gap:2rem;
+    padding: 80px;
+    margin-bottom:100px;
+  }
+
+.page-buttons button{
+border:none;
+padding:0.95rem 1.2rem;
+background-color: #d4eeff;
+color:white;
+border-radius:100%;
+cursor:pointer
+}
+
+.arrow {
+border: solid white;
+border-width: 0 3px 3px 0;
+display: inline-block;
+padding: 3px;
+}
+
+.right {
+transform: rotate(-45deg);
+-webkit-transform: rotate(-45deg);
+}
+
+.left {
+transform: rotate(135deg);
+-webkit-transform: rotate(135deg);
 }

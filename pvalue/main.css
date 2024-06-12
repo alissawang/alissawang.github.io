@@ -63,6 +63,16 @@ transform: rotate(135deg);
 -webkit-transform: rotate(135deg);
 }
 
+#sample-1 {
+    margin: auto;
+    width: 50%;
+}
+
+#sample-values-1 {
+    fill: #9fe2f5;
+    fill-opacity: 80%;
+    mix-blend-mode: multiply;
+}
 
 #intro-graph {
     margin: auto;

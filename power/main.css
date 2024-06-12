@@ -1,0 +1,116 @@
+body {
+    font-family: "Inter";
+    color: black;
+    font-weight: 300;
+}
+
+h1 {
+    padding-left: 10%;
+} 
+
+p {
+    padding-left: 10%;
+}
+
+.scrubber {
+    margin: auto;
+    width: 50%;
+}
+
+.pop-mean-text {
+    text-anchor: middle;
+}
+
+.live-value {
+    font-size: 14px;
+}
+
+#alpha-definition {
+    color: gray;
+    font-weight: 400;
+}
+
+#power-definition {
+    color: #8fd156;
+    font-weight: 400;
+}
+
+#graph {
+    margin: auto;
+    width: 50%;
+}
+
+#distribution-1 {
+    stroke: #cccccc;
+    stroke-width: 5px;
+}
+
+#distribution-2 {
+    stroke: #8fd156;
+    stroke-width: 5px;
+}
+
+#samples-1 {
+    fill: #9fe2f5;
+    fill-opacity: 30%;
+    mix-blend-mode: multiply;
+}
+
+#samples-2 {
+    fill: #ffb0f3;
+    fill-opacity: 30%;
+    mix-blend-mode: multiply;
+}
+
+#h0-pop-mean-text {
+    fill: grey;
+    fill-opacity: 50%;
+    font-weight: 400;
+}
+
+#h1-pop-mean-text {
+    fill: #8fd156;
+    font-weight: 400;
+}
+
+#h0-alpha-line {
+    stroke: red;
+    stroke-width: 4px;
+    stroke-dasharray: 10,5;
+}
+
+#alpha-text {
+    fill: grey;
+    text-anchor: middle;
+}
+
+#power-area {
+    fill:#8fd156;
+    opacity: 60%;
+}
+
+#power-text {
+    fill: #8fd156;
+    font-size: 18px;
+    text-anchor: middle;
+    font-weight: 600;
+}
+
+#power-rect {
+    fill: #bae099;
+}
+
+#power-curve {
+    margin: auto;
+    width: 50%;
+}
+
+#power-curve-effect-size {
+    stroke: black;
+    stroke-dasharray: 10,5;
+}
+
+#power-curve-power-value {
+    stroke: black;
+    stroke-dasharray: 10,5;
+}

@@ -28,6 +28,27 @@ export function emptyGraph(svg, xRange, yRange, width, height, margins) {
     return [xGraphValues, yGraphValues]
 }
 
+export function empty1DGraph(svg, xRange, width, height, margins, hideAxis = false) {
+    let xDomain = d3.extent(xRange)
+    let xGraphRange = [margins.left, width - margins.right]
+    let xGraphValues = d3.scaleLinear()
+        .domain(xDomain)
+        .range(xGraphRange)
+
+    var axisBottom;
+    if (hideAxis) {
+        axisBottom = d3.axisBottom(xGraphValues).tickValues([])
+    } else {
+        axisBottom = d3.axisBottom(xGraphValues).ticks(width / 80)
+    }
+    const xAxis = g => g
+        .attr("transform", `translate(0,${height - margins.bottom})`)
+        .call(axisBottom)
+        .select(".domain").remove();
+    svg.append("g").call(xAxis);
+    return xGraphValues
+}
+
 export function drawDistribution(svg, dataArray, width, height, margins, mouseover=false) {
     let xDomain = d3.extent(dataArray, d => d.x)
     let xGraphValues = d3.scaleLinear()

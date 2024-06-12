@@ -1,5 +1,5 @@
 import { drawDistribution } from "../utils/graph.js"
-import { generateData } from "../utils/data.js"
+import { generateNormalData } from "../utils/data.js"
 
 var margin = ({
     top: 40,
@@ -71,11 +71,11 @@ var sd = 0.5
 var x_max = 5
 var x_step = 0.01
 var x_range = d3.range(-x_max, x_max, x_step)
-drawGraph(generateData(x_range, scrubber_mu.value, sd))
+drawGraph(generateNormalData(x_range, scrubber_mu.value, sd))
 
 scrubber_mu.oninput = function() {
     let scrubbedMu = parseFloat(this.value)
     printMu.innerHTML = scrubbedMu;
-    var data = generateData(x_range, this.value, sd)
+    var data = generateNormalData(x_range, this.value, sd)
     drawGraph(data)
 }

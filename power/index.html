@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Analysis</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Statistical Power</h1>
+    <div id="page1">
+        <div id="definitions">
+            <p id="alpha-definition">α: false positive rate (rejecting H<sub>0</sub> when H<sub>0</sub> is correct)</p>
+            <p id="power-definition">power: probability of correctly rejecting H<sub>0</sub> when H<sub>1</sub> is correct</p>
+            <p>See how reducing the false positive rate (α) also reduces the power to detect a true positive:</p>
+        </div>
+        <br>
+        <br>
+        <div class="scrubber" id="select-alpha">
+            <span>α (false positive rate)</span>
+            <input type="range" id="alpha-scrubber" min="0.005" max="0.2" step="0.001" value="0.05">
+            <span id="alpha"></span>
+        </div>
+        <div class="scrubber" id="select-effect-size">
+            <span>Minimal Detectable Effect</span>
+            <input type="range" id="effect-size-scrubber" min="0" max="0.5" step="0.001" value="0.3">
+            <span id="effect-size"></span>
+        </div>
+        <div class="scrubber" id="select-sample-size">
+            <span>Sample size (n)</span>
+            <input type="range" id="sample-size-scrubber" min="5" max="30" step="1" value="15">
+            <span id="sample-size"></span>
+        </div>
+        <div id="graph"></div>
+        <div id="power-curve"></div>
+    </div>
+    <script src="power.js" type="module"></script>
+</body>

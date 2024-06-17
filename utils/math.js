@@ -1,4 +1,5 @@
-export function sum(numberArray) {
+export function sum(numberArray, bool = false) {
+    const initialVal = (bool ? true : 0)
     return numberArray.reduce((partialSum, x) => partialSum + x, 0) 
 }
 
@@ -6,14 +7,14 @@ export function mean(numberArray) {
     return sum(numberArray) / numberArray.length
 }
 
-export function variance(numberArray) {
+export function variance(numberArray, dfMinus) {
     let mean_ = mean(numberArray)
     let sqDiffs = numberArray.map(d =>  (d - mean_) ** 2) 
-    return sum(sqDiffs) / (numberArray.length - 1)
+    return sum(sqDiffs) / (numberArray.length - dfMinus)
 }
 
-export function standardDeviation(numberArray) {
-    let variance_ = variance(numberArray)
+export function standardDeviation(numberArray, dfMinus = 0) {
+    let variance_ = variance(numberArray, dfMinus)
     return Math.sqrt(variance_)
 }
 

@@ -1,0 +1,15 @@
+.curve {
+    stroke-width: 5px;
+}
+
+#population-distribution {
+    stroke: steelblue;
+}
+#sampled-distribution-raw-sd {
+    stroke: lightgray;
+    stroke-dasharray: 10,8;
+}
+#sampled-distribution-adj-sd {
+    stroke: lightblue;
+    stroke-dasharray: 10,8;
+}

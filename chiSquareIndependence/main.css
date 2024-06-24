@@ -1,0 +1,176 @@
+body {
+    font-family: Arial;
+}
+
+h1, h2, p {
+    margin-left: 100px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 50px;
+}
+
+table {
+    width: 600px;
+    height: 200px;
+    text-align: center;
+    margin: auto;
+}
+
+td, th {
+    width: 200px;
+    height: 50px;
+}
+
+.fraction {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    letter-spacing: 0.001em;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    width: 110px;
+}
+
+.fraction > span {
+    width: 100%;
+    display: block;
+    padding: 0.1em;
+}
+
+.fraction span.denominator {
+    border-top: thin solid black;
+}
+
+.area {
+    opacity: 50%;
+    fill: red;
+}
+
+.margin {
+    background-color: #ebebeb;
+}
+
+.tables {
+    margin: auto;
+    width: 100%;
+}
+
+#first-col {
+    width: 100px
+}
+
+#chi-sq-symbol {
+    padding-right: 20px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-left: 40px;
+}
+
+#equals {
+    padding-right: 5px;
+    padding-top: 15px;
+}
+
+#chisq-wrapper {
+    margin-top: 40px;
+}
+
+#chisq-symbol {
+    float: left;
+    margin-left: 10%;
+    font-size: 30px;
+    padding-top: 40px;
+}
+
+#chisq-computation {
+    float: left;
+    width: 45%;
+    padding-left: 30px;
+}
+
+#chisq-computation-1, #chisq-computation-2 {
+    height: 80px;
+}
+
+#chisq-equals {
+    font-size: 30px;
+    height: 100px;
+    padding-top: 40px;
+    float: left;
+    width: 30%;
+    text-align: left;
+    padding-left: 0px;
+}
+
+#dof {
+    font-size: 20px;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#dof-value {
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+#dof-curves-graph1, #dof-curves-graph2, #dof-curves-graph3 {
+    margin: auto;
+    width: 50%;
+}
+
+#graph-chisq-line {
+    stroke-dasharray: 10,5;
+}
+
+#alpha-text {
+    fill: red;
+    opacity: 50%;
+}
+
+#narrow-table {
+    width: 300px;
+}
+
+#proportions-table-multiply {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-left: 100px;
+}
+
+#counts-table-multiply {
+    width: 400px;
+    float: left;
+    margin-left: 100px;
+}
+
+#proportion-lt5-multiply {
+    background-color: #cfe69e;
+}
+
+#proportion-gt5-multiply {
+    background-color: #d9f9ff;
+}
+
+#chisq-tables {
+    width: 100%;
+    margin: auto;
+}
+
+#chisq-observed-table {
+    width: 500px;
+    float: left;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+#chisq-expected-table {
+    width: 400px;
+    margin-left: 100px;
+}

@@ -49,12 +49,23 @@ export function empty1DGraph(svg, xRange, width, height, margins, hideAxis = fal
     return xGraphValues
 }
 
-export function drawDistribution(svg, dataArray, width, height, margins, mouseover=false) {
+export function drawDistribution(
+    svg,
+    dataArray, 
+    width, 
+    height, 
+    margins, 
+    yExtent=undefined,
+    mouseover=false, 
+    strokeColor="#6bbfe3", 
+    strokeWidth = 5,
+    id=""
+) {
     let xDomain = d3.extent(dataArray, d => d.x)
     let xGraphValues = d3.scaleLinear()
         .domain(xDomain)
         .range([margins.left, width - margins.right])
-    let yDomain = [Math.min(d3.min(dataArray, d => d.y), 0), Math.max(1, d3.max(dataArray, d => d.y))]
+    let yDomain = yExtent ? yExtent : [Math.min(d3.min(dataArray, d => d.y), 0), Math.max(1, d3.max(dataArray, d => d.y))]
     let yGraphValues = d3.scaleLinear()
         .domain(yDomain).nice()
         .range([height - margins.bottom, margins.top])
@@ -77,11 +88,12 @@ export function drawDistribution(svg, dataArray, width, height, margins, mouseov
     svg.append("g").call(yAxis);
 
     svg.append("path")
+        .attr("id", id)
         .attr("class", "curve")
         .data([dataArray])
         .attr("fill", "none")
-        .attr("stroke", "#6bbfe3")
-        .attr("stroke-width", 5)
+        .attr("stroke", strokeColor)
+        .attr("stroke-width", strokeWidth)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", line)

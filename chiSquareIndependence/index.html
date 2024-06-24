@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degrees of Freedom</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="paginate.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Chi-Squared</h1>
+    <h2>Independence</h2>
+    <div id="page1">
+        <p>Suppose we're wondering whether the state you're from has any relationship with butter consumption.</p>
+        <p>We took a sample of 800 people and asked which state they were from and whether they had eaten more than 5 pounds of butter that week.</p>
+        <div id="freq-table">
+            <table>
+                <tr>
+                    <th id="first-col">Butter Consumption</th>
+                    <th>Alabama</th>
+                    <th>Florida</th>
+                    <th>California</th>
+                    <th>Delaware</th>
+                </tr>
+                <tr>
+                    <th>&lt; 5lb</th>
+                    <td class="type1-a"></td>
+                    <td class="type1-b"></td>
+                    <td class="type1-c"></td>
+                    <td class="type1-d"></td>
+                </tr>
+                <tr>
+                    <th>&gt; 5lb</th>
+                    <td class="type2-a"></td>
+                    <td class="type2-b"></td>
+                    <td class="type2-c"></td>
+                    <td class="type2-d"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="page2">
+        <p>First, we need to calculate the totals both by state and by butter consumption:</p>
+        <table>
+            <tr>
+                <th id="first-col">Butter Consumption</th>
+                <th>Alabama</th>
+                <th>Florida</th>
+                <th>California</th>
+                <th>Delaware</th>
+                <th class="margin">Total Subjects</th>
+            </tr>
+            <tr>
+                <th>&lt; 5lb</th>
+                <td class="type1-a"></td>
+                <td class="type1-b"></td>
+                <td class="type1-c"></td>
+                <td class="type1-d"></td>
+                <td class="margin" id="total-lt5"></td>
+            </tr>
+            <tr>
+                <th>&gt; 5lb</th>
+                <td class="type2-a"></td>
+                <td class="type2-b"></td>
+                <td class="type2-c"></td>
+                <td class="type2-d"></td>
+                <td class="margin" id="total-gt5"></td>
+            </tr>
+            <tr>
+                <th class="margin">Total Subjects</th>
+                <td class="margin" id="sum-a"></td>
+                <td class="margin" id="sum-b"></td>
+                <td class="margin" id="sum-c"></td>
+                <td class="margin" id="sum-d"></td>
+                <td class="margin" id="total"></td>
+            </tr>
+        </table>
+        <p>Looking at our totals, we can calculate the proportion of people across all four states who ate &gt; 5lbs of butter this week:</p>
+        <table id="narrow-table">
+            <tr>
+                <th>Butter Consumption</th>
+                <th># Subjects</th>
+                <th>Proportion of Subjects</th>
+            </tr>
+            <tr>
+                <th>&lt; 5lb</th>
+                <td class="total-lt5-compute"></td>
+                <td class="proportion-lt5-compute"></td>
+            </tr>
+            <tr>
+                <th>&gt; 5lb</th>
+                <td class="total-gt5-compute"></td>
+                <td class="proportion-gt5-compute"></td>
+            </tr>
+            <tr>
+                <td>Total Subjects</td>
+                <td>800</td>
+            </tr>
+        </table>
+    </div>
+    <div id="page3">
+        <p>Now that we know the proportion of people in each butter consumption category across the whole sample, we can calculate the counts we <b>would</b> expect if each state had the same proportion of butter eaters:
+        <div class="tables">
+            <table id="proportions-table-multiply">
+                <tr>
+                    <th>Butter Consumption</th>
+                    <th>Proportion of Everyone</th>
+                </tr>
+                <tr>
+                    <th>&lt; 5lb</th>
+                    <td class="proportion-lt5-compute" id="proportion-lt5-multiply"></td>
+                </tr>
+                <tr>
+                    <th>&gt; 5lb</th>
+                    <td class="proportion-gt5-compute" id="proportion-gt5-multiply"></td>
+                </tr>
+            </table>
+            <table id="counts-table-multiply">
+                <tr>
+                    <th id="first-col">Butter Consumption</th>
+                    <th>Alabama</th>
+                    <th>Florida</th>
+                    <th>California</th>
+                    <th>Delaware</th>
+                </tr>
+                <tr>
+                    <th>&lt; 5lb</th>
+                    <td id="type1-a-multiply"></td>
+                    <td id="type1-b-multiply"></td>
+                    <td id="type1-c-multiply"></td>
+                    <td id="type1-d-multiply"></td>
+                </tr>
+                <tr>
+                    <th>&gt; 5lb</th>
+                    <td id="type2-a-multiply"></td>
+                    <td id="type2-b-multiply"></td>
+                    <td id="type2-c-multiply"></td>
+                    <td id="type2-d-multiply"></td>
+                </tr>
+                <tr>
+                    <th>Total Subjects</th>
+                    <td class="margin" id="sum-a-multiply"></td>
+                    <td class="margin" id="sum-b-multiply"></td>
+                    <td class="margin" id="sum-c-multiply"></td>
+                    <td class="margin" id="sum-d-multiply"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="page4">
+        <p>Now with our expected and observed values, we can compute our chi-squared value exactly the way we computed it for the goodness-of-fit test.</p>
+        <div id="chisq-tables">
+            <table id="chisq-observed-table">
+                <caption><b>Observed</b></caption>
+                <tr>
+                    <th id="first-col">Butter Consumption</th>
+                    <th>Alabama</th>
+                    <th>Florida</th>
+                    <th>California</th>
+                    <th>Delaware</th>
+                </tr>
+                <tr>
+                    <th>&lt; 5lb</th>
+                    <td class="type1-a" id="type1-a-observed"></td>
+                    <td class="type1-b" id="type1-b-observed"></td>
+                    <td class="type1-c" id="type1-c-observed"></td>
+                    <td class="type1-d" id="type1-d-observed"></td>
+                </tr>
+                <tr>
+                    <th>&gt; 5lb</th>
+                    <td class="type2-a" id="type2-a-observed"></td>
+                    <td class="type2-b" id="type2-b-observed"></td>
+                    <td class="type2-c" id="type2-c-observed"></td>
+                    <td class="type2-d" id="type2-d-observed"></td>
+                </tr>
+            </table>
+            <table id="chisq-expected-table">
+                <caption><b>Expected</b></caption>
+                <tr>
+                    <th>Alabama</th>
+                    <th>Florida</th>
+                    <th>California</th>
+                    <th>Delaware</th>
+                </tr>
+                <tr>
+                    <td id="type1-a-expected"></td>
+                    <td id="type1-b-expected"></td>
+                    <td id="type1-c-expected"></td>
+                    <td id="type1-d-expected"></td>
+                </tr>
+                <tr>
+                    <td id="type2-a-expected"></td>
+                    <td id="type2-b-expected"></td>
+                    <td id="type2-c-expected"></td>
+                    <td id="type2-d-expected"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="chisq-wrapper">
+            <div id="chisq-symbol">χ<sup>2</sup> = </div>
+            <div id="chisq-computation">
+                <div id="chisq-computation-1"></div>
+                <div id="chisq-computation-2"></div>
+            </div>
+            <div id="chisq-equals"></div>
+        </div>
+    </div>
+    <div id="page5">
+        <table>
+            <tr>
+                <th id="first-col">Butter Consumption</th>
+                <th>Alabama</th>
+                <th>Florida</th>
+                <th>California</th>
+                <th>Delaware</th>
+                <th class="margin">Total Subjects</th>
+            </tr>
+            <tr>
+                <th>&lt; 5lb</th>
+                <td class="type1-a"></td>
+                <td class="type1-b"></td>
+                <td class="type1-c"></td>
+                <td class="type1-d"></td>
+                <td class="margin" id="total-lt5"></td>
+            </tr>
+            <tr>
+                <th>&gt; 5lb</th>
+                <td class="type2-a"></td>
+                <td class="type2-b"></td>
+                <td class="type2-c"></td>
+                <td class="type2-d"></td>
+                <td class="margin" id="total-gt5"></td>
+            </tr>
+            <tr>
+                <th class="margin">Total Subjects</th>
+                <td class="margin" id="sum-a"></td>
+                <td class="margin" id="sum-b"></td>
+                <td class="margin" id="sum-c"></td>
+                <td class="margin" id="sum-d"></td>
+                <td class="margin" id="total"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-buttons">
+        <button id="prev"><i class="arrow left"></i></button>
+        <button id="next"><i class="arrow right"></i></button>
+    </div>
+    <script src="chiSqIndependence.js" type="module"></script>
+    <script src="paginate.js" type="module"></script>
+</body>

@@ -1,0 +1,116 @@
+body {
+    font-family: Arial;
+}
+
+h1, h2, p {
+    margin-left: 100px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 600px;
+    height: 200px;
+    text-align: center;
+    margin: auto;
+}
+
+td, th {
+    width: 200px;
+    height: 50px;
+}
+
+span {
+    margin: auto;
+    float: left;
+}
+
+.fraction {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    letter-spacing: 0.001em;
+    text-align: center;
+    padding-left: 10px;
+    height: 50px;
+}
+
+.fraction > span {
+    width: 80%;
+    display: block;
+    padding: 0.1em;
+}
+
+.fraction span.denominator {
+    border-top: thin solid black;
+}
+
+.fraction-line {
+    width: 30px;
+}
+
+.area {
+    opacity: 50%;
+    fill: red;
+}
+
+#first-col {
+    width: 100px
+}
+
+#chi-sq-symbol {
+    padding-right: 20px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-left: 40px;
+}
+
+#equals {
+    padding-right: 5px;
+    padding-top: 15px;
+}
+
+#chisq-computation {
+    margin: auto;
+    padding-top: 10px;
+    padding-left: 100px;
+    width: 700px;
+}
+
+#chi-sq-value {
+    float: none;
+    display: inline-block;
+    position: relative;
+    font-size: 25px;
+    padding-top: 5px;
+    padding-left: 20px;
+}
+
+#dof {
+    font-size: 20px;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#dof-value {
+    font-size: 20px;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+#dof-curves-graph1, #dof-curves-graph2, #dof-curves-graph3 {
+    margin: auto;
+    width: 50%;
+}
+
+#graph-chisq-line {
+    stroke-dasharray: 10,5;
+}
+
+#alpha-text {
+    fill: red;
+    opacity: 50%;
+}

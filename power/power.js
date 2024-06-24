@@ -172,7 +172,7 @@ var [ powerCurveXValues, powerCurveYValues ] = emptyGraph(powerCurveSvg, [0, 1],
 function powerCurveH0Pdf(x) {
     return normalPdf(x, 0, se)
 }
-var criticalValue = reverseLookupAreaUnderCurve(powerCurveH0Pdf, -0.5, 1.0, 0.001, alpha)
+var criticalValue = reverseLookupAreaUnderCurve(powerCurveH0Pdf, 1.0, 0.001, alpha)
 const altMeans = d3.range(0, 1, 0.001)
 var altPowerValues = altMeans.map((altMean) => {
     function altPdf(x) {
@@ -191,7 +191,7 @@ function updatePowerCurve(alpha, effectSize, sampleSize) {
         return normalPdf(x, 0, se)
     }
 
-    criticalValue = reverseLookupAreaUnderCurve(powerCurveH0Pdf, -0.5, 1.0, 0.001, alpha)
+    criticalValue = reverseLookupAreaUnderCurve(powerCurveH0Pdf, 1.0, 0.001, alpha)
     altPowerValues = altMeans.map((altMean) => {
         function altPdf(x) {
             return normalPdf(x, altMean, se)

@@ -1,4 +1,4 @@
-import { expectedValuesTransition, expectedValuesReset, chiSqTransition, chiSqReset} from "./chiSqIndependence.js";
+import { expectedValuesTransition, expectedValuesReset, chiSqTransition, chiSqReset, dofTransition, dofReset, dofGraphTransition, dofGraphReset } from "./chiSqIndependence.js";
 
 // const section0 = document.querySelector("#section-0")
 // const section1 = document.querySelector("#section-1")
@@ -56,6 +56,9 @@ function hidePage() {
     if (index == 3) {
         chiSqReset()
     }
+    if (index == 4) {
+        dofReset()
+    }
     pageToHide.style.display = "none";
 }
 
@@ -67,6 +70,9 @@ function showPage() {
     }
     if (index == 3) {
         chiSqTransition()
+    }
+    if(index == 4) {
+        dofTransition()
     }
 }
 

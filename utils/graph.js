@@ -28,7 +28,7 @@ export function emptyGraph(svg, xRange, yRange, width, height, margins) {
     return [xGraphValues, yGraphValues]
 }
 
-export function empty1DGraph(svg, xRange, width, height, margins, hideAxis = false) {
+export function empty1DGraph(svg, xRange, width, height, margins, hideXAxis = false, hideYAxis = false) {
     let xDomain = d3.extent(xRange)
     let xGraphRange = [margins.left, width - margins.right]
     let xGraphValues = d3.scaleLinear()
@@ -36,11 +36,12 @@ export function empty1DGraph(svg, xRange, width, height, margins, hideAxis = fal
         .range(xGraphRange)
 
     var axisBottom;
-    if (hideAxis) {
+    if (hideXAxis) {
         axisBottom = d3.axisBottom(xGraphValues).tickValues([])
     } else {
         axisBottom = d3.axisBottom(xGraphValues).ticks(width / 80)
     }
+    
     const xAxis = g => g
         .attr("transform", `translate(0,${height - margins.bottom})`)
         .call(axisBottom)

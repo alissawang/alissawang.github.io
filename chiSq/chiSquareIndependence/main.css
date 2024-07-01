@@ -174,3 +174,42 @@ td, th {
     width: 400px;
     margin-left: 100px;
 }
+
+#dof-statement {
+    float: left;
+    width: 30%;
+    height: 50px;
+    padding-top: 30px;
+    padding-left: 20px;
+    text-align: right;
+    margin: auto;
+}
+
+#dof-text {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+#dof-formula {
+    font-size: 17px;
+    margin-top: 8px;
+}
+
+#dof {
+    float: left;
+    width: 10%;
+    height: 50px;
+    margin: auto;
+    padding-top: 45px;
+    padding-left: 20px;
+    font-size: 30px;
+}
+
+#graph-chisq-line {
+    stroke: black;
+    stroke-dasharray: 10,5;
+}
+
+#graph-chisq-text {
+    text-anchor: middle;
+}

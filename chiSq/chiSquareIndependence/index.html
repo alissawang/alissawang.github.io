@@ -210,6 +210,8 @@
         </div>
     </div>
     <div id="page5">
+        <p>Now we calculate the degrees of freedom of our sample.</p>
+        <p>Note that after the first c-1 values, the rest of the sample values are filled in because we already know the margin totals.</p>
         <table>
             <tr>
                 <th id="first-col">Butter Consumption</th>
@@ -221,29 +223,37 @@
             </tr>
             <tr>
                 <th>&lt; 5lb</th>
-                <td class="type1-a"></td>
-                <td class="type1-b"></td>
-                <td class="type1-c"></td>
-                <td class="type1-d"></td>
-                <td class="margin" id="total-lt5"></td>
+                <td id="type1-a-dof"></td>
+                <td id="type1-b-dof"></td>
+                <td id="type1-c-dof"></td>
+                <td id="type1-d-dof"></td>
+                <td class="margin" id="total-lt5-dof"></td>
             </tr>
             <tr>
                 <th>&gt; 5lb</th>
-                <td class="type2-a"></td>
-                <td class="type2-b"></td>
-                <td class="type2-c"></td>
-                <td class="type2-d"></td>
-                <td class="margin" id="total-gt5"></td>
+                <td id="type2-a-dof"></td>
+                <td id="type2-b-dof"></td>
+                <td id="type2-c-dof"></td>
+                <td id="type2-d-dof"></td>
+                <td class="margin" id="total-gt5-dof"></td>
             </tr>
             <tr>
                 <th class="margin">Total Subjects</th>
-                <td class="margin" id="sum-a"></td>
-                <td class="margin" id="sum-b"></td>
-                <td class="margin" id="sum-c"></td>
-                <td class="margin" id="sum-d"></td>
-                <td class="margin" id="total"></td>
+                <td class="margin" id="sum-a-dof"></td>
+                <td class="margin" id="sum-b-dof"></td>
+                <td class="margin" id="sum-c-dof"></td>
+                <td class="margin" id="sum-d-dof"></td>
+                <td class="margin" id="total-dof"></td>
             </tr>
         </table>
+        <div id="dof-statement">
+            <p id="dof-text">Degrees of Freedom:</p>
+            <p id="dof-formula">(# rows - 1) * (# cols - 1)</p>
+        </div>
+        <p id="dof"></p>
+    </div>
+    <div id="page6">
+        <div id="dof-graph"></div>
     </div>
     <div class="page-buttons">
         <button id="prev"><i class="arrow left"></i></button>

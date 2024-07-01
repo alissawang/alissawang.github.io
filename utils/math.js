@@ -7,10 +7,15 @@ export function mean(numberArray) {
     return sum(numberArray) / numberArray.length
 }
 
-export function variance(numberArray, dfMinus) {
+export function sumOfSquareDifferences(numberArray) {
     let mean_ = mean(numberArray)
     let sqDiffs = numberArray.map(d =>  (d - mean_) ** 2) 
-    return sum(sqDiffs) / (numberArray.length - dfMinus)
+    return sum(sqDiffs)
+}
+
+export function variance(numberArray, dfMinus) {
+    let sumSqDiffs = sumOfSquareDifferences(numberArray)
+    return sumSqDiffs / (numberArray.length - dfMinus)
 }
 
 export function standardDeviation(numberArray, dfMinus = 0) {

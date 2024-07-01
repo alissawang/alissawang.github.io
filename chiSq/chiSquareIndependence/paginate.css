@@ -33,6 +33,6 @@ transform: rotate(135deg);
 -webkit-transform: rotate(135deg);
 }
 
-#page2, #page3, #page4, #page5 {
+#page2, #page3, #page4, #page5, #page6 {
     display: none;
 }

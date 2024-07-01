@@ -1,0 +1,159 @@
+body {
+    font-family: sans-serif;
+    margin-left: 10%;
+    overflow: scroll;
+    font-weight: 100;
+    overflow: scroll;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+.overall-mean-line {
+    stroke-width: 1px;
+    stroke-dasharray: 5,2;
+    stroke: red;
+    opacity: 50%;
+}
+
+.overall-mean-text {
+    font-size: 15px;
+    fill: red;
+}
+
+.group-a-sample-mean-text, .group-b-sample-mean-text, .group-c-sample-mean-text, .sample-point-text {
+    font-size: 15px;
+}
+
+.group-a-sample-mean-text {
+    fill: #0c739c;
+}
+
+.group-b-sample-mean-text {
+    fill: #458a04;
+}
+
+.group-c-sample-mean-text {
+    fill: #9c0c65;
+}
+
+.sample-point-text {
+    fill: #96c3d4;
+}
+
+.diff-line {
+    stroke: #c1e9f7;
+    stroke-width: 5px;
+}
+
+.dashed-line {
+    stroke: #0c739c;
+    stroke-dasharray: 3,2;
+}
+
+.bracket {
+    font-family: Montserrat;
+    font-weight: 100;
+}
+
+.tss-compare-sample-points {
+    opacity: 70%;
+    fill: #c1e9f7;
+    mix-blend-mode: multiply;
+}
+
+.sse-lines {
+    stroke: black;
+    stroke-dasharray: 5,2;
+    stroke-width: 1px;
+}
+
+#sample-graphs, #tss-single-example {
+    width: 50%;
+    margin: auto;
+}
+
+#sample-graphs-2 {
+    width: 700px;
+}
+
+#group-a-graph, #group-a-graph-sst, #group-b-graph, #group-b-graph-sst {
+    float: left;
+}
+
+#group-a-sample, #group-b-sample, #group-c-sample, #tss-example-point {
+    opacity: 80%;
+    mix-blend-mode: multiply;
+}
+
+#group-a-sample, #tss-example-point {
+    fill: #c1e9f7;
+}
+
+#group-b-sample {
+    fill: #beeb4d;
+}
+
+#group-c-sample {
+    fill: #ffccf1;
+}
+
+#group-a-sample-mean, #group-b-sample-mean, #group-c-sample-mean, #tss-example-mean-line {
+    stroke-width: 3px;
+}
+
+#group-a-sample-mean, #tss-example-mean-line {
+    stroke: #0c739c;
+}
+
+#group-b-sample-mean {
+    stroke: #458a04;
+}
+
+#group-c-sample-mean {
+    stroke: #9c0c65;
+}
+
+#tss-single-example-2, 
+#tss-single-example-3, 
+#tss-single-example-4,
+#tss-single-example-5  {
+    float: left;
+}
+
+#tss-single-example-5 {
+    margin-left: 40px;
+}
+
+#tss-comparison-1, #sst-sse-large, #sst-sse-frac-large {
+    float: left;
+}
+
+#sst-sse-frac-lage, #sst-sse-frac-small {
+    margin-left: 700px;
+}
+
+#tss-compare-1-mean, #tss-compare-2-mean {
+    stroke: #0c739c;
+    stroke-width: 3px;
+}
+
+#sst-sse-large-numerator,
+#sst-sse-small-numerator {
+    fill: #0c739c;
+}
+
+#sst-sse-large-denominator,
+#sst-sse-small-denominator {
+    fill: #96c3d4;
+}
+
+#sst-sse-large-frac-line, #sst-sse-small-frac-line {
+    stroke: black;
+    stroke-width: 1px;
+}

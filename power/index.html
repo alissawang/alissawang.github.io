@@ -5,38 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Power Analysis</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="power.css">
+    <link rel="stylesheet" href="paginate.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
 </head>
 <body>
-    <h1>Statistical Power</h1>
-    <div id="page1">
-        <div id="definitions">
-            <p id="alpha-definition">α: false positive rate (rejecting H<sub>0</sub> when H<sub>0</sub> is correct)</p>
-            <p id="power-definition">power: probability of correctly rejecting H<sub>0</sub> when H<sub>1</sub> is correct</p>
-            <p>See how reducing the false positive rate (α) also reduces the power to detect a true positive:</p>
+    <div id="nav-home">
+        <a href="../index.html"><img src="../assets/beautifulnumbers.png" width="300" height="48"></a>
+    </div>
+    <div class="page-container">
+        <h1>Statistical Power</h1>
+        <div id="page1">
+            <div id="test-graph"></div>
+            <p>Statistical power is the likelihood of correctly detecting an existing effect.</p>
+            <p>Take, for example, a simple z-test for means.</p>
+            <div class="graph" id="null-distribution"></div>
+            <p>If we take a sample and the mean is within the shaded area under the curve where p&lt;0, then we'll reject the null hypothesis h0 that the true mean is 0.</p>
         </div>
-        <br>
-        <br>
-        <div class="scrubber" id="select-alpha">
-            <span>α (false positive rate)</span>
-            <input type="range" id="alpha-scrubber" min="0.005" max="0.2" step="0.001" value="0.05">
-            <span id="alpha"></span>
+        <div id="page2">
+            <p>But let's say we have an alternate hypothesis (h1) that the true mean is 0.3. If that's true, what is the probability that we'll correctly reject the null hypothesis?</p>
+            <div class="graph" id="compare-distributions"></div>
+            <p>In a world where h1 is true and our alpha value is 0.05, we'll correctly reject the null 99% of the time. This is the <b>power</b> of our test.</p>
         </div>
-        <div class="scrubber" id="select-effect-size">
-            <span>Minimal Detectable Effect</span>
-            <input type="range" id="effect-size-scrubber" min="0" max="0.5" step="0.001" value="0.3">
-            <span id="effect-size"></span>
+        <div id="page3">
+            <p id="page3-text">Power is affected by several choices we make when setting up an experiment:</p>
+            <p id="page3b-text">Power is often graphed in a curve comparing changes in the hypothesized effect size vs. power, given an alpha and a sample size. Play around with our parameters to get an understanding of how these power curves are constructed.</p>
+            <div id="definitions">
+                <ul>
+                    <li><p id="alpha-definition">α: false positive rate (incorrectly rejecting H<sub>0</sub> in a world where H<sub>0</sub> is correct)</p></li>
+                    <li><p id="mde-definition">Minimal Detectable Effect (MDE): the minimum effect size you want to be able to detect with your test</p></li>
+                    <li><p id="sample-size-definition">Sample size (n): number of subjects sampled from the population</p></li>
+                </ul>
+            </div>
+            <div class="scrubber-container" id="select-alpha">
+                <div class="scrubber-symbol">α</div>
+                <input class="scrubber" type="range" id="alpha-scrubber" min="0.005" max="0.2" step="0.001" value="0.05">
+                <span id="alpha"></span>
+            </div>
+            <div class="scrubber-container" id="select-effect-size">
+                <div class="scrubber-symbol">MDE</div>
+                <input class="scrubber" type="range" id="effect-size-scrubber" min="0" max="0.5" step="0.01" value="0.32">
+                <span id="effect-size"></span>
+            </div>
+            <div class="scrubber-container" id="select-sample-size">
+                <div class="scrubber-symbol">n</div>
+                <input class="scrubber" type="range" id="sample-size-scrubber" min="5" max="30" step="1" value="15">
+                <span id="sample-size"></span>
+            </div>
+            <div class="graph" id="distributions"></div>
         </div>
-        <div class="scrubber" id="select-sample-size">
-            <span>Sample size (n)</span>
-            <input type="range" id="sample-size-scrubber" min="5" max="30" step="1" value="15">
-            <span id="sample-size"></span>
+        <div id="page3b">
+            <div class="graph" id="power-curve"></div>
         </div>
-        <div id="graph"></div>
-        <div id="power-curve"></div>
+        <div class="page-buttons">
+            <button id="prev"><i class="arrow left"></i></button>
+            <button id="next"><i class="arrow right"></i></button>
+        </div>
     </div>
     <script src="power.js" type="module"></script>
+    <script src="paginate.js" type="module"></script>
 </body>

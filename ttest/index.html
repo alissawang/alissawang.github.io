@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ttest.css">
+    <link rel="stylesheet" href="paginate.css">
+    <link rel="stylesheet" href="../main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <div id="nav-home">
+        <a href="../index.html"><img src="../assets/beautifulnumbers.png" width="300" height="48"></a>
+    </div>
+    <h1>Z-Tests and T-Tests for Means</h1>
+    <div id="one-vs-two-sample">
+        <button id="one-sample-button">ONE SAMPLE</button>
+        <button id="two-sample-button">TWO SAMPLES</button>
+    </div>
+    <div id="one-sample">
+        <a href="one-sample-z/one-sample-z.html">
+            <div class="test-type" id="one-sample-z-test"></div>
+        </a>
+        <a href="one-sample-t/one-sample-t.html"></a>
+            <div class="test-type" id="one-sample-t-test"></div>
+        </a>
+        <div class="criteria" id="one-sample-z-criteria"></div>
+        <div class="criteria" id="one-sample-t-criteria"></div>
+    </div>
+    <div id="two-sample">
+        <div class="test-type" id="two-sample-z-test"></div>
+        <div class="test-type" id="two-sample-paired-test"></div>
+        <div class="test-type" id="two-sample-unpaired-test"></div>
+    </div>
+    <script src="ttest.js" type="module"></script>
+    <script src="paginate.js" type="module"></script>
+</body>

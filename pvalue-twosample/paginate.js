@@ -1,15 +1,19 @@
-const section0 = document.querySelector("#section-0")
 const section1 = document.querySelector("#section-1")
-const sections = [section0, section1]
+const section2 = document.querySelector("#section-2")
+const sections = [section1, section2]
 
-const tabSection0 = document.querySelector("#tab-section-0")
 const tabSection1 = document.querySelector("#tab-section-1")
+const tabsection2 = document.querySelector("#tab-section-2")
 
 let currentSectionIdx = 0
 highlightTab(currentSectionIdx)
 
 function switchTab(idx) {
     if (currentSectionIdx != idx) {
+        if (currentSectionIdx == 0) {
+            hidePage();
+            index = 0;
+        }
         sections[currentSectionIdx].style.display = "none";
         sections[idx].style.display = "block";
 
@@ -17,21 +21,24 @@ function switchTab(idx) {
         highlightTab(idx);
 
         currentSectionIdx = idx;
+        if (idx == 0) {
+            page1.style.display = "block"
+        }
     }
 }
 
 function highlightTab(idx) {
-    let tab = document.getElementById(`tab-section-${idx}`)
+    let tab = document.getElementById(`tab-section-${idx + 1}`)
     tab.className += " active"
 }
 
 function dehighlightTab(idx) {
-    let tab = document.getElementById(`tab-section-${idx}`)
+    let tab = document.getElementById(`tab-section-${idx + 1}`)
     tab.className = tab.className.replace(" active", "")
 }
 
-tabSection0.addEventListener("click", () => switchTab(0));
-tabSection1.addEventListener("click", () => switchTab(1));
+tabSection1.addEventListener("click", () => switchTab(0));
+tabsection2.addEventListener("click", () => switchTab(1));
 
 const page1 = document.querySelector("#page1");
 const page2 = document.querySelector("#page2");

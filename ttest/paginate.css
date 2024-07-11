@@ -1,0 +1,36 @@
+#one-vs-two-sample {
+    margin: auto;
+    width: 400px;
+}
+
+#one-vs-two-sample button {
+    background-color: #dfedf6;
+    height: 130px;
+    width: 150px;
+    border-radius: 40px;
+    border: none;
+    color: #8fc6dd;
+    font-weight: bold;
+    font-family: inherit;
+    margin: 10px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+#one-vs-two-sample button:hover {
+    background-color: #bad6e8;
+    color: white;
+}
+
+#one-vs-two-sample button.active {
+    background-color: #bad6e8;
+    color: white;
+}
+
+#one-sample{
+    display: none;
+}
+
+#two-sample {
+    display: none;
+}

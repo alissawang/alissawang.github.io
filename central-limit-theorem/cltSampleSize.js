@@ -39,16 +39,17 @@ var uniformDataArray = uniformXRange.map(function(d) {return {"x": d, "y": unifo
 var bernoulliXRange = [0, 1]
 var bernoulliDataArray = bernoulliXRange.map(function(d) {return {"x": d, "y": bernoulliPdf(d, 0.3)}})
 
+const selectionColor = "#7cd3eb"
 var betaSvg = d3.select('#beta-graph-page2')
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    .style("outline", "thin solid steelblue")
+    .style("outline", `thin solid ${selectionColor}`)
     .on("click", function() {
         selectedDistribution.clear()
         sampleSizeSvg.selectAll("rect").remove()
         selectedDistribution = betaGraph
-        d3.select(this).style("outline", "thin solid steelblue")
+        d3.select(this).style("outline", `thin solid ${selectionColor}`)
         scrubber.value = 1
         scrubberValue.innerHTML = "1"
         plotSampleMeans(sampleSizeSvg)
@@ -63,7 +64,7 @@ var uniSvg = d3.select('#uniform-graph-page2')
         selectedDistribution.clear()
         sampleSizeSvg.selectAll("rect").remove()
         selectedDistribution = uniformGraph
-        d3.select(this).style("outline", "thin solid steelblue")
+        d3.select(this).style("outline", `thin solid ${selectionColor}`)
         scrubber.value = 1
         scrubberValue.innerHTML = 1
         plotSampleMeans(sampleSizeSvg)
@@ -78,7 +79,7 @@ var bernoulliSvg = d3.select('#bernoulli-graph-page2')
         selectedDistribution.clear()
         sampleSizeSvg.selectAll("rect").remove()
         selectedDistribution = bernoulliGraph
-        d3.select(this).style("outline", "thin solid steelblue")
+        d3.select(this).style("outline", `thin solid ${selectionColor}`)
         scrubber.value = 1
         scrubberValue.innerHTML = 1
         plotSampleMeans(sampleSizeSvg)
@@ -124,7 +125,7 @@ plotSampleMeans(sampleSizeSvg)
 
 function plotSampleMeans(svg) {
     svg.selectAll("rect").remove()
-    let meansArray = d3.range(2000).map(drawSample)
+    let meansArray = d3.range(1000).map(drawSample)
     let meanBins = d3.histogram()
         .domain(sampleSizeGraphXValues.domain())
         .thresholds(100)

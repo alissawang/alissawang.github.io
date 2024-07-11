@@ -1,0 +1,83 @@
+svg {
+    margin-top: 30px;
+}
+
+.branch {
+    position: fixed;
+    z-index: -1;
+}
+
+.curve {
+    stroke: #dfedf6;
+}
+
+.math-symbol, .frac-text {
+    fill: #dfedf6;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.frac-text {
+    letter-spacing: 2px;
+}
+
+.math-symbol {
+    font-size: 30px;
+}
+
+.frac-line {
+    stroke: #dfedf6;
+}
+
+.svg-text {
+    font-family: "Montserrat";
+    fill: #dfedf6;
+    font-size: 25px;
+    font-weight: bold;
+    text-anchor: middle;
+}
+
+.test-type {
+    background-color: #bad6e8;
+    width: 350px;
+    height: 300px;
+    border-radius: 40px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 5px;
+}
+
+.test-type:hover {
+    background-color: #94b9d1;
+}
+
+.criteria {
+    margin-left: 40px;
+    width: 350px;
+    text-anchor: middle;
+}
+
+.criteria-text {
+    fill: #8fc6dd;
+    font-weight: bold;
+}
+
+#one-sample-z-criteria, #one-sample-t-criteria {
+    float: left;
+}
+
+#one-sample {
+    width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+#two-sample {
+    width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+/* #two-sample-z-group1-numerator {
+    text-decoration: overline;
+} */

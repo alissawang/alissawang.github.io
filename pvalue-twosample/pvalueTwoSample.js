@@ -111,7 +111,7 @@ sampleSvg.append("text")
 
 const varianceSvgWidth = 400
 const varianceSvgHeight = 450
-const sample1VarianceSvg = d3.select("#sample-1-variance").append("svg")
+const sample1VarianceSvg = d3.select("#sample-1-variance-visual").append("svg")
     .attr("width", varianceSvgWidth)
     .attr("height", varianceSvgHeight)
 const sample1VarianceValues = empty1DGraph(
@@ -182,7 +182,7 @@ sample1VarianceSvg.append("line")
     .attr("y1", 380 - 5)
     .attr("y2", 380 + 5)
 
-const sample2VarianceSvg = d3.select("#sample-2-variance").append("svg")
+const sample2VarianceSvg = d3.select("#sample-2-variance-visual").append("svg")
     .attr("width", varianceSvgWidth)
     .attr("height", varianceSvgHeight)
 const sample2VarianceValues = empty1DGraph(

@@ -1,0 +1,155 @@
+#sample, #variance, #tail-switch {
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    width: 400px;
+}
+
+#sample-values {
+    fill: #9fe2f5;
+    fill-opacity: 30%;
+    mix-blend-mode: multiply;
+}
+
+#z-slider {
+    position: relative;
+    top: 395px;
+    left: 30px;
+    width: 455px;
+    appearance: none;
+    background: none;
+    cursor: pointer;
+}
+
+#z-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 5px;
+    border: none;
+    cursor: pointer;
+    background: #6bbfe3;
+}
+
+#z-slider::-ms-thumb {
+    background: #6bbfe3;
+    height: 20px;
+    width: 5px;
+    border: none;
+}
+
+#z-slider::-moz-range-thumb {
+    background: #6bbfe3;
+    height: 20px;
+    width: 5px;
+    border: none;
+}
+
+#z-value {
+    position: relative;
+    top: 400px;
+    left: 30px;
+    height: 20px;
+    color: #6bbfe3;
+}
+
+#normal-distribution-p-text, #normal-distribution-p-area {
+    fill: #88bed1;
+}
+
+#mean-line, #mean-line-variance {
+    stroke-width: 2px;
+    stroke-dasharray: 3,2;
+}
+
+#mean-line-variance {
+    stroke: #54a4ba;
+}
+
+#mean-text, #sample-variance-mean-text {
+    text-anchor: middle;
+    fill: #54a4ba;
+    font-size: 13px;
+}
+
+#sample-var-diffs {
+    stroke: #9fe2f5;
+    stroke-width: 1px;
+}
+
+#sample-sd-line {
+    stroke: #9fe2f5;
+    stroke-width: 2px;
+}
+
+#sample-var-points {
+    fill: hsl(193, 81%, 79%);
+    fill-opacity: 70%;
+    mix-blend-mode: multiply;
+}
+
+#sample-sd-text {
+    fill: #54a4ba;
+    font-size: 18px;
+    text-anchor: middle;
+}
+
+#tail-switch {
+    margin: auto;
+    float: right;
+}
+
+#tail-switch button {
+    margin-left: 0px;
+    border: none;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: #afdbed;
+    color: #e8f5fa;
+    width: 100px;
+    height: 30px;
+}
+
+#one-tail-button, #two-tail-button {
+    cursor: pointer;
+    position: relative;
+}
+
+#one-tail-button.active {
+    background-color: #8fc6dd;
+    color: white;
+}
+
+#two-tail-button.active {
+    background-color: #8fc6dd;
+    color: white;
+}
+
+#normal-distribution, #normal-distribution-dynamic {
+    margin: auto;
+    width: 50%;
+}
+
+#normal-distr-p-text, #normal-distr-p-area {
+    fill: #88bed1;
+    opacity: 70%;
+}
+
+#normal-distr-p-text, #normal-distr-z-text  {
+    font-weight: bold;
+}
+
+#normal-distr-p-line {
+    stroke: #6ac4de;
+    stroke-width: 4px;
+    stroke-dasharray: 9,4;
+}
+
+#normal-distr-z-text {
+    fill: #6bbfe3;
+}
+
+.x-axis-label {
+    text-anchor: left;
+    opacity: 40%;
+}

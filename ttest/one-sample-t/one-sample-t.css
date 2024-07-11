@@ -1,0 +1,200 @@
+.formula {
+    margin: auto;
+    width: 50%;
+    font-size: 15px;
+}
+
+.graph {
+    display: inline-block;
+    margin: auto;
+}
+
+.df-curve {
+    stroke-width: 2px;
+}
+
+#t-slider {
+    position: relative;
+    top: 395px;
+    left: 30px;
+    width: 455px;
+    appearance: none;
+    background: none;
+    cursor: pointer;
+}
+
+#t-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 5px;
+    border: none;
+    cursor: pointer;
+    background: #6bbfe3;
+}
+
+#t-slider::-ms-thumb {
+    background: #6bbfe3;
+    height: 20px;
+    width: 5px;
+    border: none;
+}
+
+#t-slider::-moz-range-thumb {
+    background: #6bbfe3;
+    height: 20px;
+    width: 5px;
+    border: none;
+}
+
+#t-value {
+    position: relative;
+    top: 400px;
+    left: 30px;
+    color: #6bbfe3;
+}
+
+#sample, #variance, #tail-switch {
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    width: 400px;
+}
+
+#sample-values {
+    fill: #9fe2f5;
+    fill-opacity: 30%;
+    mix-blend-mode: multiply;
+}
+
+#mean-line, #mean-line-variance {
+    stroke-width: 2px;
+    stroke-dasharray: 3,2;
+}
+
+#mean-line-variance {
+    stroke: #54a4ba;
+}
+
+#sample-variance-mean-text {
+    text-anchor: middle;
+    fill: #54a4ba;
+    font-size: 13px;
+}
+
+#sample-var-diffs {
+    stroke: #9fe2f5;
+    stroke-width: 1px;
+}
+
+#sample-sd-line {
+    stroke: #9fe2f5;
+    stroke-width: 2px;
+}
+
+#sample-var-points {
+    fill: hsl(193, 81%, 79%);
+    fill-opacity: 70%;
+    mix-blend-mode: multiply;
+}
+
+#sample-sd-text {
+    fill: #54a4ba;
+    font-size: 18px;
+    text-anchor: middle;
+}
+
+#df-curve-1 {
+    stroke: pink;
+}
+
+#df-curve-2 {
+    stroke: #8ecf1f;
+}
+
+#tail-switch {
+    margin: auto;
+    float: right;
+}
+
+#tail-switch button {
+    margin-left: 0px;
+    border: none;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: #afdbed;
+    color: #e8f5fa;
+    width: 100px;
+    height: 30px;
+}
+
+#one-tail-button, #two-tail-button {
+    cursor: pointer;
+    position: relative;
+}
+
+#one-tail-button.active {
+    background-color: #8fc6dd;
+    color: white;
+}
+
+#two-tail-button.active {
+    background-color: #8fc6dd;
+    color: white;
+}
+
+#t-distributions, #null-distribution {
+    margin: auto;
+    width: 50%;
+}
+
+#t-score-formula {
+    width: 200px;
+    margin: auto;
+}
+
+#t-score-computation {
+    width: 700px;
+    margin: auto;
+}
+
+#t-score-formula-2, #t-score-formula-compute {
+    float: left;
+}
+
+#t-score-formula-2 {
+    margin-left: 60px;
+}
+
+#graph-title {
+    fill: #6ac4de;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#null-tscore-text {
+    fill: #6ac4de;
+    font-size: 15px;
+    text-anchor: middle;
+    font-weight: bold;
+}
+
+#null-distr-p-text, #null-distr-p-area, #t-distr-p-text, #t-distr-p-area {
+    fill: #88bed1;
+    opacity: 70%;
+}
+
+#null-distr-p-text {
+    font-weight: bold;
+}
+
+#null-distr-p-line {
+    stroke: #6ac4de;
+    stroke-width: 4px;
+    stroke-dasharray: 9,4;
+}
+
+.x-axis-label {
+    text-anchor: left;
+    opacity: 40%;
+}

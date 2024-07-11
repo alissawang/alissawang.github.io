@@ -5,96 +5,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Degrees of Freedom</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="dof.css">
+    <link rel="stylesheet" href="paginate.css">
+    <link rel="stylesheet" href="../main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Degrees of Freedom</h1>
-    <div class="equation-wrapper">
-        <div id="stat-type"><span>μ</span></div>
-        <div class="fraction">
-            <div id="mean-numerator">
-                <input type="number" class="adjustable-number" id="mean-input1"><span>+</span>
-                <input type="number" class="adjustable-number" id="mean-input2"><span>+</span>
-                <input type="number" class="adjustable-number" id="mean-input3">
-            </div>
-            <hr class="mean-fraction-line">
-            <p class="denominator">3</p>
-        </div>
-        <div id="mean-equal">
-            <span id="equalsign">=</span>
-            <span id="mean"></span>
-        </div>
-        <div class="dof">df = n - 1</div>
+    <div id="nav-home">
+        <a href="../index.html"><img src="../assets/beautifulnumbers.png" width="300" height="48"></a>
     </div>
-    <div class="equation-wrapper">
-        <div id="stat-type"><span>|μ1 - μ2|</span></div>
-        <div class="fraction">
-            <div id="mean-diff-numerator">
-                <span>&#40;</span>
-                <input type="number" class="adjustable-number" id="mean-diff-input1"><span>+</span>
-                <input type="number" class="adjustable-number" id="mean-diff-input2"><span>+</span>
-                <input type="number" class="adjustable-number" id="mean-diff-input3">
-                <span>&#41;</span>
+    <div class="page-container">
+        <h1>Degrees of Freedom</h1>
+        <div id="page1">
+            <p>The <b>degrees of freedom</b> of a statistic is the number of <b>independent</b> pieces of information it has.</p>
+            <p>Say we know the mean of 3 numbers. We can freely enter the first two numbers, but the third numbers is then constrained since we already know the mean:</p>
+            <div class="equation-wrapper">
+                <div id="stat-type"><span>μ =</span></div>
+                <div class="fraction">
+                    <div id="mean-numerator">
+                        <input type="number" class="adjustable-number" id="mean-input1"><span>+</span>
+                        <input type="number" class="adjustable-number" id="mean-input2"><span>+</span>
+                        <input type="number" class="adjustable-number" id="mean-input3">
+                    </div>
+                    <hr class="mean-fraction-line">
+                    <p class="denominator">3</p>
+                </div>
+                <div id="mean-equal">
+                    <span id="equalsign">=</span>
+                    <span id="mean"></span>
+                </div>
             </div>
-            <hr id="mean-diff-fraction-line">
-            <p class="denominator">3</p>
+            <p>In this case, we have <b>2 independent inputs</b>, and therefore <b>2 degrees of freedom.</b></p>
         </div>
-        <div class="minus"><span> - </span></div>
-        <div class="fraction">
-            <div id="mean-diff-numerator">
-                <span>&#40;</span>
-                <input type="number" class="adjustable-number" id="mean-diff-input4"><span>+</span>
-                <input type="number" class="adjustable-number" id="mean-diff-input5">
-                <span>&#41;</span>
+        <div id="page2">
+            <p>Similarly, for the difference between two means, the total degrees of freedom is equal to the number of independent pieces of information from each mean:</p>
+            <div class="equation-wrapper">
+                <div id="stat-type"><span>|μ1 - μ2| = </span></div>
+                <div class="fraction">
+                    <div id="mean-diff-numerator">
+                        <span>&#40;</span>
+                        <input type="number" class="adjustable-number" id="mean-diff-input1"><span>+</span>
+                        <input type="number" class="adjustable-number" id="mean-diff-input2"><span>+</span>
+                        <input type="number" class="adjustable-number" id="mean-diff-input3">
+                        <span>&#41;</span>
+                    </div>
+                    <hr id="mean-diff-fraction-line">
+                    <p class="denominator">3</p>
+                </div>
+                <div class="minus"><span> - </span></div>
+                <div class="fraction">
+                    <div id="mean-diff-numerator">
+                        <span>&#40;</span>
+                        <input type="number" class="adjustable-number" id="mean-diff-input4"><span>+</span>
+                        <input type="number" class="adjustable-number" id="mean-diff-input5">
+                        <span>&#41;</span>
+                    </div>
+                    <hr id="mean-diff-fraction-line">
+                    <p class="denominator">2</p>
+                </div>
+                <div id="mean-equal">
+                    <span id="equalsign">=</span>
+                    <span id="mean-diff"></span>
+                </div>
+                <div class="dof">df = n - 2</div>
             </div>
-            <hr id="mean-diff-fraction-line">
-            <p class="denominator">2</p>
+            <p>In this case, we have <b>3 degrees of freedom.</b></p>
         </div>
-        <div id="mean-equal">
-            <span id="equalsign">=</span>
-            <span id="mean-diff"></span>
+        <div id="page3">
+            <p>Lastly, let's look at an example of two-way data: three groups <b>A, B, C</b> each measured across two characteristics, <b>1</b> and <b>2</b>.</p>
+            <div class="equation-wrapper">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <th>1</td>
+                        <td><input type="number" id="chisq-input1"></td>
+                        <td><input type="number" id="chisq-input2"></td>
+                        <td><input type="number" id="chisq-input3" disabled></td>
+                        <td><p class="table-cell" id="chisq-type1-total"></p></td>
+                    </tr>
+                    <tr>
+                        <th>2</td>
+                        <td><input type="number" id="chisq-input4"></td>
+                        <td><input type="number" id="chisq-input5"></td>
+                        <td><input type="number" id="chisq-input6" disabled></td>
+                        <td><p class="table-cell" id="chisq-type2-total"></p></td>
+                    </tr>
+                    <tr>
+                        <th>3</td>
+                        <td><input type="number" id="chisq-input7" disabled></td>
+                        <td><input type="number" id="chisq-input8" disabled></td>
+                        <td><input type="number" id="chisq-input9" disabled></td>
+                        <td><p class="table-cell" id="chisq-type3-total"></p></td>
+                    </tr>
+                    <tr>
+                        <th>Total</td>
+                        <td><p class="table-cell" id="chisq-groupA-total"></p></td>
+                        <td><p class="table-cell" id="chisq-groupB-total"></p></td>
+                        <td><p class="table-cell" id="chisq-groupC-total"></p></td>
+                        <td><p class="table-cell" id="chisq-total"></p></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <p>Knowing the row totals, every cell except the last one in each row is free to hold any value.</p>
+            <p>By the same token, every cell except the last in each column is free to vary given the column total.</p>
+            <p>The degrees of freedom is therefore the <b>number of rows - 1</b> multiplied by the <b>number of columns - 1</b>. In this case, 2 x 2 = <b>4 degrees of freedom.</b>.</p>
         </div>
-        <div class="dof">df = n - 2</div>
     </div>
-    <div class="equation-wrapper">
-        <div id="stat-type"><span>&#967;<sup>2</sup></span></div>
-        <div class="fraction">
-            <table>
-                <tr>
-                    <th></th>
-                    <th>A</th>
-                    <th>B</th>
-                    <th>C</th>
-                    <th>Total</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><input type="number" id="chisq-input1"></td>
-                    <td><input type="number" id="chisq-input2"></td>
-                    <td><input type="number" id="chisq-input3" disabled></td>
-                    <td><p id="chisq-type1-total"></p></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><input type="number" id="chisq-input4" disabled></td>
-                    <td><input type="number" id="chisq-input5" disabled></td>
-                    <td><input type="number" id="chisq-input6" disabled></td>
-                    <td><p id="chisq-type2-total"></p></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><p id="chisq-groupA-total"></p></td>
-                    <td><p id="chisq-groupB-total"></p></td>
-                    <td><p id="chisq-groupC-total"></p></td>
-                    <td><p id="chisq-total"></p></td>
-                </tr>
-            </table>
-        </div>
-        <div class="dof">df = (# rows - 1)(# columns - 1)</div>
-        <div id="n"></div>
+    <div class="page-buttons">
+        <button id="prev"><i class="arrow left"></i></button>
+        <button id="next"><i class="arrow right"></i></button>
     </div>
     <script src="dof.js" type="module"></script>
+    <script src="paginate.js" type="module"></script>
 </body>

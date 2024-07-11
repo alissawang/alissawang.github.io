@@ -63,3 +63,9 @@ export function forceArrayMean(array, targetMean) {
     let newValue = (targetMean * n) - (sum(modifiedArray))
     return modifiedArray.concat(newValue)
 }
+
+export function shuffleArray(dataArray) {
+    let randomIndex = dataArray.map(d => {return {"x": d, "idx": Math.random()}})
+    let shuffled = randomIndex.sort((a, b) => a.idx - b.idx)
+    return shuffled.map(d => d.x)
+}

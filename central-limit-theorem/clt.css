@@ -1,0 +1,124 @@
+ol {
+    padding-left: 10%;
+}
+
+.example-distributions {
+    padding-left: 50px;
+    width: 1000px;
+}
+
+.graph {
+    cursor: pointer;
+}
+
+.scrubber {
+    width: 50%;
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+}
+
+.sampled-points {
+    fill: #9fe2f5;
+    fill-opacity: 50%;
+    mix-blend-mode: multiply;
+}
+
+#class0, #class1 {
+    fill-opacity: 100%;
+}
+
+#class0 {
+    mix-blend-mode: normal;
+}
+
+#class1 {
+    fill: #0e3c54;
+}
+
+#beta-graph, #beta-graph-page2 {
+    float: left;
+}
+
+#uniform-graph, #uniform-graph-page2 {
+    float: left;
+}
+
+#sampled-graph {
+    margin-left: 200px;
+}
+
+#random-sample {
+    margin-left: 450px;
+}
+
+#random-sample button {
+    padding: 0.5em 0.5em;
+    background-color: #6bbfe3;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: inherit;
+}
+
+#random-sample button:active {
+    background-color: #b9d4eb
+}
+
+#sample-mean {
+    fill: #76cc2f;
+}
+
+#sample-mean-text {
+    font-family: "Arial";
+    fill: #76cc2f;
+}
+
+#sample-hist-rects {
+    fill: #76cc2f;
+}
+
+#avg-sample-mean-text {
+    font-family: "Arial";
+    fill: #76cc2f;
+}
+
+#sample-size-selector {
+    margin-left: 350px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+#sample-size-graph {
+    margin: auto;
+    width: 50%;
+}
+
+#sample-size-n {
+    vertical-align: middle;
+    font-size: 20px;
+    font-family: "Arial";
+}
+
+#sample-size-scrubber {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px; 
+    background: #e0e0e0;
+    border-radius: 5px;
+    outline: none; 
+    opacity: 0.7; 
+}
+
+#sample-size-scrubber::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px; 
+    background: #8fd156;
+    cursor: pointer; 
+    border-radius: 50%; 
+  }

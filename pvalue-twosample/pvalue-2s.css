@@ -1,7 +1,3 @@
-body {
-    font-family: "Space Grotesk";
-}
-
 h1 {
     padding-left: 10%;
     padding-top: 5%;
@@ -31,14 +27,6 @@ p {
 .graph {
     display: inline-block;
     margin: auto;
-}
-
-#section-0 {
-    display: block;
-}
-
-#section-1 {
-    display: none;
 }
 
 #samples-pg {
@@ -86,9 +74,7 @@ p {
 }
 
 #variance-graphs {
-    display: inline-block;
-    margin: auto;
-    width: 100%;
+    width: 1000px;
 }
 
 #sample-1 {
@@ -117,7 +103,6 @@ p {
 }
 
 #mean-1-text {
-    font-family: Arial;
     text-anchor: middle;
     fill: #6ac4de;
     font-size: 13px;
@@ -129,7 +114,6 @@ p {
 }
 
 #mean-2-text {
-    font-family: Arial;
     text-anchor: middle;
     fill: #76cc2f;
     font-size: 13px;
@@ -152,18 +136,14 @@ p {
 }
 
 #dim-text {
-    font-family: Arial;
     font-size: 15px;
     text-anchor: middle;
     fill: #ffb3d4;
 }
 
-#sample-1-variance {
+#sample-1-variance-visual {
     padding-left: 10%;
-}
-
-#sample-2-variance {
-    padding-left: 10%;
+    float: left;
 }
 
 #sample-1-variance-mean-line {
@@ -177,28 +157,24 @@ p {
 }
 
 #sample-1-variance-mean-text {
-    font-family: Arial;
     text-anchor: middle;
     fill: #6ac4de;
     font-size: 13px;
 }
 
 #sample-2-variance-mean-text {
-    font-family: Arial;
     text-anchor: middle;
     fill: #76cc2f;
     font-size: 13px;
 }
 
 #sample-1-sd-text {
-    font-family: Arial;
     text-anchor: middle;
     fill: #6ac4de;
     font-size: 20px;
 }
 
 #sample-2-sd-text {
-    font-family: Arial;
     text-anchor: middle;
     fill: #76cc2f;
     font-size: 20px;
@@ -252,87 +228,7 @@ p {
     opacity: 60%;
 }
 
-#tab-sections {
-    justify-content: center;
-    display: flex;
-    margin-bottom: 50px;
-}
-
-#page1 {
-    display: block;
-}
-
-#page2 {
-    display: none;
-}
-
-#page3 {
-    display: none;
-}
-
 .x-axis-label {
     text-anchor: left;
     opacity: 40%;
-}
-
-.tab-sections {
-    overflow: hidden;
-    justify-content: center;
-    display: flex;
-    margin-bottom: 50px;
-}
-
-.tab-sections button{
-    float: left;
-    background-color: white;
-    border: none;
-    outline: none;
-    padding: 10px 16px;
-    cursor: pointer;
-    margin-left: 5px;
-    /* border-radius: 10px; */
-}
-
-.tab-sections button:hover {
-    background-color: #f5f5f5;
-    border-bottom: solid #ebebeb;
-}
-
-.tab-sections button.active {
-    background-color: white;
-    border-bottom: solid 4px #e6e6e6;
-}
-
-.page-buttons{
-    display:flex;
-    justify-content:center;
-    gap:2rem;
-    padding: 80px;
-    margin-bottom:100px;
-  }
-
-.page-buttons button{
-border:none;
-padding:0.95rem 1.2rem;
-background-color: #d4eeff;
-color:white;
-border-radius:100%;
-cursor:pointer
-}
-
-.arrow {
-border: solid white;
-border-width: 0 3px 3px 0;
-display: inline-block;
-padding: 3px;
-}
-
-.right {
-transform: rotate(-45deg);
--webkit-transform: rotate(-45deg);
-}
-
-.left {
-transform: rotate(135deg);
--webkit-transform: rotate(135deg);
 }

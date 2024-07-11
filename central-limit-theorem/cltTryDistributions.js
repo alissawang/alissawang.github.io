@@ -34,22 +34,23 @@ var margins = ({
     bottom: 70,
     left: 40
 })
-var width = 400
-var height = 300
+var width = 300
+var height = 250
 var width2 = 700
 var height2 = 500
 
+const selectionColor = "#7cd3eb"
 var betaSvg = d3.select('#beta-graph')
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    .style("outline", "thin solid steelblue")
+    .style("outline", `thin solid ${selectionColor}`)
     .on("click", function() {
         selectedDistribution.clear()
         sampleMeansSvg.selectAll("rect").remove()
         samplingArray = []
         selectedDistribution = betaGraph
-        d3.select(this).style("outline", "thin solid steelblue")
+        d3.select(this).style("outline", `thin solid ${selectionColor}`)
     });
 
 var uniSvg = d3.select('#uniform-graph')
@@ -62,7 +63,7 @@ var uniSvg = d3.select('#uniform-graph')
         sampleMeansSvg.selectAll("rect").remove()
         samplingArray = []
         selectedDistribution = uniformGraph
-        d3.select(this).style("outline", "thin solid steelblue")
+        d3.select(this).style("outline", `thin solid ${selectionColor}`)
     });
 
 var bernoulliSvg = d3.select('#bernoulli-graph')
@@ -75,7 +76,7 @@ var bernoulliSvg = d3.select('#bernoulli-graph')
         sampleMeansSvg.selectAll("rect").remove()
         samplingArray = []
         selectedDistribution = bernoulliGraph
-        d3.select(this).style("outline", "thin solid steelblue")
+        d3.select(this).style("outline", `thin solid ${selectionColor}`)
     });
 
 var [betaGraphXValues, betaGraphYValues] = drawDistribution(betaSvg, betaDataArray, width, height, margins, false)
@@ -93,7 +94,7 @@ var bernoulliGraph = new distributionGraph(
     bernoulliXRange, bernoulliDataArray, bernoulliPdf, bernoulliSvg, bernoulliGraphXValues, bernoulliGraphYValues
 )
         
-var selectedDistribution = betaGraph
+var selectedDistribution = betaGraph;
 
 var sampleMeansSvg = d3.select('#sampled-graph').append("svg").attr("width", width2).attr("height", height2);
 
@@ -153,8 +154,7 @@ samplingButton.addEventListener("mousedown", () => {
             .append("circle")
             .attr("class", "sampled-points")
             .attr("id", "class0")
-            .style("fill", "#9fe2f5")
-            .attr("r", "8")
+            .attr("r", "5.7")
             .attr("cx", d => xGraphValues(d.x))
             .attr("cy", d => yGraphValues(d.y))
         selectedDistribution.svg.selectAll("#class1")
@@ -163,8 +163,7 @@ samplingButton.addEventListener("mousedown", () => {
             .append("circle")
             .attr("class", "sampled-points")
             .attr("id", "class1")
-            .style("fill", "#0e3c54")
-            .attr("r", "8")
+            .attr("r", "5.7")
             .attr("cx", d => xGraphValues(d.x))
             .attr("cy", d => yGraphValues(d.y))
     } else {
@@ -173,14 +172,12 @@ samplingButton.addEventListener("mousedown", () => {
             .enter()
             .append("circle")
             .attr("class", "sampled-points")
-            .style("fill", "#79caed")
             .attr("r", "7")
             .attr("cx", d => selectedDistribution.graphXValues(d.x))
             .attr("cy", d => selectedDistribution.graphYValues(d.y))
 
         selectedDistribution.svg.append("circle")
             .attr("id", "sample-mean")
-            .attr("fill", "#91ba6a")
             .attr("r", "7")
             .attr("cx", d => selectedDistribution.graphXValues(sampleMean))
             .attr("cy", d => selectedDistribution.graphYValues(selectedDistribution.pdf(sampleMean, alpha, beta)))

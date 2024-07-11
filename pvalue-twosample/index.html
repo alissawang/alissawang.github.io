@@ -4,16 +4,21 @@
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="pvalue-2s.css">
+    <link rel="stylesheet" href="paginate.css">
+    <link rel="stylesheet" href="../main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="nav-home">
+        <a href="../index.html"><img src="../assets/beautifulnumbers.png" width="300" height="48"></a>
+    </div>
     <h1>P-Value: Two Samples</h1>
     <div class="tab-sections">
-        <button id="tab-section-0">Lesson</button>
-        <button id="tab-section-1">Playground</button>
+        <button id="tab-section-1">Lesson</button>
+        <button id="tab-section-2">Playground</button>
     </div>
     <div id="section-1">
         <div id="page1">
@@ -25,10 +30,8 @@
             <p>How much variability in each sample?
             </p>
             <div id="variance-graphs">
-                <div id="sample-1-variance-head" class="graph"></div><div id="sample-2-variance-head" class="graph"></div>
-            </div>
-            <div id="variance-graphs">
-                <div id="sample-1-variance" class="graph"></div><div id="sample-2-variance" class="graph"></div>
+                <div id="sample-1-variance-visual" class="graph"></div>
+                <div id="sample-2-variance-visual" class="graph"></div>
             </div>
             <p>Scale each group's variance to get the pooled variance:</p>
             <div class="formula">
@@ -54,7 +57,7 @@
             <button id="next"><i class="arrow right"></i></button>
         </div>
     </div>
-    <div id="section-0">
+    <div id="section-2">
         <div class="center">
             <div id="samples-pg">
                 <input type="range" class="slider" id="sample-1-slider" min="30" max="40" step="0.1"></input>

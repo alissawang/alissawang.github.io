@@ -1,0 +1,55 @@
+#samples {
+    margin-left: 200px;
+}
+
+#sample-values-1 {
+    fill: #9fe2f5;
+    fill-opacity: 80%;
+    mix-blend-mode: multiply;
+}
+
+#sample-values-2 {
+    fill: #76cc2f;
+    fill-opacity: 80%;
+    mix-blend-mode: multiply;
+}
+
+#mean-1, #mean-2 {
+    stroke: #6ac4de;
+    stroke-width: 2px;
+}
+
+#mean-2 {
+    stroke: #76cc2f;
+}
+
+#mean-1-text, #mean-2-text, #dim-text {
+    text-anchor: middle;
+    fill: #6ac4de;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#mean-2-text {
+    fill: #76cc2f;
+}
+
+#dim-mean-1 {
+    stroke: #6ac4de;
+    stroke-width: 2px;
+}
+
+#dim-mean-2 {
+    stroke: #76cc2f;
+    stroke-width: 2px;
+}
+
+#dim {
+    stroke: #ffb3d4;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
+
+#dim-text {
+    fill: #ffb3d4;
+}

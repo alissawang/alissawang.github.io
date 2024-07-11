@@ -44,10 +44,9 @@ var meanDiffInputs2 = [
     document.getElementById("mean-diff-input5")
 ]
 var meanDiffDisplay = document.getElementById("mean-diff");
-var staticMeanDiff = 10
 var meanDiffStaticMean1 = 5;
 var meanDiffStaticMean2 = 15;
-meanDiffDisplay.innerHTML = staticMeanDiff;
+meanDiffDisplay.innerHTML = `|${meanDiffStaticMean1} - ${meanDiffStaticMean2}|`;
 processInputs(meanDiffInputs1, meanDiffStaticMean1, inferFromMean);
 processInputs(meanDiffInputs2, meanDiffStaticMean2, inferFromMean);
 
@@ -87,14 +86,16 @@ function processInputsChiSq(inputRows, rowMargins, columnMargins) {
     }
 }
 
-var chiSqTypeTotal1 = 100;
-var chiSqTypeTotal2 = 150;
+var chiSqTotal = 250
+var chiSqTypeTotal1 = 80;
+var chiSqTypeTotal2 = 100;
+var chiSqTypeTotal3 = chiSqTotal - chiSqTypeTotal1 - chiSqTypeTotal2
 var chiSqGroupTotalA = 70;
 var chiSqGroupTotalB = 80;
 var chiSqGroupTotalC = 100;
-var chiSqTotal = 250
 var chiSqTypeTotal1Display = document.getElementById("chisq-type1-total");
 var chiSqTypeTotal2Display = document.getElementById("chisq-type2-total");
+var chiSqTypeTotal3Display = document.getElementById("chisq-type3-total");
 var chiSqGroupTotalADisplay = document.getElementById("chisq-groupA-total");
 var chiSqGroupTotalBDisplay = document.getElementById("chisq-groupB-total");
 var chiSqGroupTotalCDisplay = document.getElementById("chisq-groupC-total");
@@ -102,6 +103,7 @@ var chiSqGroupTotalCDisplay = document.getElementById("chisq-groupC-total");
 var chiSqTotalDisplay = document.getElementById("chisq-total");
 chiSqTypeTotal1Display.innerHTML = chiSqTypeTotal1;
 chiSqTypeTotal2Display.innerHTML = chiSqTypeTotal2;
+chiSqTypeTotal3Display.innerHTML = chiSqTypeTotal3;
 chiSqGroupTotalADisplay.innerHTML = chiSqGroupTotalA;
 chiSqGroupTotalBDisplay.innerHTML = chiSqGroupTotalB;
 chiSqGroupTotalCDisplay.innerHTML = chiSqGroupTotalC;
@@ -118,7 +120,12 @@ var chiSqInputs2 = [
     document.getElementById("chisq-input5"),
     document.getElementById("chisq-input6")
 ]
-var typeTotals = [chiSqTypeTotal1, chiSqTypeTotal1]
+var chiSqInputs3 = [
+    document.getElementById("chisq-input7"),
+    document.getElementById("chisq-input8"),
+    document.getElementById("chisq-input9")
+]
+var typeTotals = [chiSqTypeTotal1, chiSqTypeTotal2, chiSqTypeTotal3]
 var groupTotals = [chiSqGroupTotalA, chiSqGroupTotalB, chiSqGroupTotalC]
-var rows = [chiSqInputs1, chiSqInputs2]
+var rows = [chiSqInputs1, chiSqInputs2, chiSqInputs3]
 processInputsChiSq(rows, groupTotals, typeTotals)

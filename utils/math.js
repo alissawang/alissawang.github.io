@@ -32,11 +32,17 @@ export function gamma(z) {
   }
 
 export function normalPdf(input, currentMu, currentSd) {
-    let expression_1 = 1/(Math.sqrt(2*Math.PI) * currentSd)
+    let expression1 = 1/(Math.sqrt(2*Math.PI) * currentSd)
     let z = zScore(currentMu, input, currentSd)
-    let expression_2 = Math.exp(-0.5*(z**2))
+    let expression2 = Math.exp(-0.5*(z**2))
   
-    return expression_1 * expression_2
+    return expression1 * expression2
+}
+
+export function studentsTPdf(input, df) {
+    let expression1 = gamma((df + 1) / 2) / (gamma(df / 2) * Math.sqrt(df * Math.PI))
+    let expression2 = (1 + ((input ** 2) / df)) ** (-(df + 1) / 2)
+    return expression1 * expression2
 }
 
 export function betaPdf(x, a, b) {
@@ -64,6 +70,10 @@ export function factorial(x) {
 
 export function zScore(mu, observed, sd) {
     return (observed - mu) / sd
+}
+
+export function tScore(mu, observed, sd, n) {
+    return (observed - mu) / (sd / Math.sqrt(n))
 }
 
 export function areaUnderCurve(func, start, end, delta) {

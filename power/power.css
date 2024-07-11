@@ -1,0 +1,171 @@
+body {
+    color: black;
+    font-weight: lighter;
+    padding-left: 100px;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.scrubber-container {
+    margin-left: 200px;
+    padding-top: 10px;
+    width: 400px;
+}
+
+.scrubber-symbol {
+    position: relative;
+    text-align: right;
+    width: 40px;
+    float: left;
+}
+
+.scrubber-symbol p {
+    padding-left: 0;
+}
+
+.scrubber {
+    margin-left: 15px;
+    margin-right: 10px;
+    width: 250px;
+}
+
+.scrubber {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px; 
+    background: #e0e0e0;
+    border-radius: 5px;
+    outline: none; 
+    opacity: 0.7; 
+}
+
+.scrubber::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px; 
+    background: #8fd156;
+    cursor: pointer; 
+    border-radius: 50%; 
+  }
+.scrubber::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #8fd156;
+    cursor: pointer;
+  }
+
+.pop-mean-text {
+    text-anchor: left;
+}
+
+.live-value {
+    font-size: 14px;
+}
+
+.graph {
+    margin-left: 30px;
+}
+
+#distribution-1, #null-graph-distr {
+    stroke: #cccccc;
+    stroke-width: 5px;
+}
+
+#distribution-2 {
+    stroke: #8fd156;
+    stroke-width: 5px;
+}
+
+#samples-1 {
+    fill: #9fe2f5;
+    fill-opacity: 30%;
+    mix-blend-mode: multiply;
+}
+
+#samples-2 {
+    fill: #ffb0f3;
+    fill-opacity: 30%;
+    mix-blend-mode: multiply;
+}
+
+#h0-pop-mean-text {
+    fill: grey;
+    fill-opacity: 50%;
+    font-weight: 400;
+}
+
+#h1-pop-mean-text {
+    fill: #8fd156;
+    font-weight: 400;
+}
+
+#null-critical-value-line, #h0-alpha-line {
+    stroke: #cccccc;
+    stroke-width: 4px;
+    stroke-dasharray: 10,5;
+}
+
+#null-critical-value-area {
+    fill: #cccccc;
+    opacity: 30%;
+}
+
+#definitions {
+    background: #ededed;
+    padding: 10px;
+    border-radius: 20px;
+    color: black;
+    width: 750px;
+    margin: auto;
+    font-weight: bold;
+}
+
+#alpha-definition, #mde-definition, #sample-size-definition {
+    margin-left: 5px;
+}
+
+#alpha-text, #null-distr-p-value {
+    fill: grey;
+    text-anchor: middle;
+    font-weight: 400;
+}
+
+#power-area {
+    fill:#8fd156;
+    opacity: 60%;
+}
+
+#power-text {
+    fill: #8fd156;
+    font-size: 18px;
+    text-anchor: left;
+    font-weight: 600;
+}
+
+#power-rect {
+    fill: none;
+    stroke: #bae099;
+    stroke-width: 2px;
+}
+
+#power-rect-level, #power-rect-decorator {
+    fill: #bae099;
+}
+
+#power-curve-effect-size {
+    stroke: black;
+    stroke-dasharray: 10,5;
+}
+
+#power-curve-power-value {
+    stroke: black;
+    stroke-dasharray: 10,5;
+}
+
+#power-curve {
+    margin-left: 100px;
+}

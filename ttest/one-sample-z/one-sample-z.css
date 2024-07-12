@@ -53,8 +53,17 @@
     color: #6bbfe3;
 }
 
-#normal-distribution-p-text, #normal-distribution-p-area {
-    fill: #88bed1;
+#z-score-computation {
+    width: 700px;
+    margin: auto;
+}
+
+#z-score-formula, #z-score-formula-compute {
+    float: left;
+}
+
+#z-score-formula {
+    margin-left: 60px;
 }
 
 #mean-line, #mean-line-variance {
@@ -130,7 +139,7 @@
     width: 50%;
 }
 
-#normal-distr-p-text, #normal-distr-p-area {
+#normal-distr-p-text, #normal-distr-p-area, #normal-distribution-p-text, #normal-distribution-p-area {
     fill: #88bed1;
     opacity: 70%;
 }

@@ -1,4 +1,4 @@
-import { page1Transition, page1Reset, page2Transition, page3Transition, page3Reset, page4Transition } from "./one-sample-z.js"
+import { page1Transition, page1Reset, page2Transition, page2Reset, page4Transition } from "./two-sample-z.js"
 
 const page1 = document.querySelector("#page1");
 const page2 = document.querySelector("#page2");
@@ -18,8 +18,8 @@ function hidePage() {
     if (index == 0) {
         page1Reset();
     }
-    if (index == 2) {
-        page3Reset();
+    if (index == 1) {
+        page2Reset();
     }
     pageToHide.style.display = "none";
 }
@@ -32,9 +32,9 @@ function showPage() {
     if (index == 1) {
         page2Transition();
     };
-    if (index == 2) {
-        page3Transition();
-    };
+    // if (index == 2) {
+    //     page3Transition();
+    // };
     if (index == 3) {
         page4Transition();
     };

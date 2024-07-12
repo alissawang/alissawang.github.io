@@ -77,8 +77,9 @@ export function tScore(mu, observed, sd, n) {
 }
 
 export function areaUnderCurve(func, start, end, delta) {
+    delta = (end > start) ? delta : -1 * delta
     let range = d3.range(start, end, delta)
-    return range.reduce((total, currentVal) => total + (Math.abs(func(currentVal)) * delta), 0)
+    return range.reduce((total, currentVal) => total + (Math.abs(func(currentVal) * delta)), 0)
 }
 
 export function reverseLookupAreaUnderCurve(func, end, delta, targetArea) {

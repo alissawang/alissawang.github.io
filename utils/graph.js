@@ -281,7 +281,7 @@ export function graphMagnitudeLine(svg, x, y, width, tickHeight, id, class_= "")
         .attr("y2", y + (tickHeight / 2))
 }
     
-export function addSquareRootSvg(svg, x, y, number, fontSize) {
+export function addSquareRootSvg(svg, x, y, number, fontSize = null) {
     let chars = String(number).length
     svg.append("line")
         .attr("class", "frac-line")
@@ -307,10 +307,12 @@ export function addSquareRootSvg(svg, x, y, number, fontSize) {
         .attr("x2", x - 27)
         .attr("y1", y + 20 * chars - 15)
         .attr("y2", y + 20 * chars - 11)
-    svg.append("text")
-        .text(number)
-        .attr("class", "denominator")
-        .attr("x", x)
-        .attr("y", y + fontSize)
-        .style("font-size", fontSize)
+    if (fontSize) {
+        svg.append("text")
+            .text(number)
+            .attr("class", "denominator")
+            .attr("x", x)
+            .attr("y", y + fontSize)
+            .style("font-size", fontSize)
+    }
 }

@@ -1,110 +1,267 @@
-import { seedSampleNormalDistribution } from "../../utils/data.js"
-import { mean, standardDeviation, roundDecimal } from "../../utils/math.js"
-import { empty1DGraph } from "../../utils/graph.js"
+import { seedSampleNormalDistribution, shuffleArray, forceArrayMean, generateNormalData } from "../../utils/data.js"
+import { mean, standardDeviation, roundDecimal, zScore, normalPdf } from "../../utils/math.js"
+import { addSquareRootSvg, empty1DGraph, drawDistribution } from "../../utils/graph.js"
+import { animateSample, addFractionSvg, varianceTransition, highlightPArea } from "../utils.js"
 
 var margin = ({
     top: 0,
     right: 30,
     bottom: 20,
-    left: 80
+    left: 150
 })
+var varianceMargins = {
+    top: 0,
+    right: 30,
+    bottom: 20,
+    left: 20
+}
+var normalDistrMargins = {
+    "top": 80,
+    "left": 30,
+    "right": 10,
+    "bottom": 40
+}
 
 var sampleWidth = 700
 var sampleHeight = 200
+var zWidth = 400
+var zHeight = 230
+var varianceSvgWidth = 400
+var varianceSvgHeight = 500
+var normalDistrWidth = 500
+var normalDistrHeight = 400
 
-var popMean1 = 35.1
-const popMean2 = 35.9
-var sample1 = seedSampleNormalDistribution(popMean1, 1.8, 30).map(d => d.x).sort()
-var sample2 = seedSampleNormalDistribution(35.9, 1.2, 30).map(d => d.x).sort()
-var mean1 = mean(sample1)
-const mean2 = mean(sample2)
-const sd1 = standardDeviation(sample1)
-const sd2 = standardDeviation(sample2)
+var sampleGraphXRange = d3.range(0, 10, 0.01)
+var sampleMean1 = 6.3
+var sampleMean2 = 4.7
+var n = 30
+var diffInMeans = Math.abs(sampleMean1 - sampleMean2)
+var nullDiffInMeans = 2.3
+var sample1 = forceArrayMean(seedSampleNormalDistribution(sampleMean1, 1.8, n).map(d => d.x), sampleMean1).sort()
+var sample2 = forceArrayMean(seedSampleNormalDistribution(sampleMean2, 1.2, n).map(d => d.x), sampleMean2).sort()
+var sd1 = standardDeviation(sample1)
+var sd2 = standardDeviation(sample2)
+var z = zScore(nullDiffInMeans, diffInMeans, (sd1 / Math.sqrt(n)) + (sd2 / Math.sqrt(n)))
+var normalXRange = d3.range(-6, 6, 0.01)
+const normalDistrData = generateNormalData(normalXRange, 0, 1)
+function normalPdfPartial(input) {
+    return normalPdf(input, 0, 1)
+}
 
 const sampleSvg = d3.select("#samples").append("svg")
     .attr("width", sampleWidth)
     .attr("height", sampleHeight)
+const zScoreSvg = d3.select("#z-score-compute")
+    .append("svg")
+    .attr("width", zWidth)
+    .attr("height", zHeight)
+const sample1VarianceSvg = d3.select("#sample-1-variance-visual").append("svg")
+    .attr("width", varianceSvgWidth)
+    .attr("height", varianceSvgHeight)
+const sample2VarianceSvg = d3.select("#sample-2-variance-visual").append("svg")
+    .attr("width", varianceSvgWidth)
+    .attr("height", varianceSvgHeight)
+const normalDistrSvg = d3.select("#normal-distribution")
+    .append("svg")
+    .attr("width", normalDistrWidth)
+    .attr("height", normalDistrHeight)
 
-const sampleXGraphValues = empty1DGraph(sampleSvg, d3.range(30, 41, 1), sampleWidth, sampleHeight, margin)
+const sampleXGraphValues = empty1DGraph(sampleSvg, sampleGraphXRange, sampleWidth, sampleHeight, margin)
 const sampleOffset = 100
 const sample1Height = margin.top + 40
 
-sampleSvg.selectAll("#sample-values-1")
-    .data(sample1)
-    .enter()
-    .append("circle")
-    .attr("r", 8)
-    .attr("id", "sample-values-1")
-    .attr("cx", d => sampleXGraphValues(d))
-    .attr("cy", sample1Height)
-sampleSvg.append("line")
-    .attr("id", "mean-1")
-    .attr("x1", sampleXGraphValues(mean1))
-    .attr("x2", sampleXGraphValues(mean1))
-    .attr("y1", sample1Height + 8)
-    .attr("y2", sample1Height + 50)
 sampleSvg.append("text")
-    .attr("id", "mean-1-text")
-    .text(`x̄ = ${roundDecimal(mean1, 2)}`)
-    .attr("x", sampleXGraphValues(mean1))
-    .attr("y", sample1Height - 25)
-sampleSvg.append("text")
-    .text("Group 1")
+    .text("Black & White")
     .attr("class", "x-axis-label")
     .attr("id", "group-1-label")
-    .attr("x", 0)
+    .attr("x", 120)
     .attr("y", sample1Height)
 
-sampleSvg.selectAll("#sample-values-2")
-    .data(sample2)
-    .enter()
-    .append("circle")
-    .attr("r", 8)
-    .attr("id", "sample-values-2")
-    .attr("cx", d => sampleXGraphValues(d))
-    .attr("cy", sample1Height + sampleOffset)
-sampleSvg.append("line")
-    .attr("id", "mean-2")
-    .attr("x1", sampleXGraphValues(mean2))
-    .attr("x2", sampleXGraphValues(mean2))
-    .attr("y1", sample1Height + sampleOffset - 70)
-    .attr("y2", sample1Height + sampleOffset + 8)
 sampleSvg.append("text")
-    .attr("id", "mean-2-text")
-    .text(`x̄ = ${roundDecimal(mean2, 2)}`)
-    .attr("x", sampleXGraphValues(mean2))
-    .attr("y", sample1Height + sampleOffset + 25)
-sampleSvg.append("text")
-    .text("Group 2")
+    .text("Brown")
     .attr("class", "x-axis-label")
-    .attr("x", 0)
+    .attr("x", 120)
     .attr("y", sample1Height + sampleOffset)
 
-const differenceInMeans = Math.abs(mean1 - mean2)
-const diffInMeansSvg = d3.select("#diff-in-means").append("svg")
-    .attr("width", sampleWidth)
-    .attr("height", sampleHeight)
-const diffInMeansGraphValues = empty1DGraph(diffInMeansSvg, d3.range(30, 41, 1), sampleWidth, 100, margin, true)
-sampleSvg.append("line")
-    .attr("id", "dim")
-    .attr("x1", diffInMeansGraphValues(mean1))
-    .attr("x2", diffInMeansGraphValues(mean2))
-    .attr("y1", (sampleHeight / 2) - 10)
-    .attr("y2", (sampleHeight / 2) - 10)
-sampleSvg.append("line")
-    .attr("id", "dim-mean-1")
-    .attr("x1", diffInMeansGraphValues(mean1))
-    .attr("x2", diffInMeansGraphValues(mean1))
-    .attr("y1", (sampleHeight / 2) - 20)
-    .attr("y2", (sampleHeight / 2) - 3)
-sampleSvg.append("line")
-    .attr("id", "dim-mean-2")
-    .attr("x1", diffInMeansGraphValues(mean2))
-    .attr("x2", diffInMeansGraphValues(mean2))
-    .attr("y1", (sampleHeight / 2) - 20)
-    .attr("y2", (sampleHeight / 2 - 3))
-sampleSvg.append("text")
-    .attr("id", "dim-text")
-    .text(roundDecimal(differenceInMeans, 2))
-    .attr("x", diffInMeansGraphValues(mean1) + 20)
-    .attr("y", (sampleHeight / 2) - 20)
+var zComputeX = 160;
+var zComputeY = 120;
+zScoreSvg.append("text").text("=").attr("x", zComputeX - 150).attr("y", zComputeY + 15).style("font-size", 40)
+addFractionSvg(zScoreSvg, "z-score", `(${sampleMean1} - ${sampleMean2}) - ${nullDiffInMeans}`, "", zComputeX, zComputeY, 35)
+addFractionSvg(zScoreSvg, "sd1", roundDecimal(sd1, 2), n, zComputeX - 60, zComputeY + 55, 30)
+addFractionSvg(zScoreSvg, "sd2", roundDecimal(sd2, 2), n, zComputeX + 60, zComputeY + 55, 30)
+addSquareRootSvg(zScoreSvg, zComputeX - 75, zComputeY + 68, n)
+addSquareRootSvg(zScoreSvg, zComputeX + 45, zComputeY + 68, n)
+zScoreSvg.append("text").text("+").attr("class", "denominator").attr("x", zComputeX).attr("y", zComputeY + 70).style("font-size", 40).style("text-anchor", "middle")
+zScoreSvg.append("text").text(`= ${roundDecimal(z, 2)}`).attr("x", zComputeX + 130).attr("y", zComputeY + 15).style("font-size", 40)
+
+const sample1VarianceValues = empty1DGraph(
+    sample1VarianceSvg, 
+    d3.extent(sampleGraphXRange), 
+    varianceSvgWidth,
+    60,
+    varianceMargins
+)
+const sample2VarianceValues = empty1DGraph(
+    sample2VarianceSvg, 
+    d3.extent(sampleGraphXRange), 
+    varianceSvgWidth,
+    60,
+    varianceMargins
+)
+
+const oneTailButton = document.querySelector("#one-tail-button")
+const twoTailButton = document.querySelector("#two-tail-button")
+var nTails = 1;
+oneTailButton.addEventListener("click", () => {
+    if (nTails != 1) {
+        buttonFocus(oneTailButton);
+        buttonRelease(twoTailButton);
+    }
+    nTails = 1;
+    highlightPArea(
+        normalDistrSvg, "normal-distr", normalDistrData, z, normalPdfPartial, normalXGraphValues, normalYGraphValues, normalDistrWidth, normalDistrHeight, normalDistrMargins, nTails
+    );
+})
+twoTailButton.addEventListener("click", () => {
+    if (nTails != 2) {
+        buttonFocus(twoTailButton);
+        buttonRelease(oneTailButton);
+    }
+    nTails = 2;
+    highlightPArea(
+        normalDistrSvg, "normal-distr", normalDistrData, z, normalPdfPartial, normalXGraphValues, normalYGraphValues, normalDistrWidth, normalDistrHeight, normalDistrMargins, nTails
+    );
+})
+
+function buttonFocus(button) {
+    if (!button.className.includes("active")) {
+        button.className += " active"
+    }
+}
+
+function buttonRelease(button) {
+    button.className = button.className.replace(" active", "")
+}
+
+
+var [ normalXGraphValues, normalYGraphValues ] = drawDistribution(normalDistrSvg, normalDistrData, normalDistrWidth, normalDistrHeight, normalDistrMargins)
+normalDistrSvg.append("text")
+    .text(`z = ${roundDecimal(z, 2)}`)
+    .attr("id", "normal-distr-z-text")
+    .attr("x", normalXGraphValues(z))
+    .attr("y", normalDistrHeight - 5)
+
+normalDistrSvg.append("line")
+    .attr("id", "normal-distr-p-line")
+    .attr("x1", normalXGraphValues(z))
+    .attr("x2", normalXGraphValues(z))
+    .attr("y1", normalYGraphValues(normalPdfPartial(z)))
+    .attr("y2", normalDistrHeight - normalDistrMargins.bottom)
+
+function transitionSampleLines(){
+    let delayScale = 40
+    sampleSvg.append("line")
+        .attr("id", "mean-1")
+        .attr("class", "dynamic")
+        .attr("x1", sampleXGraphValues(sampleMean1))
+        .attr("x2", sampleXGraphValues(sampleMean1))
+        .attr("y1", sample1Height + 8)
+        .attr("y2", sample1Height + 8)
+        .transition()
+        .delay(delayScale*sample1.length)
+        .attr("y2", sample1Height + 50)
+    sampleSvg.append("text")
+        .attr("id", "mean-1-text")
+        .attr("class", "dynamic")
+        .text(`x̄ = ${roundDecimal(sampleMean1, 2)}`)
+        .attr("x", sampleXGraphValues(sampleMean1))
+        .attr("y", sample1Height - 15)
+        .style("opacity", "0%")
+        .transition()
+        .delay(delayScale*sample1.length)
+        .style("opacity", "100%")
+    sampleSvg.append("line")
+        .attr("id", "mean-2")
+        .attr("class", "dynamic")
+        .attr("x1", sampleXGraphValues(sampleMean2))
+        .attr("x2", sampleXGraphValues(sampleMean2))
+        .attr("y1", sample1Height + sampleOffset + 8)
+        .attr("y2", sample1Height + sampleOffset + 8)
+        .transition()
+        .delay(delayScale*sample2.length)
+        .attr("y2", sample1Height + sampleOffset - 50)
+    sampleSvg.append("text")
+        .attr("id", "mean-2-text")
+        .attr("class", "dynamic")
+        .text(`x̄ = ${roundDecimal(sampleMean2, 2)}`)
+        .attr("x", sampleXGraphValues(sampleMean2))
+        .attr("y", sample1Height + sampleOffset + 25)
+        .style("opacity", "0%")
+        .transition()
+        .delay(delayScale*sample2.length)
+        .style("opacity", "100%")
+
+    sampleSvg.append("line")
+        .attr("id", "dim")
+        .attr("class", "dynamic")
+        .attr("x1", sampleXGraphValues(sampleMean1))
+        .attr("x2", sampleXGraphValues(sampleMean1))
+        .attr("y1", (sampleHeight / 2) - 10)
+        .attr("y2", (sampleHeight / 2) - 10)
+        .transition()
+        .delay(delayScale * 1.5 * sample1.length)
+        .attr("x2", sampleXGraphValues(sampleMean2))
+    sampleSvg.append("text")
+        .attr("id", "dim-text")
+        .attr("class", "dynamic")
+        .text(roundDecimal(diffInMeans, 2))
+        .attr("x", sampleXGraphValues((sampleMean1 + sampleMean2) / 2))
+        .attr("y", (sampleHeight / 2) - 20)
+        .style("opacity", "0%")
+        .transition()
+        .delay(delayScale * 1.7 *sample2.length)
+        .style("opacity", "100%")
+}
+
+export function page1Transition() {
+    animateSample(sampleSvg, "sample-1", sampleXGraphValues, sample1Height, shuffleArray(sample1))
+    animateSample(sampleSvg, "sample-2", sampleXGraphValues, sample1Height + sampleOffset, shuffleArray(sample2))    
+    transitionSampleLines();
+}
+
+export function page1Reset() {
+    sampleSvg.selectAll(".dynamic").remove()
+}
+
+export function page2Transition() {
+    varianceTransition(sample1VarianceSvg, "sample-1-variance", sample1, sample1VarianceValues, varianceSvgHeight, varianceMargins)
+    varianceTransition(sample2VarianceSvg, "sample-2-variance", sample2, sample2VarianceValues, varianceSvgHeight, varianceMargins)
+    zScoreSvg.select("#sd1-numerator")
+        .style("opacity", "0%")
+        .transition()
+        .delay(40 * sample1.length)
+        .style("opacity", "100%")
+    zScoreSvg.select("#sd2-numerator")
+        .style("opacity", "0%")
+        .transition()
+        .delay(40 * sample2.length)
+        .style("opacity", "100%")
+}
+
+export function page2Reset() {
+    sample1VarianceSvg.selectAll(".dynamic").remove()
+    sample2VarianceSvg.selectAll(".dynamic").remove()
+    zScoreSvg.select("#sd1-numerator")
+        .style("opacity", "0%")
+    zScoreSvg.select("#sd2-numerator")
+        .style("opacity", "0%")
+}
+
+export function page4Transition() {
+    nTails = 1;
+    buttonFocus(oneTailButton);
+    buttonRelease(twoTailButton);
+    highlightPArea(
+        normalDistrSvg, "normal-distr", normalDistrData, z, normalPdfPartial, normalXGraphValues, normalYGraphValues, normalDistrWidth, normalDistrHeight, normalDistrMargins, nTails
+    );
+}

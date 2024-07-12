@@ -1,7 +1,7 @@
-import { empty1DGraph, drawDistribution, graphMagnitudeLine } from "../../utils/graph.js"
+import { empty1DGraph, drawDistribution, addSquareRootSvg } from "../../utils/graph.js"
 import { generateNormalData, seedSampleNormalDistribution, shuffleArray, forceArrayMean } from "../../utils/data.js"
 import { mean, standardDeviation, roundDecimal, normalPdf, areaUnderCurve, zScore } from "../../utils/math.js"
-import { highlightPArea } from "../utils.js"
+import { highlightPArea, addFractionSvg } from "../utils.js"
 
 const margins = ({
     top: 0,
@@ -19,6 +19,8 @@ const normalDistrMargins = {
 
 var sampleWidth = 400
 var sampleHeight = 100
+var zWidth = 400
+var zHeight = 200
 var normalDistrWidth = 500
 var normalDistrHeight = 400
 
@@ -40,6 +42,10 @@ const sampleSvg = d3.select("#sample")
     .append("svg")
     .attr("width", sampleWidth)
     .attr("height", sampleHeight)
+const zScoreSvg = d3.select("#z-score-compute")
+    .append("svg")
+    .attr("width", zWidth)
+    .attr("height", zHeight)
 const normalDistrDynamicSvg = d3.select("#normal-distribution-dynamic")
     .append("svg")
     .attr("width", normalDistrWidth)
@@ -62,6 +68,10 @@ zSlider.oninput = function() {
     zValue.style.left = `${(z + 6) * 41}px`
     highlightPArea(normalDistrDynamicSvg, "normal-distribution", normalDistrData, z, normalPdfPartial, normalXGraphValues, normalYGraphValues, normalDistrWidth, normalDistrHeight, normalDistrMargins, 1)
 }
+
+zScoreSvg.append("text").text("=").attr("x", 30).attr("y", 90).style("font-size", 40)
+addFractionSvg(zScoreSvg, "z-score", `${sampleMean} - ${nullHypothesisMean}`, `${roundDecimal(sampleSd, 2)}`, 150, 79, 35)
+zScoreSvg.append("text").text(`= ${roundDecimal(z, 2)}`).attr("x", zWidth - 160).attr("y", 90).style("font-size", 40)
 
 const varianceSvgWidth = 400
 const varianceSvgHeight = 500
@@ -137,6 +147,7 @@ normalDistrSvg.append("text")
     .attr("id", "normal-distr-z-text")
     .attr("x", normalXGraphValues(z))
     .attr("y", normalDistrHeight - 5)
+
 normalDistrSvg.append("line")
     .attr("id", "normal-distr-z-line")
     .attr("x1", normalXGraphValues(z))

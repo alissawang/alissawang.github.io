@@ -1,4 +1,4 @@
-import { normalPdf, zScore, sum } from "./math.js"
+import { normalPdf, zScore, sum, mean } from "./math.js"
 import { randomSeedArray } from "./constants.js"
 
 export function generateNormalData(xRange, currentMu, currentSd) {
@@ -59,9 +59,11 @@ export function sampleNormalDistribution(mean, sd, n) {
 
 export function forceArrayMean(array, targetMean) {
     let n = array.length
-    let modifiedArray = array.slice(0, -1)
-    let newValue = (targetMean * n) - (sum(modifiedArray))
-    return modifiedArray.concat(newValue)
+    let modifiedArray = array.slice(1, n)
+    let diff = (targetMean * n) - (sum(modifiedArray))
+    let newValue = Math.max(diff, 0)
+    let newArray = modifiedArray.concat(newValue)
+    return newArray
 }
 
 export function shuffleArray(dataArray) {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="one-sample-z.css">
-    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="../common.css">
     <link rel="stylesheet" href="paginate.css">
     <link rel="stylesheet" href="../../main.css">
 </head>
@@ -38,7 +38,11 @@
                 <p>Click and drag the <b>z-score</b> slider to see how the p-value changes depending on the t-score.</p>
             </div>
             <div id="page3">
-                <p>First, since we have a sample size &ge; 30, we can approximate the standard error of the population by simply taking the sample standard deviation:</p>
+                <div id="z-score-computation">
+                    <div id="z-score-formula"><img src="../../assets/one-sample-z.svg" width="200" height="200"></div>
+                    <div id="z-score-compute"></div>
+                </div>
+                <p>Since we have a sample size &ge; 30, we can approximate the standard error of the population by simply taking the sample standard deviation:</p>
                 <div id="variance"></div>
             </div>
             <div id="page4">

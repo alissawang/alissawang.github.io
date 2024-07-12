@@ -1,17 +1,19 @@
-#samples {
-    margin-left: 200px;
+.x-axis-label {
+    text-anchor: end;
 }
 
-#sample-values-1 {
+#samples {
+    margin-left: 170px;
+}
+
+#sample-1-points, #sample-2-points {
     fill: #9fe2f5;
     fill-opacity: 80%;
     mix-blend-mode: multiply;
 }
 
-#sample-values-2 {
-    fill: #76cc2f;
-    fill-opacity: 80%;
-    mix-blend-mode: multiply;
+#sample-2-points {
+    fill: #c0e86b;
 }
 
 #mean-1, #mean-2 {
@@ -20,7 +22,7 @@
 }
 
 #mean-2 {
-    stroke: #76cc2f;
+    stroke: #c0e86b;
 }
 
 #mean-1-text, #mean-2-text, #dim-text {
@@ -52,4 +54,103 @@
 
 #dim-text {
     fill: #ffb3d4;
+}
+
+#z-score-computation {
+    width: 100%;
+    margin-left: 100px;
+    height: 300px;
+}
+
+#z-score-formula {
+    width: 300px;
+    float: left;
+}
+
+#z-score-compute {
+    width: 400px;
+    float: left;
+}
+
+#sd1-numerator {
+    fill: #6ac4de;
+}
+
+#sd2-numerator {
+    fill: #76cc2f;
+}
+
+#variance-graphs {
+    width: 100%;
+    height: 700px;
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
+#sample-1-variance-visual, #sample-2-variance-visual {
+    float: left;
+}
+
+#sample-1-variance-mean-line {
+    stroke: #6ac4de;
+    stroke-dasharray: 10,5;
+}
+
+#sample-2-variance-mean-line {
+    stroke: #76cc2f;
+    stroke-dasharray: 10,5;
+}
+
+#sample-1-variance-mean-text, #sample-2-variance-mean-text  {
+    text-anchor: middle;
+    fill: #6ac4de;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#sample-2-variance-mean-text {
+    fill: #76cc2f;
+}
+
+#sample-1-variance-sd-text {
+    text-anchor: middle;
+    fill: #6ac4de;
+    font-size: 20px;
+}
+
+#sample-2-variance-sd-text {
+    text-anchor: middle;
+    fill: #76cc2f;
+    font-size: 20px;
+}
+
+#sample-1-variance-sd-line {
+    stroke: #6ac4de;
+    stroke-width: 1px;
+}
+
+#sample-2-variance-sd-line {
+    stroke: #76cc2f;
+    stroke-width: 1px;
+}
+
+#sample-1-variance-points, 
+#sample-1-variance-diff-points,
+#sample-2-variance-points,
+#sample-2-variance-diff-points {
+    fill: #9fe2f5;
+    opacity: 70%;
+    mix-blend-mode: multiply;
+}
+
+#sample-2-variance-points, #sample-2-variance-diff-points {
+    fill: #c0e86b;
+}
+
+#sample-1-variance-diff {
+    stroke: #6ac4de;
+}
+
+#sample-2-variance-diff {
+    stroke: #76cc2f;
 }

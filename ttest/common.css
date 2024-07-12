@@ -43,3 +43,58 @@ p {
 .numerator, .denominator {
     fill: black;
 }
+
+#normal-distribution, #normal-distribution-dynamic {
+    margin: auto;
+    width: 50%;
+}
+
+#normal-distr-p-text, #normal-distr-p-area, #normal-distribution-p-text, #normal-distribution-p-area {
+    fill: #88bed1;
+    opacity: 70%;
+}
+
+#normal-distr-p-text, #normal-distr-z-text  {
+    font-weight: bold;
+}
+
+#normal-distr-p-line {
+    stroke: #6ac4de;
+    stroke-width: 4px;
+    stroke-dasharray: 9,4;
+}
+
+#normal-distr-z-text {
+    fill: #6bbfe3;
+}
+
+#tail-switch {
+    margin: auto;
+    float: right;
+}
+
+#tail-switch button {
+    margin-left: 0px;
+    border: none;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: #afdbed;
+    color: #e8f5fa;
+    width: 100px;
+    height: 30px;
+}
+
+#one-tail-button, #two-tail-button {
+    cursor: pointer;
+    position: relative;
+}
+
+#one-tail-button.active {
+    background-color: #8fc6dd;
+    color: white;
+}
+
+#two-tail-button.active {
+    background-color: #8fc6dd;
+    color: white;
+}

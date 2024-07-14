@@ -1,11 +1,3 @@
-body {
-    font-family: Arial;
-}
-
-h1, h2, p {
-    margin-left: 100px;
-}
-
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -13,15 +5,25 @@ table, th, td {
 }
 
 table {
-    width: 600px;
+    width: 500px;
     height: 200px;
     text-align: center;
     margin: auto;
 }
 
+caption {
+    margin-bottom: 10px;
+}
+
 td, th {
     width: 200px;
     height: 50px;
+    font-size: 13px;
+}
+
+th {
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
 .fraction {
@@ -58,6 +60,11 @@ td, th {
 .tables {
     margin: auto;
     width: 100%;
+    height: 250px;
+}
+
+.graph {
+    margin-left: 100px;
 }
 
 #first-col {
@@ -78,6 +85,7 @@ td, th {
 
 #chisq-wrapper {
     margin-top: 40px;
+    height: 250px;
 }
 
 #chisq-symbol {
@@ -89,7 +97,7 @@ td, th {
 
 #chisq-computation {
     float: left;
-    width: 45%;
+    width: 600px;
     padding-left: 30px;
 }
 
@@ -102,7 +110,7 @@ td, th {
     height: 100px;
     padding-top: 40px;
     float: left;
-    width: 30%;
+    width: 100px;
     text-align: left;
     padding-left: 0px;
 }
@@ -159,49 +167,42 @@ td, th {
 }
 
 #chisq-tables {
-    width: 100%;
+    width: 740px;
     margin: auto;
 }
 
 #chisq-observed-table {
-    width: 500px;
+    width: 400px;
     float: left;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-right: 10px;
 }
 
 #chisq-expected-table {
-    width: 400px;
-    margin-left: 100px;
+    width: 300px;
 }
 
 #dof-statement {
-    float: left;
-    width: 30%;
-    height: 50px;
-    padding-top: 30px;
-    padding-left: 20px;
-    text-align: right;
+    width: 800px;
+    height: 100px;
     margin: auto;
 }
 
 #dof-text {
+    width: 250px;
     font-size: 20px;
-    margin-bottom: 0px;
+    margin-top: 40px;
+    float: left;
 }
 
-#dof-formula {
-    font-size: 17px;
-    margin-top: 8px;
+#dof-text p {
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 #dof {
+    width: 50px;
     float: left;
-    width: 10%;
-    height: 50px;
-    margin: auto;
-    padding-top: 45px;
-    padding-left: 20px;
     font-size: 30px;
 }
 

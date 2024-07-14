@@ -5,10 +5,13 @@ ol {
 .example-distributions {
     padding-left: 50px;
     width: 1000px;
+    height: 300px;
 }
 
 .graph {
     cursor: pointer;
+    position: relative;
+    float: left;
 }
 
 .scrubber {
@@ -36,14 +39,6 @@ ol {
     fill: #0e3c54;
 }
 
-#beta-graph, #beta-graph-page2 {
-    float: left;
-}
-
-#uniform-graph, #uniform-graph-page2 {
-    float: left;
-}
-
 #sampled-graph {
     margin-left: 200px;
 }
@@ -61,6 +56,7 @@ ol {
     cursor: pointer;
     font-family: inherit;
     font-weight: inherit;
+    position: relative;
 }
 
 #random-sample button:active {

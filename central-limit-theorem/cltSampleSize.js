@@ -85,8 +85,8 @@ var bernoulliSvg = d3.select('#bernoulli-graph-page2')
         plotSampleMeans(sampleSizeSvg)
     });
 
-var [betaGraphXValues, betaGraphYValues] = drawDistribution(betaSvg, betaDataArray, width, height, margins, false)
-var [uniformGraphXValues, uniformGraphYValues] = drawDistribution(uniSvg, uniformDataArray, width, height, margins, false)
+var [betaGraphXValues, betaGraphYValues] = drawDistribution(betaSvg, betaDataArray, width, height, margins, {})
+var [uniformGraphXValues, uniformGraphYValues] = drawDistribution(uniSvg, uniformDataArray, width, height, margins, {})
 var [bernoulliGraphXValues, bernoulliGraphYValues] = drawBarGraph(bernoulliSvg, bernoulliDataArray, 1, width, height, margins)
 
 const betaMean = alpha / (alpha + beta)

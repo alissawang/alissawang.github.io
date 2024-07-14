@@ -1,0 +1,36 @@
+#chi-sq-type {
+    margin: auto;
+    width: 400px;
+}
+
+#chi-sq-type button {
+    background-color: #dfedf6;
+    height: 130px;
+    width: 150px;
+    border-radius: 40px;
+    border: none;
+    color: #8fc6dd;
+    font-weight: bold;
+    font-family: inherit;
+    margin: 10px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+#chi-sq-type button:hover {
+    background-color: #bad6e8;
+    color: white;
+}
+
+#chi-sq-type button.active {
+    background-color: #bad6e8;
+    color: white;
+}
+
+#goodness-of-fit{
+    display: none;
+}
+
+#independence {
+    display: none;
+}

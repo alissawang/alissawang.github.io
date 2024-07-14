@@ -46,6 +46,7 @@ var betaSvg = d3.select('#beta-graph')
     .attr("height", height)
     .style("outline", `thin solid ${selectionColor}`)
     .on("click", function() {
+        console.log("click")
         selectedDistribution.clear()
         sampleMeansSvg.selectAll("rect").remove()
         samplingArray = []
@@ -79,8 +80,8 @@ var bernoulliSvg = d3.select('#bernoulli-graph')
         d3.select(this).style("outline", `thin solid ${selectionColor}`)
     });
 
-var [betaGraphXValues, betaGraphYValues] = drawDistribution(betaSvg, betaDataArray, width, height, margins, false)
-var [uniformGraphXValues, uniformGraphYValues] = drawDistribution(uniSvg, uniformDataArray, width, height, margins, false)
+var [betaGraphXValues, betaGraphYValues] = drawDistribution(betaSvg, betaDataArray, width, height, margins, {})
+var [uniformGraphXValues, uniformGraphYValues] = drawDistribution(uniSvg, uniformDataArray, width, height, margins, {})
 var [bernoulliGraphXValues, bernoulliGraphYValues] = drawBarGraph(bernoulliSvg, bernoulliDataArray, 1, width, height, margins)
 
 

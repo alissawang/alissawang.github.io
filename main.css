@@ -3,14 +3,15 @@
     background-color: #fafafa;
 }
 
-h1 {
+h1, h2 {
     color: #8fc6dd;
-    margin-left: 80px;
+    margin-left: 90px;
+    font-weight: bold;
 }
 
 p {
     width: 700px;
-    margin-left: 80px;
+    margin-left: 90px;
 }
 
 .topic-container {
@@ -69,8 +70,7 @@ p {
     position: relative;
     border:none;
     padding:2.5rem 2.5rem;
-    background-color: #f5f5f5;
-    /* color:white; */
+    background-color: transparent;
     cursor:pointer;
     top: 50%;
     transform: translateY(-50%);

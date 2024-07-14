@@ -71,17 +71,17 @@ function transitionHighlights(groupNames) {
                 .style("background-color", color)
                 .transition()
                 .delay(highlightTimeMs)
-                .style("background-color", "white");
+                .style("background-color", "none");
             expected.transition()
                 .style("background-color", color)
                 .transition()
                 .delay(highlightTimeMs)
-                .style("background-color", "white");
+                .style("background-color", "none");
             stat.transition()
                 .style("background-color", color)
                 .transition()
                 .delay(highlightTimeMs)
-                .style("background-color", "white")
+                .style("background-color", "none")
         }, 400 * i);
      }
 }
@@ -109,7 +109,7 @@ const chiSqDistrSvg3 = d3.select("#dof-curves-graph3")
 const pink = "#ffc7e9"
 const blue = "#9ce2f7"
 const colors = [pink, "orange", "gold", green, blue]
-const degreesOfFreedomCurves = d3.range(1, 7)
+const degreesOfFreedomCurves = d3.range(1, 6)
 
 graphDoFCurves(chiSqDistrSvg, degreesOfFreedomCurves)
 graphDoFCurves(chiSqDistrSvg2, degreesOfFreedomCurves)
@@ -158,7 +158,11 @@ var groupNames = ["a", "b", "c", "d"]
 export function page1Transition() {
     transitionHighlights(groupNames)
 }
-page1Transition()
+
+export function page1Reset() {
+    d3.selectAll(".highlight-cell").style("background-color", "transparent")
+    d3.selectAll(".fraction").style("background-color", "transparent")
+}
 
 export function page3Transition() {
     for (let i = 0; i < groupNames.length - 1; i++) {

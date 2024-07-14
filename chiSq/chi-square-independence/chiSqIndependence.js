@@ -1,5 +1,5 @@
 import { chiSqValue, chiSqDistribution, reverseLookupAreaUnderCurve, sum, roundDecimal } from "../../utils/math.js"
-import { graphDoFCurves } from "../chiSq.js"
+import { graphDoFCurves, colors } from "../chiSq.js"
 
 const nTypes = 2
 const type1A = 70
@@ -149,6 +149,7 @@ export function expectedValuesReset() {
 }
 
 export function chiSqTransition() {
+    chiSqReset()
     for (let i = 0; i < groupIds.length * 2; i++) {
         setTimeout(function() {
             let type = (i <= 3) ? 1 : 2
@@ -164,9 +165,9 @@ export function chiSqTransition() {
             fracElement.transition().style("background-color", highlightColor)
             observedElement.transition().style("background-color", highlightColor)
             expectedElement.transition().style("background-color", highlightColor)
-            fracElement.transition().delay(400).style("background-color", "white")
-            observedElement.transition().delay(400).style("background-color", "white")
-            expectedElement.transition().delay(400).style("background-color", "white")
+            fracElement.transition().delay(400).style("background-color", "transparent")
+            observedElement.transition().delay(400).style("background-color", "transparent")
+            expectedElement.transition().delay(400).style("background-color", "transparent")
 
             if (i == groupIds.length * 2 - 1) {
                 d3.select("#chisq-equals")
@@ -208,7 +209,8 @@ export function dofTransition() {
 }
 
 export function dofReset() {
-    groupIds.slice(1, groupIds.length).forEach(groupId => document.getElementById(`type1-${groupId}-dof`).innerHTML = "")
+    groupIds.forEach(groupId => document.getElementById(`type1-${groupId}-dof`).innerHTML = "")
+    groupIds.forEach(groupId => document.getElementById(`type2-${groupId}-dof`).innerHTML = "")
 }
 
 export function dofGraphTransition() {
@@ -239,8 +241,7 @@ export function dofGraphTransition() {
             .attr("y", 300)
             }, 1500)
 }
-dofGraphTransition()
 
 export function dofGraphReset() {
-    d3.range(1, 7).map((dOF, idx) => d3.selectAll(`#dof-curve-${degreesOfFreedom}`).style("opacity", 100).style("stroke", colors.at(idx)))
+    d3.range(1, 6).map((dOF, idx) => chiSqDistrSvg.select(`#dof-curve-${idx}`).style("opacity", 100).style("stroke", colors.at(idx - 1)))
 }

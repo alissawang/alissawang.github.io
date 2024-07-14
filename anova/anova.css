@@ -1,19 +1,3 @@
-body {
-    font-family: sans-serif;
-    margin-left: 10%;
-    overflow: scroll;
-    font-weight: 100;
-    overflow: scroll;
-}
-
-h1 {
-    font-size: 50px;
-}
-
-h2 {
-    font-size: 30px;
-}
-
 .overall-mean-line {
     stroke-width: 1px;
     stroke-dasharray: 5,2;
@@ -73,17 +57,29 @@ h2 {
     stroke-width: 1px;
 }
 
-#sample-graphs, #tss-single-example {
+.tss-frac {
+    fill: black;
+    font-size: 20px;
+}
+
+#sample-graphs {
+    width: 700px;
+    margin: auto;
+}
+
+#tss-single-example {
     width: 50%;
     margin: auto;
 }
 
 #sample-graphs-2 {
-    width: 700px;
+    width: 800px;
+    height: 500px;
 }
 
-#group-a-graph, #group-a-graph-sst, #group-b-graph, #group-b-graph-sst {
+#group-a-graph, #group-a-graph-sst, #group-b-graph, #group-b-graph-sst, #group-c-graph-sst {
     float: left;
+    width: 200px;
 }
 
 #group-a-sample, #group-b-sample, #group-c-sample, #tss-example-point {
@@ -124,18 +120,24 @@ h2 {
 #tss-single-example-4,
 #tss-single-example-5  {
     float: left;
+    margin-left: 100px;
 }
 
 #tss-single-example-5 {
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 #tss-comparison-1, #sst-sse-large, #sst-sse-frac-large {
     float: left;
 }
 
-#sst-sse-frac-lage, #sst-sse-frac-small {
-    margin-left: 700px;
+#sst-sse-frac-compare {
+    width: 800px;
+    margin: auto;
+}
+
+#sst-sse-frac-large, #sst-sse-frac-small {
+    margin-left: 100px;
 }
 
 #tss-compare-1-mean, #tss-compare-2-mean {
@@ -143,11 +145,13 @@ h2 {
     stroke-width: 3px;
 }
 
+#treatment-text,
 #sst-sse-large-numerator,
 #sst-sse-small-numerator {
     fill: #0c739c;
 }
 
+#error-text,
 #sst-sse-large-denominator,
 #sst-sse-small-denominator {
     fill: #96c3d4;
@@ -156,4 +160,15 @@ h2 {
 #sst-sse-large-frac-line, #sst-sse-small-frac-line {
     stroke: black;
     stroke-width: 1px;
+}
+
+#sst, #sse {
+    position: relative;
+    float: left;
+    top: 381px;
+    font-size: 20px;
+}
+
+#sse {
+    top: 390px;
 }

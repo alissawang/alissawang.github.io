@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degrees of Freedom</title>
+    <link rel="stylesheet" href="clt-gof.css">
+    <link rel="stylesheet" href="../../main.css">
+    <link rel="stylesheet" href="paginate.css">
+</head>
+<body>
+    <div id="nav-home">
+        <a href="../../index.html"><img src="../../assets/beautifulnumbers.png" width="300" height="48"></a>
+    </div>
+    <div class="page-container">
+    <div class="replay">
+        <button id="replay-button"><img src="../../assets/replay.svg" width="20" height="20"></button>
+    </div>
+    <h1>Chi-Squared Tests</h1>
+    <h2>Goodness-of-Fit</h2>
+        <div class="page-buttons">
+            <button id="prev"><i class="arrow left"></i></button>
+            <button id="next"><i class="arrow right"></i></button>
+        </div>
+        <div id="page1">
+            <p>Suppose we hypothesize that groups A, B, C, and D have the same proportions of some value.</p>
+            <div id="gof-table">
+                <table>
+                    <tr>
+                        <th id="first-col"></th>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>D</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <th>Observed</th>
+                        <td id="observed-a" class="highlight-cell"></td>
+                        <td id="observed-b" class="highlight-cell"></td>
+                        <td id="observed-c" class="highlight-cell"></td>
+                        <td id="observed-d" class="highlight-cell"></td>
+                        <td rowspan="2" id="total">100</td>
+                    </tr>
+                    <tr>
+                        <th>Expected</th>
+                        <td id="expected-a" class="highlight-cell"></td>
+                        <td id="expected-b" class="highlight-cell"></td>
+                        <td id="expected-c" class="highlight-cell"></td>
+                        <td id="expected-d" class="highlight-cell"></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <p>First, we calculate the <b>chi-squared statistic</b>, which is a measure of how different our observations are from the expected:</b></p>
+            <div id="chisq-computation">
+                <span id="chi-sq-symbol">𝛘<sup>2</sup></span>
+                <span id="equals">=</span>
+                <div id = "group-a-stat" class="fraction">
+                    <span id="group-a-diff"></span>
+                    <span class="denominator">25</span>
+                </div>
+                +
+                <div id = "group-b-stat" class="fraction">
+                    <span id="group-b-diff">(20-25)<sup>2</sup></span>
+                    <span class="denominator">25</span>
+                </div>
+                +
+                <div id = "group-c-stat" class="fraction">
+                    <span id="group-c-diff">(27-25)<sup>2</sup></span>
+                    <span class="denominator">25</span>
+                </div>
+                +
+                <div id = "group-d-stat" class="fraction">
+                    <span id="group-d-diff">(19-25)<sup>2</sup></span>
+                    <span class="denominator">25</span>
+                </div>
+                =
+                <span id="chi-sq-value"></span>
+            </div>
+        </div>
+        <div id="page2">
+            <p id="chi-squared-statement"></p>
+            <p>What is the likelihood of getting this chi-squared value if our null hypothesis is true?</p>
+            <p>First, we need to find the right probability distribution curve to tell us the probability of seeing our chi-squared value.</p>
+            <div id="dof-curves-graph1"></div>
+            <p>We choose a probability distribution based on the <b>degrees of freedom</b> in our data, i.e. the number of independent pieces of information we had to work with.
+        </div>
+        <div id="page3">
+            <p>So let's find the degrees of freedom in our <b>observed</b> samples.</p>
+            <p>Since we know the total # of observations is 100, the number of independent pieces of information is the # of columns - 1:</p>
+            <table>
+                <tr>
+                    <th id="first-col"></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <th>Observed</th>
+                    <td id="observed-a-dof"></td>
+                    <td id="observed-b-dof"></td>
+                    <td id="observed-c-dof"></td>
+                    <td id="observed-d-dof"></td>
+                    <td id="total">100</td>
+                </tr>
+            </table>
+            <div id="dof-display"><span id="dof">Degrees of freedom:</span><span id="dof-value"></span></div>
+        </div>
+        <div id="page4">
+            <p>With 3 degrees of freedom, we choose the corresponding probability distribution:</p>
+            <div id="dof-curves-graph2"></div>
+        </div>
+        <div id="page5">
+            <p>As with any hypothesis test, we must choose our alpha level for statistical significance. The conventionally accepted default is <b>0.05</b>.</p>
+            <div id="dof-curves-graph3"></div>
+            <p>Our chi-squared value is clearly far from the signficance level of 0.05, so we can reject the null hypothesis that all groups have an equal proportion.</p>
+        </div>
+    </div>
+    <script src="chiSqGoodnessOfFit.js" type="module"></script>
+    <script src="paginate.js" type="module"></script>
+</body>

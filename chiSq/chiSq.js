@@ -4,7 +4,7 @@ import { drawDistribution } from "../utils/graph.js"
 const pink = "#ffc7e9"
 const blue = "#9ce2f7"
 const green = "#d8edaf"
-const colors = [pink, "orange", "gold", green, blue]
+export const colors = [pink, "orange", "gold", green, blue]
 const width = 700
 const height = 400
 const margins = ({
@@ -33,11 +33,12 @@ export function graphDoFCurves(svg, dofs) {
             width, 
             height, 
             margins,
-            [0, 1],
-            false,
-            colors.at(currentDoF - 1),
-            3,
-            `dof-curve-${currentDoF}`
+            {
+                "yExtent": [0, 1],
+                "strokeColor": colors.at(currentDoF - 1),
+                "strokeWidth": 3,
+                "id": `dof-curve-${currentDoF}`
+            }
         )
         svg.selectAll("legend-labels")
             .data(colors)

@@ -7,52 +7,64 @@
     <title>ANOVA</title>
     <link rel="stylesheet" href="anova.css">
     <link rel="stylesheet" href="paginate.css">
+    <link rel="stylesheet" href="../main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>ANOVA</h1>
-    <h2>One-Way</h2>
-    <div id="page1">
-        <div id="sample-graphs">
-            <div class="sample-graph-a" id="group-a-graph"></div>
-            <div class="sample-graph-b" id="group-b-graph"></div>
-            <div class="sample-graph-c" id="group-c-graph"></div>
+    <div id="nav-home">
+        <a href="../index.html"><img src="../assets/beautifulnumbers.png" width="300" height="48"></a>
+    </div>
+    <div class="page-container">
+        <div class="page-buttons">
+            <button id="prev"><i class="arrow left"></i></button>
+            <button id="next"><i class="arrow right"></i></button>
         </div>
-        <p>How much of the difference between a point and the overall mean is explained by the group mean vs. random error?</p>
-        <div id="tss-single-example"></div>
-    </div>
-    <div id="page2">
-        <div id="tss-single-example-2"></div>
-        <div id="sst-subtract"></div>
-    </div>
-    <div id="page3">
-        <div id="tss-single-example-3"></div>
-        <div id="sse-subtract"></div>
-    </div>
-    <div id="page4">
-        <div id="tss-single-example-4"></div>
-        <div id="sst-sse-large"></div>
-        <div id="tss-single-example-5"></div>
-        <div id="sst-sse-small"></div>
-        <p>Let's get a feel for how much of a greater difference comes from the "treatment" mean vs. the error of the sample point.</p>
-        <div id="sst-sse-frac-large"></div>
-        <div id="sst-sse-frac-small"></div>
-        <p>The greater the difference coming from sample "error" compared to the difference between group and overall mean, the larger our treatment vs. error fraction is.</p>
-    </div>
-    <div id="page5">
-        <p>Sum of Squares <b>Treatment</b> (SST):</p>
-        <p>The squared difference between the overall mean and each group mean.</p>
-        <div id="sample-graphs-2">
-            <div id="group-a-graph-sst"></div>
-            <div id="group-b-graph-sst"></div>
-            <div id="group-c-graph-sst"></div>
+        <h1>ANOVA</h1>
+        <h2>One-Way</h2>
+        <div id="page1">
+            <div id="sample-graphs">
+                <div class="sample-graph-a" id="group-a-graph"></div>
+                <div class="sample-graph-b" id="group-b-graph"></div>
+                <div class="sample-graph-c" id="group-c-graph"></div>
+            </div>
+            <p>How much of the difference between a point and the overall mean is explained by the group mean vs. random error?</p>
+            <div id="tss-single-example"></div>
         </div>
-    </div>
-    <div class="page-buttons">
-        <button id="prev"><i class="arrow left"></i></button>
-        <button id="next"><i class="arrow right"></i></button>
+        <div id="page2">
+            <div id="tss-single-example-2"></div>
+            <div id="sst-subtract"></div>
+        </div>
+        <div id="page3">
+            <div id="tss-single-example-3"></div>
+            <div id="sse-subtract"></div>
+        </div>
+        <div id="page4">
+            <div id="tss-single-example-4"></div>
+            <div id="sst-sse-large"></div>
+            <div id="tss-single-example-5"></div>
+            <div id="sst-sse-small"></div>
+            <p>Let's get a feel for how much of a greater difference comes from the "treatment" mean vs. the error of the sample point.</p>
+            <div id="sst-sse-frac-compare">
+                <div id="sst-sse-frac-large"></div>
+                <div id="sst-sse-frac-small"></div>
+            </div>
+            <p>The greater the difference coming from sample "error" compared to the difference between group and overall mean, the larger our treatment vs. error fraction is.</p>
+        </div>
+        <div id="page5">
+            <p>Sum of Squares <b>Treatment</b> (SST):</p>
+            <p>The squared difference between the overall mean and each group mean.</p>
+            <div id="sample-graphs-2">
+                <div id="group-a-graph-sst"></div>
+                <div id="group-b-graph-sst"></div>
+                <div id="group-c-graph-sst"></div>
+                <div id="sst"></div>
+            </div>
+        </div>
+        <div id="page5b">
+            <div id="sse"></div>
+        </div>
     </div>
     <script src="anovaOneWay.js" type="module"></script>
     <script src="anovaTSS.js" type="module"></script>

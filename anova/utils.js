@@ -1,0 +1,32 @@
+import { mean, roundDecimal } from "../utils/math.js"
+
+export function graphSample(svg, data, id, overallMean, width, xGraphValues, yGraphValues) {
+    let mean_ = mean(data.map(d => d.y))
+    svg.append("line")
+        .attr("class", "overall-mean-line")
+        .attr("x1", 0)
+        .attr("x2", width)
+        .attr("y1", yGraphValues(overallMean))
+        .attr("y2", yGraphValues(overallMean))
+    svg.selectAll(`#${id}`)
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("id", id)
+        .attr("r", 8)
+        .attr("cx", d => xGraphValues(d.x))
+        .attr("cy", d => yGraphValues(d.y))
+    svg.append("line")
+        .attr("id", `${id}-mean`)
+        .attr("class", "group-mean-line")
+        .attr("x1",80)
+        .attr("x2", 100 + 10)
+        .attr("y1", yGraphValues(mean_))
+        .attr("y2", yGraphValues(mean_))
+    svg.append("text")
+        .attr("class", `${id}-mean-text`)
+        .text(`x̄: ${roundDecimal(mean_, 2)}`)
+        .attr("x", 110)
+        .attr("y", yGraphValues(mean_) + 5)
+    return yGraphValues
+}

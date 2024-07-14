@@ -4,19 +4,19 @@
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Power Analysis</title>
-    <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" href="power.css">
+    <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" href="paginate.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
 </head>
 <body>
     <div id="nav-home">
         <a href="../index.html"><img src="../assets/beautifulnumbers.png" width="300" height="48"></a>
     </div>
     <div class="page-container">
+        <div class="page-buttons">
+            <button id="prev"><i class="arrow left"></i></button>
+            <button id="next"><i class="arrow right"></i></button>
+        </div>
         <h1>Statistical Power</h1>
         <div id="page1">
             <div id="test-graph"></div>
@@ -59,10 +59,6 @@
         </div>
         <div id="page3b">
             <div class="graph" id="power-curve"></div>
-        </div>
-        <div class="page-buttons">
-            <button id="prev"><i class="arrow left"></i></button>
-            <button id="next"><i class="arrow right"></i></button>
         </div>
     </div>
     <script src="power.js" type="module"></script>

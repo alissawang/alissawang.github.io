@@ -316,3 +316,25 @@ export function addSquareRootSvg(svg, x, y, number, fontSize = null) {
             .style("font-size", fontSize)
     }
 }
+
+export function addBracketSvg(svg, startingY, endingY) {
+    let bracketWidth = 8
+    svg.append("line")
+        .style("stroke", "black")
+        .attr("x1", bracketWidth)
+        .attr("x2", bracketWidth)
+        .attr("y1", startingY)
+        .attr("y2", endingY)
+    svg.append("line")
+        .style("stroke", "black")
+        .attr("x1", 0)
+        .attr("x2", bracketWidth)
+        .attr("y1", startingY)
+        .attr("y2", startingY)
+    svg.append("line")
+        .style("stroke", "black")
+        .attr("x1", 0)
+        .attr("x2", bracketWidth)
+        .attr("y1", endingY)
+        .attr("y2", endingY)
+}

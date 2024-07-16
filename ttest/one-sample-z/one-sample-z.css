@@ -66,6 +66,10 @@
     margin-left: 60px;
 }
 
+#z-score-denominator {
+    fill: #54a4ba;
+}
+
 #mean-line, #mean-line-variance {
     stroke-width: 2px;
     stroke-dasharray: 3,2;
@@ -101,37 +105,7 @@
     fill: #54a4ba;
     font-size: 18px;
     text-anchor: middle;
-}
-
-#tail-switch {
-    margin: auto;
-    float: right;
-}
-
-#tail-switch button {
-    margin-left: 0px;
-    border: none;
-    font-family: inherit;
     font-weight: bold;
-    background-color: #afdbed;
-    color: #e8f5fa;
-    width: 100px;
-    height: 30px;
-}
-
-#one-tail-button, #two-tail-button {
-    cursor: pointer;
-    position: relative;
-}
-
-#one-tail-button.active {
-    background-color: #8fc6dd;
-    color: white;
-}
-
-#two-tail-button.active {
-    background-color: #8fc6dd;
-    color: white;
 }
 
 #normal-distribution, #normal-distribution-dynamic {

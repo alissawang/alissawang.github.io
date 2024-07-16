@@ -70,7 +70,7 @@ zSlider.oninput = function() {
 }
 
 zScoreSvg.append("text").text("=").attr("x", 30).attr("y", 90).style("font-size", 40)
-addFractionSvg(zScoreSvg, "z-score", `${sampleMean} - ${nullHypothesisMean}`, `${roundDecimal(sampleSd, 2)}`, 150, 79, 35)
+addFractionSvg(zScoreSvg, "z-score", `${sampleMean} - ${nullHypothesisMean}`, `sd`, 150, 79, 35)
 zScoreSvg.append("text").text(`= ${roundDecimal(z, 2)}`).attr("x", zWidth - 160).attr("y", 90).style("font-size", 40)
 
 const varianceSvgWidth = 400
@@ -174,27 +174,27 @@ function animateSample(dataArray) {
 
     sampleSvg.append("line")
         .attr("id", "mean-line")
-        .transition()
-        .delay(40 * sample.length + 400)
+        .attr("class", "dynamic")
+        .style("stroke", "steelblue")
         .attr("x1", sampleXGraphValues(sampleMean))
         .attr("x2", sampleXGraphValues(sampleMean))
         .attr("y1", circleY - 10)
-        .attr("y2", circleY - 20)
-        .style("stroke", "lightblue")
-        .transition()
-        .delay(400)
-        .style("stroke", "steelblue")
-    sampleSvg.append("text")
-        .attr("id", "mean-text")
+        .attr("y2", circleY - 10)
         .transition()
         .delay(40 * sample.length + 400)
+        .ease(d3.easeLinear)
+        .attr("y2", circleY - 20)
+    sampleSvg.append("text")
+        .attr("id", "mean-text")
+        .attr("class", "dynamic")
         .text(`x̄ = ${roundDecimal(sampleMean, 2)}`)
         .attr("x", sampleXGraphValues(sampleMean))
         .attr("y", circleY - 20)
-        .style("fill", "lightblue")
+        .style("opacity", "0%")
         .transition()
-        .delay(400)
+        .delay(40 * sample.length + 400)
         .style("fill", "steelblue")
+        .style("opacity", "100%")
 }
 
 function varianceTransition() {
@@ -296,24 +296,28 @@ export function page1Transition() {
 
 export function page1Reset() {
     sampleSvg.selectAll("circle").remove();
+    sampleSvg.selectAll(".dynamic").remove();
 }
 
 export function page2Transition() {
-    let z = parseFloat(zSlider.value);
-    zValue.innerHTML = `z = ${z}`;
-    zValue.style.left = `${(z + 6) * 41}px`
-    highlightPArea(normalDistrDynamicSvg, "normal-distribution", normalDistrData, z, normalPdfPartial, normalXGraphValues, normalYGraphValues, normalDistrWidth, normalDistrHeight, normalDistrMargins, 1)
+    varianceTransition();
+    zScoreSvg.select("#z-score-denominator")
+        .transition()
+        .delay(40 * (sample.length - 1))
+        .style("opacity", "0%")
+        .transition()
+        .duration(100)
+        .style("opacity", "100%")
+        .text(roundDecimal(sampleSd, 2))
+}
+
+export function page2Reset() {
+    sampleVarianceSvg.selectAll(".dynamic").remove();
+    zScoreSvg.select("#z-score-denominator")
+        .text("sd")
 }
 
 export function page3Transition() {
-    varianceTransition();
-}
-
-export function page3Reset() {
-    sampleVarianceSvg.selectAll(".dynamic").remove();
-}
-
-export function page4Transition() {
     nTails = 1;
     buttonFocus(oneTailButton);
     buttonRelease(twoTailButton);

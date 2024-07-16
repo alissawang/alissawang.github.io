@@ -24,7 +24,7 @@ var normalDistrMargins = {
 
 var sampleWidth = 700
 var sampleHeight = 200
-var zWidth = 400
+var zWidth = 500
 var zHeight = 230
 var varianceSvgWidth = 400
 var varianceSvgHeight = 500
@@ -87,12 +87,16 @@ var zComputeX = 160;
 var zComputeY = 120;
 zScoreSvg.append("text").text("=").attr("x", zComputeX - 150).attr("y", zComputeY + 15).style("font-size", 40)
 addFractionSvg(zScoreSvg, "z-score", `(${sampleMean1} - ${sampleMean2}) - ${nullDiffInMeans}`, "", zComputeX, zComputeY, 35)
-addFractionSvg(zScoreSvg, "sd1", roundDecimal(sd1, 2), n, zComputeX - 60, zComputeY + 55, 30)
-addFractionSvg(zScoreSvg, "sd2", roundDecimal(sd2, 2), n, zComputeX + 60, zComputeY + 55, 30)
+addFractionSvg(zScoreSvg, "sd1", " sd₁ ", n, zComputeX - 60, zComputeY + 55, 30)
+addFractionSvg(zScoreSvg, "sd2", " sd₂ ", n, zComputeX + 60, zComputeY + 55, 30)
 addSquareRootSvg(zScoreSvg, zComputeX - 75, zComputeY + 68, n)
 addSquareRootSvg(zScoreSvg, zComputeX + 45, zComputeY + 68, n)
+
 zScoreSvg.append("text").text("+").attr("class", "denominator").attr("x", zComputeX).attr("y", zComputeY + 70).style("font-size", 40).style("text-anchor", "middle")
 zScoreSvg.append("text").text(`= ${roundDecimal(z, 2)}`).attr("x", zComputeX + 130).attr("y", zComputeY + 15).style("font-size", 40)
+zScoreSvg.append("text").text(`standard deviations from`).attr("x", zComputeX + 160).attr("y", zComputeY + 40).style("font-size", 12)
+zScoreSvg.append("text").text(`null hypothesis mean`).attr("x", zComputeX + 160).attr("y", zComputeY + 55).style("font-size", 12)
+
 
 const sample1VarianceValues = empty1DGraph(
     sample1VarianceSvg, 
@@ -237,27 +241,29 @@ export function page2Transition() {
     varianceTransition(sample1VarianceSvg, "sample-1-variance", sample1, sample1VarianceValues, varianceSvgHeight, varianceMargins)
     varianceTransition(sample2VarianceSvg, "sample-2-variance", sample2, sample2VarianceValues, varianceSvgHeight, varianceMargins)
     zScoreSvg.select("#sd1-numerator")
-        .style("opacity", "0%")
         .transition()
         .delay(40 * sample1.length)
-        .style("opacity", "100%")
-    zScoreSvg.select("#sd2-numerator")
         .style("opacity", "0%")
         .transition()
-        .delay(40 * sample2.length)
         .style("opacity", "100%")
+        .text(roundDecimal(sd1, 2))
+    zScoreSvg.select("#sd2-numerator")
+        .transition()
+        .delay(40 * sample2.length)
+        .style("opacity", "0%")
+        .transition()
+        .style("opacity", "100%")
+        .text(roundDecimal(sd2, 2))
 }
 
 export function page2Reset() {
     sample1VarianceSvg.selectAll(".dynamic").remove()
     sample2VarianceSvg.selectAll(".dynamic").remove()
-    zScoreSvg.select("#sd1-numerator")
-        .style("opacity", "0%")
-    zScoreSvg.select("#sd2-numerator")
-        .style("opacity", "0%")
+    zScoreSvg.select("#sd1-numerator").text(" sd₁ ")
+    zScoreSvg.select("#sd2-numerator").text(" sd₂ ")
 }
 
-export function page4Transition() {
+export function page3Transition() {
     nTails = 1;
     buttonFocus(oneTailButton);
     buttonRelease(twoTailButton);

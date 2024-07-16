@@ -71,6 +71,7 @@ p {
 #tail-switch {
     margin: auto;
     float: right;
+    width: 400px;
 }
 
 #tail-switch button {

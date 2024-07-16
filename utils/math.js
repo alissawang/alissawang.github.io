@@ -104,3 +104,12 @@ export function chiSqDistribution(x, dof) {
     let exp3 = 1 / (gamma(dof / 2) * 2 ** (dof / 2))
     return exp1 * exp2 * exp3
 }
+
+export function FDistribution(x, dof1, dof2) {
+    let numeratorExp1 = (dof1 / dof2) ** (dof1 / 2)
+    let numeratorExp2 = gamma((dof1 + dof2) / 2)
+    let numeratorExp3 = x ** ((dof1 / 2) - 1)
+    let denominatorExp1 = gamma(dof1/2) * gamma(dof2 / 2)
+    let denominatorExp2 = (1 + ((dof1 * x) / dof2)) ** ((dof1 + dof2) / 2)
+    return (numeratorExp1 * numeratorExp2 * numeratorExp3) / (denominatorExp1 * denominatorExp2)
+}

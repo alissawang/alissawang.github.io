@@ -1,3 +1,11 @@
-#page2, #page3, #page4, #page5, #page5b{
+#page2, #page3, #page4, #page5{
     display: none;
+}
+
+#page6 {
+  display: block;
+}
+
+#sse-description {
+  display: none;
 }

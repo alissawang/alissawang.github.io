@@ -1,17 +1,17 @@
 import { seedSampleNormalDistribution } from "../utils/data.js"
 import { mean, roundDecimal, sum } from "../utils/math.js"
 import { graphSample } from "./utils.js"
-import { addBracketSvg } from "../utils/graph.js"
+import { addBracketSvg, addFractionSvg } from "../utils/graph.js"
 
-const groupIds = ["a", "b", "c"]
-const sampleData = jitterXValues(seedSampleNormalDistribution(5, 2.5, 60))
-const groupAData = sampleData.slice(0, 20)
-const groupBData = sampleData.slice(20, 40)
-const groupCData = sampleData.slice(40, 60)
+export const groupIds = ["a", "b", "c"]
+export const n = 20
+const groupAData = jitterXValues(seedSampleNormalDistribution(5, 1, n))
+const groupBData = jitterXValues(seedSampleNormalDistribution(6, 1, n))
+const groupCData = jitterXValues(seedSampleNormalDistribution(4.2, 1, n))
 const groupAMean = mean(groupAData.map(d => d.y))
 const groupBMean = mean(groupBData.map(d => d.y))
 const groupCMean = mean(groupCData.map(d => d.y))
-const overallMean = mean(sampleData.map(d => d.y))
+const overallMean = mean([groupAData.map(d => d.y), groupBData.map(d => d.y), groupCData.map(d => d.y)].flat())
 const groupData = [groupAData, groupBData, groupCData]
 const groupMeans = [groupAMean, groupBMean, groupCMean]
 
@@ -24,6 +24,7 @@ const sseGroupB = sum(groupBData.map(point => (point.y - groupBMean) ** 2))
 const sseGroupC = sum(groupCData.map(point => (point.y - groupCMean) ** 2))
 const sse = sum([sseGroupA, sseGroupB, sseGroupC])
 const groupSSEs = [sseGroupA, sseGroupB, sseGroupC]
+export const f = (sst / (groupIds.length - 1)) / ((sse / (n - 1) * groupIds.length))
 
 const groupAGraph = d3.select("#group-a-graph")
 const groupBGraph = d3.select("#group-b-graph")
@@ -53,13 +54,17 @@ const groupCSvg = groupCGraph.append("svg")
     .attr("height", height)
 const groupASvgSST = groupAGraphSST.append("svg")
     .attr("width", width + 50)
-    .attr("height", height + 200)
+    .attr("height", height)
 const groupBSvgSST = groupBGraphSST.append("svg")
     .attr("width", width + 50)
-    .attr("height", height + 200)
+    .attr("height", height)
 const groupCSvgSST = groupCGraphSST.append("svg")
     .attr("width", width + 120)
-    .attr("height", height + 200)
+    .attr("height", height)
+const sstSseEqualsSvg = d3.select("#sst-sse-equals")
+    .append("svg")
+    .attr("width", 900)
+    .attr("height", 300)
 
 const groupSvgs = [groupASvg, groupBSvg, groupCSvg]
 const sstGroupSvgs = [groupASvgSST, groupBSvgSST, groupCSvgSST]
@@ -89,6 +94,7 @@ groupCSvgSST.append("text")
     .attr("y", sampleYGraphVals(overallMean) + 6)
 sstGroupSvgs.forEach((svg) => {
     svg.append("text")
+        .attr("id", "sample-size-label")
         .text(`n = ${groupAData.length}`)
         .attr("x", width / 2)
         .attr("y", 15)
@@ -132,19 +138,19 @@ const sstSseFracSmallSvg = d3.select("#sst-sse-frac-small")
     .attr("width", 350)
     .attr("height", 100)
 const tssSingleExampleSvgs = [tssSingleExampleSvg2, tssSingleExampleSvg3, tssSingleExampleSvg4]
-const samplePoint1 = groupAData[8].y
-const samplePoint2 = groupAData[7].y
+const samplePoint1 = groupAData[0].y
+const samplePoint2 = samplePoint1 + 0.4
 const diffTreatment = overallMean - groupAMean
 const diffError1 = groupAMean - samplePoint1
 const diffError2 = groupAMean - samplePoint2
 
-const [xGraphValuesTssExample, yGraphValuesTssExample] = graphSetUp(tssSingleExampleSvg, [samplePoint1 - 0.5, samplePoint1 + 2.5], "tss-example", "", height, width, margins)
-tssSingleExampleSvgs.forEach(svg => graphSetUp(svg, [samplePoint1 - 0.5, samplePoint1 + 2.5], "tss-example", "", height, width, margins))
-tssSingleExampleSvgs.forEach(svg => graphSingleExample(svg, samplePoint1))
+const [xGraphValuesTssExample, yGraphValuesTssExample] = graphSetUp(tssSingleExampleSvg, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins)
+tssSingleExampleSvgs.forEach(svg => graphSetUp(svg, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins))
+tssSingleExampleSvgs.forEach(svg => graphSingleExample(svg, groupAMean, overallMean, samplePoint1, yGraphValuesTssExample, width, margins))
 
-graphSetUp(tssSingleExampleSvg5, [samplePoint1 - 0.5, samplePoint1 + 2.5], "tss-example", "", height, width, margins)
-graphSingleExample(tssSingleExampleSvg, samplePoint1)
-graphSingleExample(tssSingleExampleSvg5, samplePoint2)
+graphSetUp(tssSingleExampleSvg5, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins)
+graphSingleExample(tssSingleExampleSvg, groupAMean, overallMean, samplePoint1, yGraphValuesTssExample, width, margins)
+graphSingleExample(tssSingleExampleSvg5, groupAMean, overallMean, samplePoint2, yGraphValuesTssExample, width, margins)
 
 tssSingleExampleSvg.append("line")
     .attr("class", "dashed-line")
@@ -271,44 +277,19 @@ addFractionSvg(sstSseFracLargeSvg, "sst-sse-large", roundDecimal(diffTreatment, 
 addFractionSvg(sstSseFracSmallSvg, "sst-sse-small", roundDecimal(diffTreatment, 2), roundDecimal(diffError2, 2), 170, 40, 30)
 sstSseFracLargeSvg.append("text")
     .text(`= ${roundDecimal(diffTreatment / diffError1, 2)}`)
-    .style("fill", "black")
+    .attr("id", "sst-sse-large-equals")
     .style("font-size", 30)
     .attr("x", 220)
     .attr("y", 50)
 sstSseFracSmallSvg.append("text")
     .text(`= ${roundDecimal(diffTreatment / diffError2, 2)}`)
-    .style("fill", "black")
+    .attr("id", "sst-sse-small-equals")
     .style("font-size", 30)
     .attr("x", 220)
     .attr("y", 50)
 
 function jitterXValues(data) {
-    return data.map(point => {return {"x": 0.5 + Math.random() * 0.3, "y": point.x}})
-}
-
-function addFractionSvg(svg, id, numerator, denominator, x, y, fontSize) {
-    let maxChars = d3.max([String(numerator).length, String(denominator).length])
-    svg.append("text")
-        .attr("id", `${id}-numerator`)
-        .style("font-size", fontSize)
-        .style("text-anchor", "middle")
-        .text(numerator)
-        .attr("x", x)
-        .attr("y", y - 10)
-    svg.append("line")
-        .attr("id", `${id}-frac-line`)
-        .attr("x1", x - (fontSize * (maxChars * 0.25)))
-        .attr("x2", x + (fontSize * (maxChars * 0.25)))
-        .attr("y1", y)
-        .attr("y2", y)
-    svg.append("text")
-        .attr("id", `${id}-denominator`)
-        .style("font-size", fontSize)
-        .style("text-anchor", "middle")
-        .text(denominator)
-        .attr("dy", "1em")
-        .attr("x", x)
-        .attr("y", y + 5)
+    return data.map(point => {return {"x": 0.5 + Math.random() * 0.5, "y": point.x}})
 }
 
 function transitionLine(svg, startingY, endingY) {
@@ -324,57 +305,57 @@ function transitionLine(svg, startingY, endingY) {
         .attr("y2", yGraphValuesTssExample(endingY))
 }
 
-function graphSingleExample(svg, samplePoint) {
+function graphSingleExample(svg, groupMean, overallMean, samplePoint, yGraphValues, width, margins) {
     svg.append("line")
         .attr("id", "tss-example-mean-line")
         .attr("x1", (width / 2) - 10)
         .attr("x2", (width / 2) + 10)
-        .attr("y1", yGraphValuesTssExample(groupAMean))
-        .attr("y2", yGraphValuesTssExample(groupAMean))
+        .attr("y1", yGraphValues(groupMean))
+        .attr("y2", yGraphValues(groupMean))
     svg.append("line")
         .attr("class", "overall-mean-line")
         .attr("x1", margins.left)
         .attr("x2", width - 30)
-        .attr("y1", yGraphValuesTssExample(overallMean))
-        .attr("y2", yGraphValuesTssExample(overallMean))
+        .attr("y1", yGraphValues(overallMean))
+        .attr("y2", yGraphValues(overallMean))
     svg.append("circle")
         .attr("id", "tss-example-point")
         .attr("r", 8)
         .attr("cx", width / 2)
-        .attr("cy", yGraphValuesTssExample(samplePoint))
+        .attr("cy", yGraphValues(samplePoint))
     svg.append("text")
         .attr("class", "sample-point-text")
         .text(roundDecimal(samplePoint, 2))
         .attr("x", (width / 2) + 20)
-        .attr("y", yGraphValuesTssExample(samplePoint) + 5)
+        .attr("y", yGraphValues(samplePoint) + 5)
     svg.append("text")
         .attr("class", "group-a-sample-mean-text")
-        .text(roundDecimal(groupAMean, 2))
+        .text(roundDecimal(groupMean, 2))
         .attr("x", (width / 2) + 20)
-        .attr("y", yGraphValuesTssExample(groupAMean) + 5)
+        .attr("y", yGraphValues(groupMean) + 5)
     svg.append("text")
         .attr("class", "overall-mean-text")
         .text(roundDecimal(overallMean, 2))
         .attr("x", (width / 2) + 50)
-        .attr("y", yGraphValuesTssExample(overallMean) + 5)
+        .attr("y", yGraphValues(overallMean) + 5)
     svg.append("text")
         .attr("class", "overall-mean-text")
         .text("Overall mean")
         .style("text-anchor", "right")
         .attr("x", width + 20)
-        .attr("y", yGraphValuesTssExample(overallMean) + 5)
+        .attr("y", yGraphValues(overallMean) + 5)
     svg.append("text")
         .attr("class", "group-a-sample-mean-text")
         .text("Group mean")
         .style("text-anchor", "right")
         .attr("x", width + 20)
-        .attr("y", yGraphValuesTssExample(groupAMean) + 5)
+        .attr("y", yGraphValues(groupMean) + 5)
     svg.append("text")
         .attr("class", "sample-point-text")
         .text("Sample point")
         .style("text-anchor", "right")
         .attr("x", width + 20)
-        .attr("y", yGraphValuesTssExample(samplePoint) + 5)
+        .attr("y", yGraphValues(samplePoint) + 5)
 }
 
 function graphSetUp(svg, yDomain, id, xlabel, height, width, margins) {
@@ -442,80 +423,81 @@ function focusSvg(svg) {
         .style("opacity", "100%")
     }
 
-function addSST(svg, groupMean, color, plusSign = false) {
+const fCalcX = 720
+const fCalcY = 100
+
+function addSST(svg, groupMean, color, x, y, plusSign = false) {
     let chars = String(groupMean).length
-    let x = 25
+    svg.select(".overall-mean-line").style("opacity", "100%")
     svg.append("text")
-        .attr("class", "tss-frac")
+        .attr("class", "sst-addend")
         .text(`(${roundDecimal(overallMean, 2)}`)
         .style("fill", "red")
         .attr("x", x)
-        .attr("y", height + 100)
+        .attr("y", y)
         .style("opacity", "0%")
         .transition()
         .style("opacity", "100%")
     svg.append("text")
-        .attr("class", "tss-frac")
+        .attr("class", "sst-addend")
         .text(` - ${roundDecimal(groupMean, 2)})²`)
         .style("fill", color)
         .attr("x", x + 53)
-        .attr ("y", height + 100)
+        .attr ("y", y)
         .style("opacity", "0%")
         .transition()
         .style("opacity", "100%")
     svg.append("text")
-        .attr("class", "tss-frac")
+        .attr("class", "sst-addend")
         .text(`× ${groupAData.length}`)
         .attr("x", (chars > 3) ? x + 125 : x + 110)
-        .attr ("y", height + 100)
+        .attr ("y", y)
         .style("opacity", "0%")
         .transition()
         .style("opacity", "100%")
     if (plusSign) {
         svg.append("text")
             .text("+")
-            .attr("class", "tss-frac")
-            .attr("x", 0)
-            .attr("y", height + 100)
+            .attr("class", "sst-addend")
+            .attr("x", x - 20)
+            .attr("y", y)
     }
 }
 
-function addSSE(svg, groupMean, color, plusSign = false) {
+function addSSE(svg, groupMean, color, x, y, plusSign = false) {
     let chars = String(groupMean).length
-    let x = 50
-    svg.apped
     svg.append("text")
-        .attr("class", "tss-frac")
+        .attr("class", "sse-addend")
         .text("Σ(nⁱ")
         .style("font-size", 20)
         .style("text-align", "left")
         .attr("x", x)
-        .attr ("y", height + 100)
+        .attr("y", y)
         .style("opacity", "0%")
         .transition()
         .style("opacity", "100%")
     svg.append("text")
-        .attr("class", "tss-frac")
+        .attr("class", "sse-addend")
         .text(`- ${roundDecimal(groupMean, 2)})²`)
         .style("fill", color)
         .style("font-size", 20)
         .style("text-align", "left")
         .attr("x", x + 40)
-        .attr ("y", height + 100)
+        .attr ("y", y)
         .style("opacity", "0%")
         .transition()
         .style("opacity", "100%")
     if (plusSign) {
             svg.append("text")
                 .text("+")
-                .attr("class", "tss-frac")
-                .attr("x", 0)
-                .attr("y", height + 100)
+                .attr("class", "sse-addend")
+                .attr("x", x - 20)
+                .attr("y", y)
         }
 }
 
 function animateSSE(svg, samplePoints, overallMean, color) {
-    svg.select(".overall-mean-line").remove()
+    svg.select(".overall-mean-line").style("opacity", "0%")
     for (let i = 0; i < samplePoints.length; i++) {
         setTimeout(function () {
             let point = samplePoints[i]
@@ -525,43 +507,179 @@ function animateSSE(svg, samplePoints, overallMean, color) {
                 .style("stroke", color)
                 .attr("x1", sampleXGraphVals(point.x))
                 .attr("x2", sampleXGraphVals(point.x))
-                .attr("y1", sampleYGraphVals(point.y) + (point.y > overallMean ? 5 : -5))
-                .attr("y2", sampleYGraphVals(point.y) + (point.y > overallMean ? 5 : -5))
+                .attr("y1", sampleYGraphVals(point.y) + (point.y > overallMean ? 10 : -10))
+                .attr("y2", sampleYGraphVals(point.y) + (point.y > overallMean ? 10 : -10))
                 .transition()
                 .ease(d3.easeLinear)
                 .attr("y2", sampleYGraphVals(overallMean))
         }, i * 20)
     }
 }
-export function transitionSSEFull(){
-    resetSSTFull()
-    let colors = ["steelblue", "#458a04", "#9c0c65"]
-    for (let i = 0; i < sstGroupSvgs.length; i++) {
-        let currentSvg = sstGroupSvgs[i];
-        let addPlusSign = (i > 0) ? true : false;
-        setTimeout(function() {
-            animateSSE(currentSvg, groupData[i], groupMeans[i], colors[i], addPlusSign);
-            addSSE(currentSvg, roundDecimal(groupMeans[i], 2), colors[i], addPlusSign)
-        }, i * 1000);
-    }
-    setTimeout(function() {document.getElementById("sse").innerHTML = `= SSE = ${roundDecimal(sse, 2)}`}, 1000 * sstGroupSvgs.length)
-}
-transitionSSEFull()
+
+var timeout;
 
 export function transitionSSTFull(){
+    d3.select("#sst-equals-text").remove()
+    d3.select("#sse-equals-text").remove()
+    document.getElementById("sse-description").style.display = "none";
+    document.getElementById("sst-description").style.display = "block";
     let colors = ["steelblue", "#458a04", "#9c0c65"]
     sstGroupSvgs.forEach(svg => unfocusSvg(svg))
     for (let i = 0; i < sstGroupSvgs.length; i++) {
-        setTimeout(function() {
+        timeout = setTimeout(function() {
             let currentSvg = sstGroupSvgs[i];
             let addPlusSign = (i > 0) ? true : false
+            sstSseEqualsSvg.selectAll(".sse-addend").remove()
             focusSvg(currentSvg);
-            addSST(currentSvg, roundDecimal(groupMeans[i], 2), colors[i], addPlusSign)
-        }, i * 1000)
+            addSST(sstSseEqualsSvg, roundDecimal(groupMeans[i], 2), colors[i], 120 + i * 210, fCalcY, addPlusSign)
+            if (i == sstGroupSvgs.length - 1) {
+                sstSseEqualsSvg.append("text")
+                .attr("x", fCalcX)
+                .attr("y", fCalcY)
+                .attr("id", "sst-equals-text")
+                .style("fill", "black")
+                .text(`= SST = ${roundDecimal(sst, 2)}`)
+            }
+        }, i * 600)
     }
-    setTimeout(function() {document.getElementById("sst").innerHTML = `= SST = ${roundDecimal(sst, 2)}`}, 1000 * sstGroupSvgs.length)
+}
+
+export function transitionSSEFull(){
+    resetSSTFull()
+    d3.select("#sst-equals-text")
+        .text(`SST = ${roundDecimal(sst, 2)}`)
+        .attr("x", fCalcX)
+        .attr("y", fCalcY)
+        .transition()
+        .delay(100)
+        .ease(d3.easeLinear)
+        .attr("y", fCalcY - 40)
+    document.getElementById("sse-description").style.display = "block";
+    let colors = ["steelblue", "#458a04", "#9c0c65"]
+    for (let i = 0; i < sstGroupSvgs.length; i++) {
+        let currentSvg = sstGroupSvgs[i];
+        focusSvg(currentSvg);
+        currentSvg.selectAll("circle").style("fill-opacity", "100%");
+        sstSseEqualsSvg.selectAll(".sst-addend").remove()
+        let addPlusSign = (i > 0) ? true : false;
+        timeout = setTimeout(function() {
+            animateSSE(currentSvg, groupData[i], groupMeans[i], colors[i], addPlusSign);
+            addSSE(sstSseEqualsSvg, roundDecimal(groupMeans[i], 2), colors[i], 150 + i * 210, fCalcY, addPlusSign);
+            if ( i == sstGroupSvgs.length - 1) {
+                sstSseEqualsSvg.selectAll(".sst-addend").remove()
+                sstSseEqualsSvg.append("text")
+                    .attr("id", "sse-equals-text")
+                    .attr("x", fCalcX)
+                    .attr("y", fCalcY)
+                    .style("fill", "black")
+                    .text(`= SSE = ${roundDecimal(sse, 2)}`)
+                }
+            }, i * 600);
+    }
+}
+
+export function transitionStop() {
+    clearTimeout(timeout);
 }
 
 export function resetSSTFull() {
-    sstGroupSvgs.forEach(svg => svg.selectAll(".tss-frac").remove())
+    document.getElementById("sst-description").style.display = "none";
+    sstGroupSvgs.forEach(svg => svg.selectAll(".sst-addend").remove())
+}
+
+export function resetSSEFull() {
+    d3.select("sse-equals-text").remove()
+    document.getElementById("sse-description").style.display = "none";
+    sstGroupSvgs.forEach(svg => svg.selectAll(".sse-addend").remove())
+    sstGroupSvgs.forEach(svg => svg.selectAll(".sse-lines").remove())
+}
+
+export function transitionCalculateF() {
+    sstSseEqualsSvg.selectAll("text").remove()
+
+    let formulaX = 120
+    let subX = formulaX + 230
+    let simplifyX = subX + 250
+    let sstY = 100
+    let sseY = sstY + 90
+    addFractionSvg(sstSseEqualsSvg, "msst", "SST", "dfₖ", formulaX, sstY, 30)
+    addFractionSvg(sstSseEqualsSvg, "msse", "SSE", "dfₙ", formulaX, sseY, 30)
+
+    sstSseEqualsSvg.append("text").text("=").attr("class", "f-formula").attr("x", subX - 160).attr("y", mean([sstY, sseY]))
+    addFractionSvg(sstSseEqualsSvg, "msst-sub", `${roundDecimal(sst, 2)}`, "# groups - 1", subX, sstY, 30)
+    addFractionSvg(sstSseEqualsSvg, "msse-sub", `${roundDecimal(sse, 2)}`, "(n - 1) × # groups", subX, sseY, 30)
+
+    setTimeout(function() {
+        sstSseEqualsSvg.append("text").text("=").attr("class", "f-formula").attr("x", simplifyX - 90).attr("y", mean([sstY, sseY]))
+        sstGroupSvgs.forEach(svg => svg.append("rect")
+            .attr("class", "graph-outline")
+            .attr("x", 1)
+            .attr("y", 1)
+            .attr("width", width)
+            .attr("height", height)
+            .style("stroke", "steelblue")
+            .style("fill", "none")
+            .style("stroke-width", "1px")
+            .transition()
+            .duration(200)
+            .delay(800)
+            .style("stroke", "none")
+        )
+        addFractionSvg(sstSseEqualsSvg, "msst-simplify", `${roundDecimal(sst, 2)}`, `${groupIds.length} - 1`, simplifyX, sstY, 30)
+        d3.select("#msst-sub-denominator")
+            .transition()
+            .style("fill", "steelblue")
+        d3.select("#msst-simplify-denominator")
+            .transition()
+            .style("fill", "steelblue")
+    }, 200)
+
+    setTimeout(function() {
+        sstGroupSvgs.forEach(svg => svg.append("rect")
+                .attr("class", "graph-outline")
+                .attr("x", width / 2 - 20)
+                .attr("y", 1)
+                .attr("width", 100)
+                .attr("height", 20)
+                .style("stroke", "steelblue")
+                .style("fill", "none")
+                .style("stroke-width", "1px")
+                .transition()
+                .duration(200)
+                .delay(800)
+                .style("stroke", "none")
+        )
+        sstSseEqualsSvg.append("text").text("=").attr("class", "f-formula").attr("x", simplifyX - 90).attr("y", mean([sstY, sseY]))
+        addFractionSvg(sstSseEqualsSvg, "msse-simplify", `${roundDecimal(sse, 2)}`, `${(n - 1)} × ${groupIds.length}`, simplifyX, sseY, 30)
+        d3.select("#msse-sub-denominator")
+            .transition()
+            .style("fill", "steelblue")
+        d3.select("#msse-simplify-denominator")
+            .transition()
+            .style("fill", "steelblue")
+    }, 1200)
+
+    sstSseEqualsSvg.append("line")
+        .attr("class", "frac-line")
+        .attr("x1", simplifyX - 50)
+        .attr("x2", simplifyX - 50)
+        .attr("y1", mean([sstY, sseY]))
+        .attr("y2", mean([sstY, sseY]))
+        .transition()
+        .delay(2000)
+        .ease(d3.easeLinear)
+        .attr("x2", simplifyX + 50)
+    sstSseEqualsSvg.append("text")
+        .text(`= ${roundDecimal(f, 2)}`)
+        .attr("class", "f-formula")
+        .attr("x", simplifyX + 90)
+        .attr("y", mean([sstY, sseY]))
+        .style("opacity", "0%")
+        .transition()
+        .delay(2000)
+        .style("opacity", "100%")
+}
+export function resetCalculateF() {
+    sstSseEqualsSvg.selectAll("text").remove()
+    sstSseEqualsSvg.selectAll("line").remove()
 }

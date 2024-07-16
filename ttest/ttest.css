@@ -7,7 +7,7 @@ svg {
     z-index: -1;
 }
 
-.curve {
+.example-curve {
     stroke: #dfedf6;
 }
 
@@ -45,6 +45,7 @@ svg {
     float: left;
     margin-left: 40px;
     margin-top: 5px;
+    position: relative;
 }
 
 .test-type:hover {
@@ -62,7 +63,7 @@ svg {
     font-weight: bold;
 }
 
-#one-sample-z-criteria, #one-sample-t-criteria {
+#one-sample-z-criteria, #one-sample-t-criteria,  #two-sample-z-criteria, #two-sample-paired-criteria, #two-sample-unpaired-criteria {
     float: left;
 }
 
@@ -73,7 +74,7 @@ svg {
 }
 
 #two-sample {
-    width: 800px;
+    width: 1200px;
     margin: auto;
     text-align: center;
 }

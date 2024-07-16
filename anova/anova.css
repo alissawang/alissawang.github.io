@@ -8,10 +8,12 @@
 .overall-mean-text {
     font-size: 15px;
     fill: red;
+    font-weight: bold;
 }
 
 .group-a-sample-mean-text, .group-b-sample-mean-text, .group-c-sample-mean-text, .sample-point-text {
     font-size: 15px;
+    font-weight: bold;
 }
 
 .group-a-sample-mean-text {
@@ -57,14 +59,24 @@
     stroke-width: 1px;
 }
 
-.tss-frac {
+.sse-addend, .sst-addend {
     fill: black;
     font-size: 20px;
 }
 
+.f-formula {
+    fill: black;
+    font-size: 40px;
+}
+
 #sample-graphs {
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
     width: 700px;
     margin: auto;
+    background-color: #ebebeb;
+    border-radius: 50px;
 }
 
 #tss-single-example {
@@ -72,9 +84,10 @@
     margin: auto;
 }
 
-#sample-graphs-2 {
+#sample-graphs-2, #f-distributions {
     width: 800px;
-    height: 500px;
+    height: 300px;
+    margin: auto;
 }
 
 #group-a-graph, #group-a-graph-sst, #group-b-graph, #group-b-graph-sst, #group-c-graph-sst {
@@ -157,18 +170,33 @@
     fill: #96c3d4;
 }
 
-#sst-sse-large-frac-line, #sst-sse-small-frac-line {
+.frac-line {
     stroke: black;
     stroke-width: 1px;
 }
 
-#sst, #sse {
-    position: relative;
-    float: left;
-    top: 381px;
-    font-size: 20px;
+#sst-sse-large-equals {
+    fill: black;
+    opacity: 30%;
 }
 
-#sse {
-    top: 390px;
+#sst-sse-small-equals {
+    fill: black;
+    opacity: 100%;
+}
+
+#sst-sse-equals {
+    margin: auto;
+    font-size: 20px;
+    height: 300px;
+}
+
+#msst-simplify-denominator {
+    fill: steelblue;
+}
+
+#f-score-line {
+    stroke: red;
+    stroke-width: 4px;
+    stroke-dasharray: 8,3;
 }

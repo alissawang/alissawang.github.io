@@ -36,19 +36,17 @@
     fill: #76cc2f;
 }
 
-#dim-mean-1 {
+#dim-mean-1, #dim-mean-2, #dim  {
     stroke: #6ac4de;
     stroke-width: 2px;
 }
 
 #dim-mean-2 {
     stroke: #76cc2f;
-    stroke-width: 2px;
 }
 
 #dim {
     stroke: #ffb3d4;
-    stroke-width: 2px;
     stroke-dasharray: 3,3;
 }
 
@@ -59,7 +57,7 @@
 #z-score-computation {
     width: 100%;
     margin-left: 100px;
-    height: 300px;
+    height: 280px;
 }
 
 #z-score-formula {
@@ -82,9 +80,9 @@
 
 #variance-graphs {
     width: 100%;
-    height: 700px;
+    height: 500px;
     margin-top: 30px;
-    margin-left: 100px;
+    margin-left: 130px;
 }
 
 #sample-1-variance-visual, #sample-2-variance-visual {
@@ -112,26 +110,24 @@
     fill: #76cc2f;
 }
 
-#sample-1-variance-sd-text {
+#sample-1-variance-sd-text, #sample-2-variance-sd-text {
     text-anchor: middle;
     fill: #6ac4de;
     font-size: 20px;
+    font-weight: bold;
 }
 
 #sample-2-variance-sd-text {
-    text-anchor: middle;
     fill: #76cc2f;
-    font-size: 20px;
 }
 
-#sample-1-variance-sd-line {
+#sample-1-variance-sd-line, #sample-2-variance-sd-line {
     stroke: #6ac4de;
     stroke-width: 1px;
 }
 
 #sample-2-variance-sd-line {
     stroke: #76cc2f;
-    stroke-width: 1px;
 }
 
 #sample-1-variance-points, 
@@ -153,4 +149,9 @@
 
 #sample-2-variance-diff {
     stroke: #76cc2f;
+}
+
+#normal-distribution {
+    margin: auto;
+    width: 50%;
 }

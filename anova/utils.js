@@ -19,14 +19,14 @@ export function graphSample(svg, data, id, overallMean, width, xGraphValues, yGr
     svg.append("line")
         .attr("id", `${id}-mean`)
         .attr("class", "group-mean-line")
-        .attr("x1",80)
-        .attr("x2", 100 + 10)
+        .attr("x1", 80)
+        .attr("x2", 130)
         .attr("y1", yGraphValues(mean_))
         .attr("y2", yGraphValues(mean_))
     svg.append("text")
         .attr("class", `${id}-mean-text`)
         .text(`x̄: ${roundDecimal(mean_, 2)}`)
-        .attr("x", 110)
+        .attr("x", 130)
         .attr("y", yGraphValues(mean_) + 5)
     return yGraphValues
 }

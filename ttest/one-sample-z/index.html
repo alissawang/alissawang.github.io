@@ -33,19 +33,14 @@
                 <p>If the Farm Bureau is right, what is the probability of seeing our sample average of 7 gallons just by chance?</p>
             </div>
             <div id="page2">
-                <p>Given our null hypothesis h<sub>0</sub> that the true average is 6.3 gallons, we'll need to calculate the probability of getting a sample value as far away from 6.3 as we saw.</p>
-                <div id="normal-distribution-dynamic"><input type="range" id="z-slider" min="-6" max="6" step="0.1" value="0"><div id="z-value"></div></div>
-                <p>Click and drag the <b>z-score</b> slider to see how the p-value changes depending on the t-score.</p>
-            </div>
-            <div id="page3">
+                <p>First we need to quantify *how* different our observed mean <b>7</b> is from the null hypothesis mean, <b>6.3</b>.</p>
                 <div id="z-score-computation">
                     <div id="z-score-formula"><img src="../../assets/one-sample-z.svg" width="200" height="200"></div>
                     <div id="z-score-compute"></div>
                 </div>
-                <p>Since we have a sample size &ge; 30, we can approximate the standard error of the population by simply taking the sample standard deviation:</p>
                 <div id="variance"></div>
             </div>
-            <div id="page4">
+            <div id="page3">
                 <p>With our sample standard deviation approximating the population standard error, we can plot the probabilities of seeing any given sample mean under the null hypothesis h<sub>0</sub> that the true population mean μ = 6.3:</p>
                 <div id="tail-switch">
                     <button id="one-tail-button">ONE-TAIL</button><button id="two-tail-button">TWO-TAIL</button>
@@ -63,7 +58,8 @@
                 <div class="formula">
                     <div class="expression" id="pooled-sd-pg"></div>
                 </div>
-                <div id="null-distr-pg"></div>
+                <div id="normal-distribution-dynamic"><input type="range" id="z-slider" min="-6" max="6" step="0.1" value="0"><div id="z-value"></div></div>
+                <p>Click and drag the <b>z-score</b> slider to see how the p-value changes depending on the t-score.</p>
             </div>
         </div>
     </div>

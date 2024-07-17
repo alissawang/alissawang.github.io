@@ -71,3 +71,12 @@ export function shuffleArray(dataArray) {
     let shuffled = randomIndex.sort((a, b) => a.idx - b.idx)
     return shuffled.map(d => d.x)
 }
+
+export function jitterXValues(data) {
+    return data.map(point => {return {"x": 0.5 + Math.random() * 0.5, "y": point.x}})
+}
+
+export function closestInArray(dataArray, target) {
+    let sortedArray = dataArray.sort((a, b) => a - b)
+    return sortedArray.reduce((prev, current) => Math.abs(target - current) < Math.abs(target - prev) ? current : prev)
+}

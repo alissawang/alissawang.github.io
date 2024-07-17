@@ -3,6 +3,11 @@
     background-color: #fafafa;
 }
 
+a {
+    color: #8fc6dd;
+    font-weight: bold;
+}
+
 h1, h2 {
     color: #8fc6dd;
     margin-left: 90px;
@@ -12,6 +17,7 @@ h1, h2 {
 p {
     width: 700px;
     margin-left: 90px;
+    position: relative;
 }
 
 .topic-container {

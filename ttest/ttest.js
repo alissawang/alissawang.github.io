@@ -1,5 +1,4 @@
 import { drawNormalDistribution } from "../utils/graph.js"
-import { addFractionSvg } from "./utils.js"
 
 const width = 300
 const height = 230

@@ -1,3 +1,8 @@
+.frac-line {
+    stroke: black;
+    stroke-width: 1px;
+}
+
 .overall-mean-line {
     stroke-width: 1px;
     stroke-dasharray: 5,2;
@@ -69,6 +74,11 @@
     font-size: 40px;
 }
 
+.dof-text-treatment, .dof-text-error {
+    fill: steelblue;
+    font-size: 30px;
+}
+
 #sample-graphs {
     padding-left: 30px;
     padding-bottom: 30px;
@@ -84,10 +94,18 @@
     margin: auto;
 }
 
+#treatment-diff-line {
+    stroke: steelblue;
+}
+
 #sample-graphs-2, #f-distributions {
     width: 800px;
     height: 300px;
     margin: auto;
+}
+
+#f-distributions {
+    height: 700px;
 }
 
 #group-a-graph, #group-a-graph-sst, #group-b-graph, #group-b-graph-sst, #group-c-graph-sst {
@@ -128,16 +146,16 @@
     stroke: #9c0c65;
 }
 
-#tss-single-example-2, 
-#tss-single-example-3, 
-#tss-single-example-4,
-#tss-single-example-5  {
+#single-example-treatment-diff, 
+#single-example-error-diff, 
+#single-example-treatment-diff-large,
+#single-example-treatment-diff-small {
     float: left;
     margin-left: 100px;
 }
 
-#tss-single-example-5 {
-    margin-left: 30px;
+#single-example-treatment-diff-large {
+    margin-left: 0px;
 }
 
 #tss-comparison-1, #sst-sse-large, #sst-sse-frac-large {
@@ -170,11 +188,6 @@
     fill: #96c3d4;
 }
 
-.frac-line {
-    stroke: black;
-    stroke-width: 1px;
-}
-
 #sst-sse-large-equals {
     fill: black;
     opacity: 30%;
@@ -186,17 +199,33 @@
 }
 
 #sst-sse-equals {
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
     font-size: 20px;
     height: 300px;
 }
 
-#msst-simplify-denominator {
+#msst-denominator, #msse-denominator, #msst-simplify-denominator {
     fill: steelblue;
 }
 
-#f-score-line {
+#f-score-line, #critical-value-line {
     stroke: red;
     stroke-width: 4px;
     stroke-dasharray: 8,3;
+}
+
+#critical-value-text, #p-05-text {
+    fill: red;
+    font-weight: bold;
+}
+
+#critical-value-line, #critical-value-text, #p-05-text {
+    opacity: 40%;
+}
+
+#conclusion {
+    top: 550px;
+    margin-left: 0px;
 }

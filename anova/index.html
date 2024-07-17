@@ -21,37 +21,46 @@
             <button id="prev"><i class="arrow left"></i></button>
             <button id="next"><i class="arrow right"></i></button>
         </div>
+        <div class="replay">
+            <button id="replay-button"><img src="../../assets/replay.svg" width="20" height="20"></button>
+        </div>
         <h1>ANOVA</h1>
         <h2>One-Way</h2>
         <div id="page1">
+            <p>Say we want to know whether there's any difference in milk production between brown, red, and black & white cows.</p>
+            <p>We sample 20 cows of each type and measure the number of gallons of milk they produced in a day:</p>
             <div id="sample-graphs">
                 <div class="sample-graph-a" id="group-a-graph"></div>
                 <div class="sample-graph-b" id="group-b-graph"></div>
                 <div class="sample-graph-c" id="group-c-graph"></div>
             </div>
-            <p>How much of the difference between a point and the overall mean is explained by the group mean vs. random error?</p>
-            <div id="tss-single-example"></div>
+            <p>Are the group samples different enough to reject the hypothesis that there is no difference between these types of cows?</p>
         </div>
         <div id="page2">
-            <div id="tss-single-example-2"></div>
+            <p>We need to quantify how much of the differences we see are due to random error as opposed to actual differences between the means of each cow type.</p>
+            <p>The difference between a single sample point and the overall mean is partially explained by the difference between its group mean and the overall mean, which you might think of as the effect of "treatment":</p>
+            <div id="single-example-treatment-diff"></div>
             <div id="sst-subtract"></div>
         </div>
         <div id="page3">
-            <div id="tss-single-example-3"></div>
+            <p>And we might consider the difference between the sample point itself and the group mean as explained by sampling error:</p>
+            <div id="single-example-error-diff"></div>
             <div id="sse-subtract"></div>
         </div>
         <div id="page4">
-            <div id="tss-single-example-4"></div>
+            <p>The proportion of differences coming from the "treatment", or group type, vs error helps us determine whether there's a real difference due to the group type.</p>
+            <div id="single-example-treatment-diff-small"></div>
             <div id="sst-sse-large"></div>
-            <div id="tss-single-example-5"></div>
+            <div id="single-example-treatment-diff-large"></div>
             <div id="sst-sse-small"></div>
             <div id="sst-sse-frac-compare">
                 <div id="sst-sse-frac-large"></div>
                 <div id="sst-sse-frac-small"></div>
             </div>
-            <p>The greater the difference coming from sample "error" compared to the difference between group and overall mean, the larger our treatment vs. error fraction is.</p>
+            <p>The example on the right has a much larger treatment-to-error proportion, which is more indicative of a real effect from group type.</p>
         </div>
         <div id="page5">
+            <p id="intro-text">We can apply this concept to the whole sample.</p>
             <div id="sst-description">
                 <p>Sum of Squares <b>Treatment</b> (SST):</p>
                 <p>The squared difference between the overall mean and each group mean.</p>
@@ -59,6 +68,12 @@
             <div id="sse-description">
                 <p>Sum of Squares <b>Error</b> (SSE):</p>
                 <p>The sum of squared differences between each sample point and its own group mean.</p>
+            </div>
+            <div id="f-description">
+                <p>We then standardize our SST and SSE by dividing by their respective <a href="../../degreesOfFreedom" target="_blank">degrees of freedom</a>.</p>:
+            </div>
+            <div id="f-display-description">
+                <p>The proportion of our standardized SST to SSE is the <b>F-statistic</b>.</p>
             </div>
             <div id="sample-graphs-2">
                 <div id="group-a-graph-sst"></div>
@@ -68,7 +83,10 @@
             <div id="sst-sse-equals"></div>
         </div>
         <div id="page6">
-            <div id="f-distributions"></div>
+            <p>We select an F distribution using our treatment and error degrees of freedom, and graph our F-statistic.</p>
+            <div id="f-distributions">
+                <p id="conclusion">Assuming the default alpha value of 0.05, our result is not statistically significant. We therefore fail to reject the hypothesis that the average milk production is the same between all three cow types.</p>
+            </div>
         </div>
     </div>
     <script src="anovaOneWay.js" type="module"></script>

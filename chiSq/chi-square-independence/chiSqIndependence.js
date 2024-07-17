@@ -1,4 +1,5 @@
 import { chiSqValue, chiSqDistribution, reverseLookupAreaUnderCurve, sum, roundDecimal } from "../../utils/math.js"
+import { transitionArea } from "../../utils/graph.js"
 import { graphDoFCurves, colors } from "../chiSq.js"
 
 const nTypes = 2
@@ -218,30 +219,35 @@ export function dofGraphTransition() {
         return chiSqDistribution(x, degreesOfFreedom)
     }
     let criticalValue = reverseLookupAreaUnderCurve(selectedDistribution, 100, 0.001, 0.05)
-    
-    var alphaArea = d3.area()
-        .x((d) => {return chiSqGraphXValues(d.x)})
-        .y0(height - margins.bottom)
-        .y1((d) => {return chiSqGraphYValues(d.y)})
 
     var unselectedDofs = d3.range(1,7).filter(dof => dof != degreesOfFreedom)
     unselectedDofs.map(i => d3.selectAll(`#dof-curve-${i}`).lower().transition().delay(600).duration(800).style("stroke", gray))
     unselectedDofs.map(i => d3.selectAll(`#dof-curve-${i}`).lower().transition().delay(600).duration(800).style("opacity", 0))
     setTimeout(function() {
-        chiSqDistrSvg.append("path")
-            .datum(d3.range(criticalValue, 10, 0.01).map(x => {return {"x": x, "y": selectedDistribution(x)}}))
-            .attr("id", "alpha-area")
-            .attr("class", "area")
-            .attr("d", alphaArea)
-            .lower()
+        transitionArea(
+            chiSqDistrSvg,
+            criticalValue, 
+            d3.range(criticalValue, 10, 0.01).map(x => {return {"x": x, "y": selectedDistribution(x)}}),
+            chiSqGraphXValues,
+            chiSqGraphYValues,
+            width,
+            height,
+            margins
+        );
         chiSqDistrSvg.append("text")
             .attr("id", "alpha-text")
             .text("α = 0.05")
             .attr("x", chiSqGraphXValues(8))
-            .attr("y", 300)
-            }, 1500)
+            .attr("y", 320)
+            .style("opacity", "0%")
+            .transition()
+            .delay(1000)
+            .style("opacity", "100%")
+    }, 1000)
 }
 
 export function dofGraphReset() {
     d3.range(1, 6).map((dOF, idx) => chiSqDistrSvg.select(`#dof-curve-${idx}`).style("opacity", 100).style("stroke", colors.at(idx - 1)))
+    chiSqDistrSvg.select("#area-under-curve").remove()
+    chiSqDistrSvg.select("#alpha-text").remove()
 }

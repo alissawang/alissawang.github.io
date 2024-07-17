@@ -1,4 +1,5 @@
 import { chiSqValue, chiSqDistribution, reverseLookupAreaUnderCurve } from "../../utils/math.js"
+import { transitionArea } from "../../utils/graph.js"
 import { graphDoFCurves } from "../chiSq.js"
 
 const observedADisplay = document.getElementById("observed-a")
@@ -137,22 +138,6 @@ function selectedDistribution(x) {
 }
 let criticalValue = reverseLookupAreaUnderCurve(selectedDistribution, 100, 0.001, 0.05)
 
-var alphaArea = d3.area()
-    .x((d) => {return chiSqGraphXValues(d.x)})
-    .y0(height - margins.bottom)
-    .y1((d) => {return chiSqGraphYValues(d.y)})
-chiSqDistrSvg3.append("path")
-    .datum(d3.range(criticalValue, 10, 0.01).map(x => {return {"x": x, "y": selectedDistribution(x)}}))
-    .attr("id", "alpha-area")
-    .attr("class", "area")
-    .attr("d", alphaArea)
-    .lower()
-chiSqDistrSvg3.append("text")
-    .attr("id", "alpha-text")
-    .text("α = 0.05")
-    .attr("x", chiSqGraphXValues(8))
-    .attr("y", 300)
-
 var groupNames = ["a", "b", "c", "d"]
 
 export function page1Transition() {
@@ -197,4 +182,27 @@ export function page4Transition() {
 
 export function page4Reset() {
     degreesOfFreedomCurves.map((dOF, idx) => d3.selectAll(`#dof-curve-${dOF}`).style("opacity", 100).style("stroke", colors.at(idx)))
+}
+
+export function page5Transition() {
+    transitionArea(
+        chiSqDistrSvg3,
+        criticalValue, 
+        d3.range(criticalValue, 10, 0.01).map(x => {return {"x": x, "y": selectedDistribution(x)}}),
+        chiSqGraphXValues,
+        chiSqGraphYValues,
+        width,
+        height,
+        margins
+    );
+    chiSqDistrSvg3.append("text")
+        .attr("id", "alpha-text")
+        .text("α = 0.05")
+        .attr("x", chiSqGraphXValues(8))
+        .attr("y", 300)
+}
+
+export function page5Reset() {
+    d3.select("#area-under-curve").remove()
+    d3.select("#alpha-text").remove()
 }

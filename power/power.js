@@ -1,5 +1,5 @@
 import { drawNormalDistribution, emptyGraph, graphAreaUnderCurve } from "../utils/graph.js";
-import { generateNormalData, arraySampleDistribution } from "../utils/data.js";
+import { generateNormalData, closestInArray } from "../utils/data.js";
 import { roundDecimal, mean, sum, reverseLookupAreaUnderCurve, normalPdf, areaUnderCurve } from "../utils/math.js"
 
 function initializeScrubber(scrubberId, valueId) {
@@ -43,14 +43,14 @@ sampleSizeSelector.oninput = function() {
     updatePowerCurve(alpha, effectSize, sampleSize)
 }
 
-const width = 800
+const width = 700
 const powerCurveWidth = 0.7 * width
-const height = 500
-const powerCurveHeight = 0.4 * height
+const height = 400
+const powerCurveHeight = 0.6 * height
 const margins = ({
     top: 40,
     right: 80,
-    bottom: 50,
+    bottom: 70,
     left: 80
 })
 
@@ -68,14 +68,14 @@ const powerSvg = d3.select("#distributions")
     .attr("height", height)
 const powerCurveSvg = d3.select("#power-curve")
     .append("svg")
-    .attr("width", 0.7 * width)
-    .attr("height", 0.4 * height)
+    .attr("width", powerCurveWidth)
+    .attr("height", powerCurveHeight)
 const yRange = d3.range(0, 9)
 
 const [ nullXValues, nullYValues ] = drawNormalDistribution(nullDistrSvg, xRange, 0, se, width, height, margins, {"yExtent": d3.extent(yRange), "id": "null-graph-distr"});
 const [ powerXValues, powerYValues ] = emptyGraph(compareDistrSvg, xRange, yRange, width, height, margins);
 emptyGraph(powerSvg, xRange, yRange, width, height, margins);
-var [ powerCurveXValues, powerCurveYValues ] = emptyGraph(powerCurveSvg, xRange, [0, 1], powerCurveWidth, powerCurveHeight, {"top": 20, "bottom": 50, "left": 80, "right": 0})
+var [ powerCurveXValues, powerCurveYValues ] = emptyGraph(powerCurveSvg, xRange, [0, 1], powerCurveWidth, powerCurveHeight, {"top": 20, "bottom": 60, "left": 80, "right": 0})
 
 function nullDistr(x) {
     return normalPdf(x, 0, se)
@@ -94,7 +94,7 @@ nullDistrSvg.append("text")
     .attr("x", nullXValues(0.3))
     .attr("y", nullYValues(0) - 35)
 
-const batteryX = width - 150 - 62
+const batteryX = width - 150 - 77
 powerSvg.append("rect")
     .attr("id", "power-rect")
     .attr('width', 50)
@@ -210,7 +210,7 @@ function updateSignificance(svg, alpha) {
         .attr("id", "power-text")
         .attr("class", "dynamic")
         .text(`power = ${roundDecimal(power, 3)}`)
-        .attr("x", width - 150)
+        .attr("x", width - 165)
         .attr("y", margins.top)
     svg.append("rect")
         .attr("id", "power-rect-level")
@@ -228,7 +228,7 @@ function updatePowerCurve(alpha, effectSize, sampleSize) {
     }
 
     let criticalValue = reverseLookupAreaUnderCurve(powerCurveH0Pdf, 1.0, 0.001, alpha)
-    let altMeans = d3.range(0, 1, 0.001)
+    let altMeans = d3.range(-0.3, 1, 0.001)
     let altPowerValues = altMeans.map((altMean) => {
         function altPdf(x) {
             return normalPdf(x, altMean, se)
@@ -236,7 +236,7 @@ function updatePowerCurve(alpha, effectSize, sampleSize) {
         let power = areaUnderCurve(altPdf, criticalValue, altMean + (6 * se), 0.001)
         return {"x": altMean, "y": power}
     })
-    let power = altPowerValues.find(d => d.x == effectSize).y
+    let power = altPowerValues.find(d => d.x == closestInArray(altMeans, effectSize)).y
     powerCurveSvg.selectAll("line").remove()
     powerCurveSvg.selectAll("path").remove()
     powerCurveSvg.selectAll(".live-value").remove()

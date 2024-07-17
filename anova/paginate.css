@@ -1,11 +1,7 @@
-#page2, #page3, #page4, #page5{
+#page2, #page3, #page4, #page5, #page6 {
     display: none;
 }
 
-#page6 {
-  display: block;
-}
-
-#sse-description {
+#sse-description, #f-description, #f-display-description, #conclusion {
   display: none;
 }

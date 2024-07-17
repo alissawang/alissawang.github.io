@@ -1,29 +1,23 @@
-import { seedSampleNormalDistribution } from "../utils/data.js"
+import { seedSampleNormalDistribution, jitterXValues } from "../utils/data.js"
 import { mean, roundDecimal, sum } from "../utils/math.js"
-import { graphSample } from "./utils.js"
+import { graphSample, graphSingleExample, graphSetUp } from "./utils.js"
 import { addBracketSvg, addFractionSvg } from "../utils/graph.js"
 
 export const groupIds = ["a", "b", "c"]
+const groupNames = ["Black & White", "Brown", "Red"]
 export const n = 20
 const groupAData = jitterXValues(seedSampleNormalDistribution(5, 1, n))
 const groupBData = jitterXValues(seedSampleNormalDistribution(6, 1, n))
 const groupCData = jitterXValues(seedSampleNormalDistribution(4.2, 1, n))
-const groupAMean = mean(groupAData.map(d => d.y))
-const groupBMean = mean(groupBData.map(d => d.y))
-const groupCMean = mean(groupCData.map(d => d.y))
 const overallMean = mean([groupAData.map(d => d.y), groupBData.map(d => d.y), groupCData.map(d => d.y)].flat())
 const groupData = [groupAData, groupBData, groupCData]
-const groupMeans = [groupAMean, groupBMean, groupCMean]
+const groupMeans = groupData.map(data => mean(data.map(d => d.y)))
+const [ groupAMean, groupBMean, groupCMean ] = groupMeans
 
-const sstGroupA = ((groupAMean - overallMean) ** 2) * groupAData.length
-const sstGroupB = ((groupBMean - overallMean) ** 2) * groupBData.length
-const sstGroupC = ((groupCMean - overallMean) ** 2) * groupCData.length
-const sst = sum([sstGroupA, sstGroupB, sstGroupC])
-const sseGroupA = sum(groupAData.map(point => (point.y - groupAMean) ** 2))
-const sseGroupB = sum(groupBData.map(point => (point.y - groupBMean) ** 2))
-const sseGroupC = sum(groupCData.map(point => (point.y - groupCMean) ** 2))
-const sse = sum([sseGroupA, sseGroupB, sseGroupC])
-const groupSSEs = [sseGroupA, sseGroupB, sseGroupC]
+const groupSsts = groupMeans.map(groupMean => ((groupMean - overallMean) ** 2) * n)
+const sst = sum(groupSsts)
+const groupSses = groupData.map((sample, idx) => sum(sample.map(point => (point.y - groupMeans[idx]) ** 2)))
+const sse = sum(groupSses)
 export const f = (sst / (groupIds.length - 1)) / ((sse / (n - 1) * groupIds.length))
 
 const groupAGraph = d3.select("#group-a-graph")
@@ -40,7 +34,7 @@ const margins = {
     top: 10,
     left: 30,
     right: 30,
-    bottom: 40
+    bottom: 50
 }
 
 const groupASvg = groupAGraph.append("svg")
@@ -75,9 +69,9 @@ var sampleXGraphVals;
 var sampleYGraphVals;
 for (let i = 0; i < groupSvgs.length; i++) {
     let id = groupIds[i];
-    [sampleXGraphVals, sampleYGraphVals] = graphSetUp(groupSvgs[i], sampleYDomain, `group-${id}-sample`, `Group ${id.toUpperCase()}`, height, width, margins)
+    [sampleXGraphVals, sampleYGraphVals] = graphSetUp(groupSvgs[i], sampleYDomain, `group-${id}-sample`, groupNames[i], height, width, margins)
     
-    graphSetUp(sstGroupSvgs[i], sampleYDomain, `group-${id}-sample`, `Group ${id.toUpperCase()}`, height, width, margins)
+    graphSetUp(sstGroupSvgs[i], sampleYDomain, `group-${id}-sample`, groupNames[i], height, width, margins)
     graphSample(groupSvgs[i], groupData[i], `group-${id}-sample`, overallMean, width, sampleXGraphVals, sampleYGraphVals)
     graphSample(sstGroupSvgs[i], groupData[i], `group-${id}-sample`, overallMean, width, sampleXGraphVals, sampleYGraphVals)
 }
@@ -101,23 +95,19 @@ sstGroupSvgs.forEach((svg) => {
         .style("fill", "black")
 })
 
-const tssSingleExampleSvg = d3.select("#tss-single-example")
-    .append("svg")
-    .attr("width", width + 400)
-    .attr("height", height)
-const tssSingleExampleSvg2 = d3.select("#tss-single-example-2")
+const treatmentDiffSvg = d3.select("#single-example-treatment-diff")
     .append("svg")
     .attr("width", tssWidth)
     .attr("height", height)
-const tssSingleExampleSvg3 = d3.select("#tss-single-example-3")
+const errorDiffSvg = d3.select("#single-example-error-diff")
     .append("svg")
     .attr("width", tssWidth)
     .attr("height", height)
-const tssSingleExampleSvg4 = d3.select("#tss-single-example-4")
+const treatmentProportionSmallSvg = d3.select("#single-example-treatment-diff-small")
     .append("svg")
     .attr("width", tssWidth)
     .attr("height", height)
-const tssSingleExampleSvg5 = d3.select("#tss-single-example-5")
+const treatmentProportionLargeSvg = d3.select("#single-example-treatment-diff-large")
     .append("svg")
     .attr("width", tssWidth)
     .attr("height", height)
@@ -137,53 +127,19 @@ const sstSseFracSmallSvg = d3.select("#sst-sse-frac-small")
     .append("svg")
     .attr("width", 350)
     .attr("height", 100)
-const tssSingleExampleSvgs = [tssSingleExampleSvg2, tssSingleExampleSvg3, tssSingleExampleSvg4]
+const tssSingleExampleSvgs = [treatmentDiffSvg, errorDiffSvg, treatmentProportionSmallSvg, treatmentProportionLargeSvg]
 const samplePoint1 = groupAData[0].y
 const samplePoint2 = samplePoint1 + 0.4
 const diffTreatment = overallMean - groupAMean
 const diffError1 = groupAMean - samplePoint1
 const diffError2 = groupAMean - samplePoint2
 
-const [xGraphValuesTssExample, yGraphValuesTssExample] = graphSetUp(tssSingleExampleSvg, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins)
-tssSingleExampleSvgs.forEach(svg => graphSetUp(svg, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins))
-tssSingleExampleSvgs.forEach(svg => graphSingleExample(svg, groupAMean, overallMean, samplePoint1, yGraphValuesTssExample, width, margins))
+const [xGraphValuesTssExample, yGraphValuesTssExample] = graphSetUp(treatmentDiffSvg, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins)
+tssSingleExampleSvgs.slice(1, tssSingleExampleSvgs.length).forEach(svg => graphSetUp(svg, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins))
+tssSingleExampleSvgs.slice(0, tssSingleExampleSvgs.length - 1).forEach(svg => graphSingleExample(svg, groupAMean, overallMean, samplePoint1, yGraphValuesTssExample, width, margins))
+graphSingleExample(treatmentProportionLargeSvg, groupAMean, overallMean, samplePoint2, yGraphValuesTssExample, width, margins)
 
-graphSetUp(tssSingleExampleSvg5, [samplePoint1 - 0.3, samplePoint1 + 0.6], "tss-example", "", height, width, margins)
-graphSingleExample(tssSingleExampleSvg, groupAMean, overallMean, samplePoint1, yGraphValuesTssExample, width, margins)
-graphSingleExample(tssSingleExampleSvg5, groupAMean, overallMean, samplePoint2, yGraphValuesTssExample, width, margins)
-
-tssSingleExampleSvg.append("line")
-    .attr("class", "dashed-line")
-    .attr("x1", (width / 2))
-    .attr("x2", (width / 2))
-    .attr("y1", yGraphValuesTssExample(samplePoint1) - 8)
-    .attr("y2", yGraphValuesTssExample(samplePoint1) - 8)
-    .transition()
-    .ease(d3.easeLinear)
-    .duration(500)
-    .attr("y2", yGraphValuesTssExample(overallMean))
-tssSingleExampleSvg.append("text")
-    .text("}")
-    .attr("class", "bracket")
-    .style("font-size", 200)
-    .style("font-weight", 100)
-    .attr("x", width + 150)
-    .attr("y", height / 2 + 40)
-tssSingleExampleSvg.append("text")
-    .text(`Total difference:`)
-    .style("font-size", 15)
-    .style("font-weight", 100)
-    .attr("x", width + 220)
-    .attr("y", height / 2 - 10)
-tssSingleExampleSvg.append("text")
-    .text(roundDecimal((overallMean - samplePoint1), 2))
-    .style("font-size", 20)
-    .style("font-weight", 100)
-    .attr("dy", "1em")
-    .attr("x", width + 220)
-    .attr("y", height / 2 - 10)
-
-tssSingleExampleSvgs.forEach(svg => {
+tssSingleExampleSvgs.slice(0, tssSingleExampleSvgs.length - 1).forEach(svg => {
     svg.append("line")
         .attr("class", "dashed-line")
         .attr("x1", (width / 2))
@@ -191,7 +147,7 @@ tssSingleExampleSvgs.forEach(svg => {
         .attr("y1", yGraphValuesTssExample(samplePoint1) - 8)
         .attr("y2", yGraphValuesTssExample(overallMean))
 })
-tssSingleExampleSvg5.append("line")
+treatmentProportionLargeSvg.append("line")
     .attr("class", "dashed-line")
     .attr("x1", (width / 2))
     .attr("x2", (width / 2))
@@ -288,12 +244,9 @@ sstSseFracSmallSvg.append("text")
     .attr("x", 220)
     .attr("y", 50)
 
-function jitterXValues(data) {
-    return data.map(point => {return {"x": 0.5 + Math.random() * 0.5, "y": point.x}})
-}
-
-function transitionLine(svg, startingY, endingY) {
+function transitionLine(svg, id, startingY, endingY) {
     svg.append("line").lower()
+        .attr("id", `${id}-diff-line`)
         .attr("class", "diff-line")
         .attr("x1", (width / 2))
         .attr("x2", (width / 2))
@@ -305,105 +258,32 @@ function transitionLine(svg, startingY, endingY) {
         .attr("y2", yGraphValuesTssExample(endingY))
 }
 
-function graphSingleExample(svg, groupMean, overallMean, samplePoint, yGraphValues, width, margins) {
-    svg.append("line")
-        .attr("id", "tss-example-mean-line")
-        .attr("x1", (width / 2) - 10)
-        .attr("x2", (width / 2) + 10)
-        .attr("y1", yGraphValues(groupMean))
-        .attr("y2", yGraphValues(groupMean))
-    svg.append("line")
-        .attr("class", "overall-mean-line")
-        .attr("x1", margins.left)
-        .attr("x2", width - 30)
-        .attr("y1", yGraphValues(overallMean))
-        .attr("y2", yGraphValues(overallMean))
-    svg.append("circle")
-        .attr("id", "tss-example-point")
-        .attr("r", 8)
-        .attr("cx", width / 2)
-        .attr("cy", yGraphValues(samplePoint))
-    svg.append("text")
-        .attr("class", "sample-point-text")
-        .text(roundDecimal(samplePoint, 2))
-        .attr("x", (width / 2) + 20)
-        .attr("y", yGraphValues(samplePoint) + 5)
-    svg.append("text")
-        .attr("class", "group-a-sample-mean-text")
-        .text(roundDecimal(groupMean, 2))
-        .attr("x", (width / 2) + 20)
-        .attr("y", yGraphValues(groupMean) + 5)
-    svg.append("text")
-        .attr("class", "overall-mean-text")
-        .text(roundDecimal(overallMean, 2))
-        .attr("x", (width / 2) + 50)
-        .attr("y", yGraphValues(overallMean) + 5)
-    svg.append("text")
-        .attr("class", "overall-mean-text")
-        .text("Overall mean")
-        .style("text-anchor", "right")
-        .attr("x", width + 20)
-        .attr("y", yGraphValues(overallMean) + 5)
-    svg.append("text")
-        .attr("class", "group-a-sample-mean-text")
-        .text("Group mean")
-        .style("text-anchor", "right")
-        .attr("x", width + 20)
-        .attr("y", yGraphValues(groupMean) + 5)
-    svg.append("text")
-        .attr("class", "sample-point-text")
-        .text("Sample point")
-        .style("text-anchor", "right")
-        .attr("x", width + 20)
-        .attr("y", yGraphValues(samplePoint) + 5)
-}
-
-function graphSetUp(svg, yDomain, id, xlabel, height, width, margins) {
-    let xDomain = [0, 1]
-    let xGraphRange = [margins.left, width - margins.right]
-    let xGraphValues = d3.scaleLinear()
-        .domain(xDomain)
-        .range(xGraphRange)
-    let axisBottom = d3.axisBottom(xGraphValues).tickValues([])
-        
-    let xAxis = g => g
-        .attr("transform", `translate(0,${height - margins.bottom})`)
-        .call(axisBottom)
-        .select(".domain").remove();
-    svg.append("g").call(xAxis);
-
-    let yGraphRange = [height - margins.bottom, margins.top]
-    let yGraphValues = d3.scaleLinear()
-        .domain(yDomain)
-        .range(yGraphRange)
-    let axisLeft = d3.axisLeft(yGraphValues).tickValues(d3.scaleLinear().domain(yGraphValues.domain()).ticks())
-    const yAxis = g => g
-        .attr("transform", `translate(${margins.left},0)`)
-        .call(axisLeft)
-    svg.append("g").call(yAxis);
-    svg.append("text")
-        .attr("id", `${id}-xlabel`)
-        .text(xlabel)
-        .style("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height - 10)
-    return [xGraphValues, yGraphValues]
-}
-
 export function transitionSSTExample(){
-    transitionLine(tssSingleExampleSvg2, groupAMean, overallMean)
+    transitionLine(treatmentDiffSvg, "treatment", groupAMean, overallMean)
 }
 
 export function resetSSTExample(){
-    tssSingleExampleSvg2.selectAll(".diff-line").remove()
+    treatmentDiffSvg.selectAll(".diff-line").remove()
+}
+
+export function transitionDiffCompare() {
+    transitionLine(treatmentProportionSmallSvg, "treatment", groupAMean, overallMean)
+    transitionLine(treatmentProportionSmallSvg, "error", samplePoint1, groupAMean)
+    transitionLine(treatmentProportionLargeSvg, "treatment", groupAMean, overallMean)
+    transitionLine(treatmentProportionLargeSvg, "error", samplePoint2, groupAMean)
+}
+
+export function resetDiffCompare() {
+    treatmentProportionSmallSvg.selectAll(".diff-line").remove()
+    treatmentProportionLargeSvg.selectAll(".diff-line").remove()
 }
 
 export function transitionSSEExample(){
-    transitionLine(tssSingleExampleSvg3, samplePoint1 + 0.08, groupAMean)
+    transitionLine(errorDiffSvg, "error", samplePoint1, groupAMean)
 }
 
 export function resetSSEExample(){
-    tssSingleExampleSvg3.selectAll(".diff-line").remove()
+    errorDiffSvg.selectAll(".diff-line").remove()
 }
 
 function unfocusSvg(svg) {
@@ -518,7 +398,7 @@ function animateSSE(svg, samplePoints, overallMean, color) {
 
 var timeout;
 
-export function transitionSSTFull(){
+export function transitionSSTFull(){document.getElementById("intro-text").style.display = "block"
     d3.select("#sst-equals-text").remove()
     d3.select("#sse-equals-text").remove()
     document.getElementById("sse-description").style.display = "none";
@@ -546,6 +426,7 @@ export function transitionSSTFull(){
 
 export function transitionSSEFull(){
     resetSSTFull()
+    document.getElementById("intro-text").style.display = "none"
     d3.select("#sst-equals-text")
         .text(`SST = ${roundDecimal(sst, 2)}`)
         .attr("x", fCalcX)
@@ -566,7 +447,6 @@ export function transitionSSEFull(){
             animateSSE(currentSvg, groupData[i], groupMeans[i], colors[i], addPlusSign);
             addSSE(sstSseEqualsSvg, roundDecimal(groupMeans[i], 2), colors[i], 150 + i * 210, fCalcY, addPlusSign);
             if ( i == sstGroupSvgs.length - 1) {
-                sstSseEqualsSvg.selectAll(".sst-addend").remove()
                 sstSseEqualsSvg.append("text")
                     .attr("id", "sse-equals-text")
                     .attr("x", fCalcX)
@@ -576,6 +456,7 @@ export function transitionSSEFull(){
                 }
             }, i * 600);
     }
+    sstSseEqualsSvg.selectAll(".sst-addend").remove()
 }
 
 export function transitionStop() {
@@ -584,24 +465,25 @@ export function transitionStop() {
 
 export function resetSSTFull() {
     document.getElementById("sst-description").style.display = "none";
-    sstGroupSvgs.forEach(svg => svg.selectAll(".sst-addend").remove())
+    sstSseEqualsSvg.selectAll(".sst-addend").remove()
 }
 
 export function resetSSEFull() {
     d3.select("sse-equals-text").remove()
     document.getElementById("sse-description").style.display = "none";
-    sstGroupSvgs.forEach(svg => svg.selectAll(".sse-addend").remove())
+    sstSseEqualsSvg.selectAll(".sst-addend").remove()
     sstGroupSvgs.forEach(svg => svg.selectAll(".sse-lines").remove())
 }
 
+var formulaX = 120
+var subX = formulaX + 230
+var simplifyX = subX + 250
+var sstY = 100
+var sseY = sstY + 90
+
 export function transitionCalculateF() {
     sstSseEqualsSvg.selectAll("text").remove()
-
-    let formulaX = 120
-    let subX = formulaX + 230
-    let simplifyX = subX + 250
-    let sstY = 100
-    let sseY = sstY + 90
+    document.getElementById("f-description").style.display = "block";
     addFractionSvg(sstSseEqualsSvg, "msst", "SST", "dfₖ", formulaX, sstY, 30)
     addFractionSvg(sstSseEqualsSvg, "msse", "SSE", "dfₙ", formulaX, sseY, 30)
 
@@ -613,10 +495,10 @@ export function transitionCalculateF() {
         sstSseEqualsSvg.append("text").text("=").attr("class", "f-formula").attr("x", simplifyX - 90).attr("y", mean([sstY, sseY]))
         sstGroupSvgs.forEach(svg => svg.append("rect")
             .attr("class", "graph-outline")
-            .attr("x", 1)
+            .attr("x", 10)
             .attr("y", 1)
             .attr("width", width)
-            .attr("height", height)
+            .attr("height", height - 1)
             .style("stroke", "steelblue")
             .style("fill", "none")
             .style("stroke-width", "1px")
@@ -637,7 +519,7 @@ export function transitionCalculateF() {
     setTimeout(function() {
         sstGroupSvgs.forEach(svg => svg.append("rect")
                 .attr("class", "graph-outline")
-                .attr("x", width / 2 - 20)
+                .attr("x", width / 2 - 25)
                 .attr("y", 1)
                 .attr("width", 100)
                 .attr("height", 20)
@@ -658,28 +540,39 @@ export function transitionCalculateF() {
             .transition()
             .style("fill", "steelblue")
     }, 1200)
+}
 
+export function resetCalculateF() {
+    document.getElementById("f-description").style.display = "none";
+}
+
+export function displayF() {
+    document.getElementById("f-display-description").style.display = "block";
     sstSseEqualsSvg.append("line")
+        .attr("id", "final-frac-line")
         .attr("class", "frac-line")
         .attr("x1", simplifyX - 50)
         .attr("x2", simplifyX - 50)
-        .attr("y1", mean([sstY, sseY]))
-        .attr("y2", mean([sstY, sseY]))
+        .attr("y1", mean([sstY, sseY]) - 5)
+        .attr("y2", mean([sstY, sseY]) - 5)
         .transition()
-        .delay(2000)
+        .delay(100)
         .ease(d3.easeLinear)
         .attr("x2", simplifyX + 50)
     sstSseEqualsSvg.append("text")
         .text(`= ${roundDecimal(f, 2)}`)
+        .attr("id", "f-display")
         .attr("class", "f-formula")
         .attr("x", simplifyX + 90)
         .attr("y", mean([sstY, sseY]))
         .style("opacity", "0%")
         .transition()
-        .delay(2000)
+        .delay(100)
         .style("opacity", "100%")
 }
-export function resetCalculateF() {
-    sstSseEqualsSvg.selectAll("text").remove()
-    sstSseEqualsSvg.selectAll("line").remove()
+
+export function resetDisplayF() {
+    document.getElementById("f-description").style.display = "none";
+    d3.select("#final-frac-line").remove()
+    d3.select("#f-display").remove()
 }

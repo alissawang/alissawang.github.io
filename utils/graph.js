@@ -366,6 +366,15 @@ export function addFractionSvg(svg, id, numerator, denominator, x, y, fontSize) 
         .attr("y", y + (fontSize * 0.9))
 }
 
+export function addTextSvg(svg, text, x, y, id="", class_="") {
+    svg.append("text")
+        .text(text)
+        .attr("id", id)
+        .attr("class", class_)
+        .attr("x", x)
+        .attr("y", y)
+}
+
 export function transitionArea(svg, criticalValue, distributionData, xGraphValues, yGraphValues, width, height, margins) {
     let clip = svg.append("clipPath")
         .attr("id", "clip")
@@ -386,7 +395,7 @@ export function transitionArea(svg, criticalValue, distributionData, xGraphValue
         .attr("d", area)
         .attr("clip-path", "url(#clip)")
     clipRect.transition()
-        .duration(1500)
+        .duration(1000)
         .ease(d3.easeLinear)
         .attr("width", width)
 }

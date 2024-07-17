@@ -98,8 +98,7 @@ span {
 }
 
 #dof-curves-graph1, #dof-curves-graph2, #dof-curves-graph3 {
-    margin: auto;
-    width: 50%;
+    margin-left: 100px;
 }
 
 #graph-chisq-line {

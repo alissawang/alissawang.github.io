@@ -1,4 +1,4 @@
-import { page1Transition, page1Reset, page3Transition, page4Transition, page3Reset, page4Reset } from "./chiSqGoodnessOfFit.js";
+import { page1Transition, page1Reset, page3Transition, page3Reset, page4Transition, page4Reset, page5Transition, page5Reset } from "./chiSqGoodnessOfFit.js";
 
 const page1 = document.querySelector("#page1");
 const page2 = document.querySelector("#page2");
@@ -25,6 +25,9 @@ function hidePage() {
     if (index == 3) {
         page4Reset()
     }
+    if (index == 4) {
+        page5Reset()
+    }
     pageToHide.style.display = "none";
 }
 
@@ -40,6 +43,9 @@ function showPage() {
     if (index == 3) {
         page4Transition();
     }
+    if (index == 4) {
+        page5Transition();
+    }
 }
 
 prevButton.addEventListener("click", () => {
@@ -51,8 +57,8 @@ prevButton.addEventListener("click", () => {
 })
 
 nextButton.addEventListener("click", () => {
+    hidePage();
     if (index < pages.length - 1) {
-        hidePage();
         index += 1;
     }
     showPage();

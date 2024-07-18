@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="one-sample-t.css">
+    <link rel="stylesheet" href="playground.css">
     <link rel="stylesheet" href="../common.css">
     <link rel="stylesheet" href="paginate.css">
     <link rel="stylesheet" href="../../main.css">
@@ -25,7 +26,11 @@
             <button id="replay-button"><img src="../../assets/replay.svg" width="20" height="20"></button>
         </div>
         <h1>One-Sample T-Test</h1>
-        <div id="section-1">
+        <div class="tab-sections">
+            <button id="tab-lesson">LESSON</button>
+            <button id="tab-playground">PLAYGROUND</button>
+        </div>
+        <div id="lesson">
             <div id="page1">
                 <div class="assumptions">
                     <p>Use case: N&le;30</p>
@@ -62,11 +67,11 @@
                 <p id="conclusion"></p>
             </div>
         </div>
-        <div id="section-2">
+        <div id="playground">
+            <input type="range" class="slider" id="sample-size-slider" min="0" max="29" step="1"><div id="sample-size-slider-value"></div>
             <div class="center">
-                <div id="samples-pg">
-                    <input type="range" class="slider" id="sample-1-slider" min="30" max="40" step="0.1"></input>
-                    <input type="range" class="slider" id="sample-2-slider" min="30" max="40" step="0.1"></input>
+                <div id="sample-pg">
+                    <input type="range" class="slider" id="mean-slider" min="0" max="10" step="0.01"><div id="mean-slider-value"></div>
                 </div>
                 <div class="formula">
                     <div class="expression" id="pooled-sd-pg"></div>
@@ -76,6 +81,7 @@
         </div>
     </div>
     <script src="one-sample-t.js" type="module"></script>
+    <script src="one-sample-t-playground.js" type="module"></script>
     <script src="paginate.js" type="module"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> 
     <script> 

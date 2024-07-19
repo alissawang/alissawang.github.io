@@ -44,6 +44,27 @@ p {
     fill: black;
 }
 
+.slider-container {
+    margin: auto;
+    padding-top: 10px;
+    width: 400px;
+}
+
+.slider-symbol {
+    position: relative;
+    text-align: right;
+    width: 40px;
+    float: left;
+    font-weight: bold;
+    padding-right: 7px;
+}
+
+.graph {
+    margin: auto;
+    width: 400px;
+    height: 400px;
+}
+
 #normal-distribution, #normal-distribution-dynamic {
     margin: auto;
     width: 50%;

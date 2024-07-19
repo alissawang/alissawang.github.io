@@ -71,6 +71,37 @@ export function addFractionSvg(svg, id, numerator, denominator, x, y, fontSize) 
         .attr("y", y + 10)
 }
 
+export function addSquareRootSvg(svg, x, y, number, fontSize = null, id="") {
+    let chars = String(number).length
+    svg.append("line")
+        .attr("class", "frac-line")
+        .attr("x1", x - 5)
+        .attr("x2", x + chars * 10)
+        .attr("y1", y)
+        .attr("y2", y)
+    svg.append("line")
+        .attr("class", "frac-line")
+        .attr("x1", x - 5)
+        .attr("x2", x - 10)
+        .attr("y1", y)
+        .attr("y2", y + (0.5 * fontSize) * 2)
+    svg.append("line")
+        .attr("class", "frac-line")
+        .attr("x1", x - 10)
+        .attr("x2", x - 15)
+        .attr("y1", y + (0.5 * fontSize) * 2)
+        .attr("y2", y + (0.5 * fontSize) * 2 - 7)
+    if (fontSize) {
+        svg.append("text")
+            .text(number)
+            .attr("class", "denominator")
+            .attr("id", id)
+            .attr("x", x)
+            .attr("y", y + fontSize)
+            .style("font-size", fontSize)
+    }
+}
+
 export function highlightPArea(svg, id, data, criticalPoint, pdf, xGraphValues, yGraphValues, width, height, margins, nTails = 1){
     svg.selectAll(".dynamic").remove()
     svg.selectAll(".area").remove()

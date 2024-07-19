@@ -37,11 +37,11 @@
 }
 
 #lesson {
-    display: none;
+    display: block;
 }
 
 #playground{
-    display: block;
+    display: none;
 }
 
 

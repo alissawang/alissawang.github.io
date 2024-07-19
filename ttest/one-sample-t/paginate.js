@@ -4,10 +4,12 @@ const lesson = document.querySelector("#lesson")
 const playground = document.querySelector("#playground")
 const tab1 = document.querySelector("#tab-lesson")
 const tab2 = document.querySelector("#tab-playground")
+const pageButtons = document.querySelector(".page-buttons")
 
 tab1.addEventListener("click", () => {
     lesson.style.display = "block";
     playground.style.display = "none";
+    pageButtons.style.display = "block";
     buttonFocus(tab1);
     buttonRelease(tab2);
 })
@@ -15,6 +17,7 @@ tab1.addEventListener("click", () => {
 tab2.addEventListener("click", () => {
     playground.style.display = "block";
     lesson.style.display = "none";
+    pageButtons.style.display = "none";
     buttonFocus(tab2);
     buttonRelease(tab1);
 })

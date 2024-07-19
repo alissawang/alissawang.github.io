@@ -1,0 +1,129 @@
+.slider {
+    -webkit-appearance: none;
+    width: 300px;
+    appearance: none;
+    height: 10px; 
+    background: #e0e0e0;
+    border-radius: 5px;
+    outline: none; 
+    opacity: 0.7; 
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px; 
+    background: #6bbfe3;
+    cursor: pointer; 
+    border-radius: 50%;
+}
+
+.slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #6bbfe3;
+    cursor: pointer;
+}
+
+.t-score-input {
+    fill: steelblue;
+    font-size: 20px;
+    text-anchor: middle;
+}
+
+#sample-pg {
+    height: 100px;
+    width: 400px;
+    margin: auto;
+}
+
+#sample-pg-points {
+    fill: #9fe2f5;
+    fill-opacity: 30%;
+    mix-blend-mode: multiply;
+}
+
+#sliders{
+    position: relative;
+    margin: auto;
+}
+
+#mean-slider {
+    position: relative;
+    top: 85px;
+    left: 70px;
+    width: 300px;
+    appearance: none;
+    background: none;
+    cursor: pointer;
+}
+
+#mean-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 25px;
+    width: 6px;
+    border: none;
+    cursor: pointer;
+    background: #6bbfe3;
+}
+
+#mean-slider-value {
+    position: relative;
+    font-family: sans-serif;
+    color: #6bbfe3;
+    font-size: 20px;
+    top: 30px;
+}
+
+#df-display {
+    position: relative;
+    float: right;
+    margin-top: 40px;
+    left: 50px;
+    color: #6bbfe3;;
+    font-weight: bold;
+    top: 80px;
+}
+
+#df-formula {
+    color: #6bbfe3;
+    position: relative;
+    float: right;
+    top: 135px;
+    left: 73px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+#t-distribution {
+    height: 500px;
+}
+
+#t-score {
+    position: relative;
+    top: 370px;
+}
+
+#t-equals, #t-score-equals {
+    fill: black;
+}
+
+#t-score-sample-size {
+    fill: steelblue;
+}
+
+#t-slider {
+    fill: steelblue;
+}
+
+#p-area {
+    fill: steelblue;
+    opacity: 30%;
+}
+
+#p-value-text {
+    fill: steelblue;
+}

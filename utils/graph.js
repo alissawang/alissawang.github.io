@@ -1,5 +1,5 @@
 import { generateNormalData } from "./data.js"
-import { reverseLookupAreaUnderCurve } from "./math.js"
+import { reverseLookupAreaUnderCurve, mean, areaUnderCurve } from "./math.js"
 
 export function emptyGraph(svg, xRange, yRange, width, height, margins) {
     let xDomain = d3.extent(xRange)
@@ -222,6 +222,27 @@ export function graphAreaUnderCurve(svg, func, xRange, targetArea, graphXValues,
         .attr("y2", graphYValues(func(criticalValue)))
 
     return criticalValue
+}
+
+export function graphAreaUnderCurveFromPoint(svg, func, xRange, point, graphXValues, graphYValues, height, margins, id, class_) {
+    let highlightxRange = xRange.filter((d) => (point > mean(xRange) ? d >= point : d <= point))
+    let dataArray = highlightxRange.map(d => {return {"x": d, "y": func(d)}})
+    let area = d3.area()
+        .x0((d) => {return graphXValues(d.x)})
+        .y0(height - margins.bottom)
+        .y1((d) => {return graphYValues(d.y)})
+    svg.append("path")
+        .datum(dataArray)
+        .attr("id", `${id}-area`)
+        .attr("class", class_)
+        .attr("d", area)
+        .lower()
+    svg.append("line")
+        .attr("id", `${id}-line`)
+        .attr("x1", graphXValues(point))
+        .attr("x2", graphXValues(point))
+        .attr("y1", graphYValues(0))
+        .attr("y2", graphYValues(func(point)))
 }
 
 export function addLegend(svg, colors, labels, x, y) {

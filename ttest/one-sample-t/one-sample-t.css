@@ -4,11 +4,6 @@
     font-size: 15px;
 }
 
-.graph {
-    display: inline-block;
-    margin: auto;
-}
-
 .df-curve {
     stroke-width: 2px;
 }

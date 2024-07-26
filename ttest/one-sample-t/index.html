@@ -79,22 +79,29 @@
                     <input type="range" class="slider" id="sample-size-slider" min="1" max="29" step="1">
                     <span id="sample-size-value"></span>
                 </div>
-                <div class="slider-container" id="select-sd">
-                    <div class="slider-symbol" id="sd-slider-symbol">sd</div>
-                    <input type="range" class="slider" id="sd-slider" min="0" max="3" step="0.01">
-                    <span id="sd-value"></span>
+                <div class="slider-container" id="select-alpha">
+                    <div class="slider-symbol" id="alpha-slider-symbol">α</div>
+                    <input type="range" class="slider" id="alpha-slider" min="0.001" max="0.15" step="0.001">
+                    <span id="alpha-value"></span>
                 </div>
             </div>
-            <div class="center">
+            <div class="graph" id="sample-graph-pg">
                 <div id="sample-pg">
+                    <div id="select-sd">
+                        <div class="slider-symbol" id="sd-slider-symbol">sd</div>
+                        <input type="range" id="sd-slider" min="0" max="3" step="0.01">
+                        <span id="sd-value"></span>
+                    </div>
                     <input type="range" id="mean-slider" min="0" max="10" step="0.01"><div id="mean-slider-value"></div>
                 </div>
-                <div class="formula">
-                    <div class="expression" id="pooled-sd-pg"></div>
-                </div>
             </div>
-            <div id="t-distribution" class="graph">
-                <div id="df-display"></div><div id="df-formula">n-1</div>
+            <div id="t-distr-container">
+                <div id="tail-switch-pg">
+                    <button id="one-tail-button-pg">ONE-TAIL</button><button id="two-tail-button-pg">TWO-TAIL</button>
+                </div>
+                <div id="t-distribution" class="graph">
+                    <div id="df-display"></div><div id="df-formula">n-1</div>
+                </div>
                 <div id="t-score"></div>
             </div>
         </div>
@@ -102,15 +109,4 @@
     <script src="one-sample-t.js" type="module"></script>
     <script src="one-sample-t-playground.js" type="module"></script>
     <script src="paginate.js" type="module"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> 
-    <script> 
-        MathJax = { 
-            tex: { 
-                inlineMath: [['\[', '\]']] 
-            }, 
-            svg: { 
-                fontCache: 'global' 
-            } 
-        }; 
-    </script> 
 </body>

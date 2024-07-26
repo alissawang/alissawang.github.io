@@ -34,7 +34,6 @@
 }
 
 #sample-pg {
-    height: 100px;
     width: 400px;
     margin: auto;
 }
@@ -50,14 +49,21 @@
     margin: auto;
 }
 
+#mean-slider, #sd-slider {
+    appearance: none;
+    cursor: pointer;
+}
+
 #mean-slider {
     position: relative;
-    top: 85px;
-    left: 70px;
-    width: 300px;
-    appearance: none;
     background: none;
-    cursor: pointer;
+    left: 5px;
+    width: 368px;
+}
+
+#sd-slider {
+    background: #6bbfe3;
+    height: 2px;
 }
 
 #mean-slider::-webkit-slider-thumb {
@@ -69,42 +75,70 @@
     background: #6bbfe3;
 }
 
+#sd-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 15px;
+    width: 2px;
+    border: none;
+    cursor: pointer;
+    background: #6bbfe3;
+}
+
 #mean-slider-value {
     position: relative;
     font-family: sans-serif;
     color: #6bbfe3;
-    font-size: 20px;
-    top: 30px;
+    font-size: 15px;
+}
+
+#select-sd {
+    position: relative;
+    top: 110px;
+    width: 200px;
+    height: 30px;
+    margin: auto;
+}
+
+#sd-slider {
+    width: 90px;
 }
 
 #df-display {
     position: relative;
     float: right;
     margin-top: 40px;
-    left: 50px;
+    left: 100px;
     color: #6bbfe3;;
     font-weight: bold;
-    top: 80px;
+    top: 20px;
 }
 
 #df-formula {
     color: #6bbfe3;
     position: relative;
     float: right;
-    top: 135px;
-    left: 73px;
+    top: 75px;
+    left: 123px;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 1.5px;
 }
 
-#t-distribution {
+#t-distr-container {
+    width: 800px;
     height: 500px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#t-distribution {
+    margin-top: 30px;
 }
 
 #t-score {
-    position: relative;
-    top: 370px;
+    margin: auto;
+    width: 500px;
 }
 
 #t-equals, #t-score-equals {
@@ -117,6 +151,40 @@
 
 #t-slider {
     fill: steelblue;
+    margin: auto;
+    width: 600px;
+}
+
+#tail-switch-pg {
+    margin: auto;
+    float: left;
+    margin-left: 200px;
+}
+
+#tail-switch-pg button {
+    margin-left: 0px;
+    border: none;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: #afdbed;
+    color: #e8f5fa;
+    width: 100px;
+    height: 30px;
+}
+
+#one-tail-button-pg, #two-tail-button-pg {
+    cursor: pointer;
+    position: relative;
+}
+
+#one-tail-button-pg.active {
+    background-color: #8fc6dd;
+    color: white;
+}
+
+#two-tail-button-pg.active {
+    background-color: #8fc6dd;
+    color: white;
 }
 
 #p-area {
@@ -126,4 +194,25 @@
 
 #p-value-text {
     fill: steelblue;
+}
+
+#sample-graph-title {
+    fill: #6bbfe3;
+    font-weight: bold;
+    text-anchor: middle;
+}
+
+#sample-graph-pg {
+    width: 300px;
+    height: 200px;
+}
+
+#graph-alpha {
+    fill: red;
+}
+
+#graph-alpha-line {
+    stroke: red;
+    stroke-width: 3px;
+    stroke-dasharray: 4,2;
 }

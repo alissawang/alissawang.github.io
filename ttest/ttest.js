@@ -110,7 +110,7 @@ drawNormalDistribution(twoSamplePairedSvg, xRangeT, exampleMean, ttestSD, width,
 drawNormalDistribution(twoSampleUnpairedSvg, xRangeT, exampleMean, ttestSD, width, height - 30, margins, {"hideXAxis": true, "hideYAxis": true, "class": "example-curve"})
 
 testInfo(oneSampleZSvg, "Z-TEST", width, height, "one-sample-z", "√Σ(x-x̄)²", "n", (width / 2) - 60, 25)
-testInfo(oneSampleTSvg, "T-TEST", width, height, "one-sample-t", "√Σ(x-x̄)²", "n - 1", (width / 2) - 60, 25)
+testInfo(oneSampleTSvg, "T-TEST", width, height, "one-sample-t", "√Σ(x-x̄)²", "n - 1", (width / 2) - 60, 25, "s")
 testInfo(twoSampleZSvg, "Z-TEST", width, height, "two-sample-z-group1", "√Σ(x₁-x̄₁)²", "n₁", (width / 2) - 110, 20)
 addFractionSvg(twoSampleZSvg, "two-sample-z-group2", "√Σ(x₂-x̄₂)²", "n₂", (width / 2) + 90, height - margins.bottom + 50, 20)
 twoSampleZSvg.append("text")
@@ -119,10 +119,10 @@ twoSampleZSvg.append("text")
     .attr("x", 170)
     .attr("y", height - margins.bottom + 50)
     .style("font-size", 25)
-testInfo(twoSamplePairedSvg, "PAIRED T-TEST", width, height, "two-sample-paired", "√Σ(x̄₁₋₂-μ₁₋₂)²", "n - 1", (width / 2) - 60, 20)
-testInfo(twoSampleUnpairedSvg, "UNPAIRED T-TEST", width, height, "two-sample-unpaired", "√(Σ(n₁-1)×sd₁² + Σ(n₂-1)×sd₂²)", "√(n₁ - 1 + n₂ - 1)", (width / 2) - 60, 20)
+testInfo(twoSamplePairedSvg, "PAIRED T-TEST", width, height, "two-sample-paired", "√Σ(x̄₁₋₂-μ₁₋₂)²", "n - 1", (width / 2) - 60, 20, "s")
+testInfo(twoSampleUnpairedSvg, "UNPAIRED T-TEST", width, height, "two-sample-unpaired", "√(Σ(n₁-1)×sd₁² + Σ(n₂-1)×sd₂²)", "√(n₁ - 1 + n₂ - 1)", (width / 2) - 60, 20, "s")
 
-function testInfo(svg, title, width, height, id, numerator, denominator, x, fontSize) {
+function testInfo(svg, title, width, height, id, numerator, denominator, x, fontSize, symbol="σ") {
     let maxChars = d3.max([String(numerator).length, String(denominator).length])
     svg.append("text")
         .text(title)
@@ -130,7 +130,7 @@ function testInfo(svg, title, width, height, id, numerator, denominator, x, font
         .attr("x", width / 2)
         .attr("y", 25)
     svg.append("text")
-        .text("σ = ")
+        .text(`${symbol} = `)
         .attr("class", "math-symbol")
         .attr("x", x - (3 * maxChars))
         .attr("y", height - margins.bottom + 50)

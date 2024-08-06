@@ -27,15 +27,18 @@
     cursor: pointer;
 }
 
-.t-score-input {
-    fill: steelblue;
-    font-size: 20px;
+.t-score-input, #t-score-sample-size {
+    fill: #6bbfe3;
+    font-size: 23px;
     text-anchor: middle;
+    font-weight: bold;
 }
 
 #sample-pg {
     width: 400px;
-    margin: auto;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #sample-pg-points {
@@ -43,7 +46,6 @@
     fill-opacity: 30%;
     mix-blend-mode: multiply;
 }
-
 #sliders{
     position: relative;
     margin: auto;
@@ -93,9 +95,8 @@
 
 #select-sd {
     position: relative;
-    top: 110px;
+    top: 20px;
     width: 200px;
-    height: 30px;
     margin: auto;
 }
 
@@ -124,6 +125,28 @@
     letter-spacing: 1.5px;
 }
 
+#t-score-container {
+    width: 500px;
+    height: 150px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#t-score-image {
+    margin-left: 100px;
+    float: left;
+    opacity: 50%;
+}
+
+#t-score {
+    float: left;
+}
+
+#t-equals, #t-score-equals {
+    fill: black;
+}
+
 #t-distr-container {
     width: 800px;
     height: 500px;
@@ -134,19 +157,6 @@
 
 #t-distribution {
     margin-top: 30px;
-}
-
-#t-score {
-    margin: auto;
-    width: 500px;
-}
-
-#t-equals, #t-score-equals {
-    fill: black;
-}
-
-#t-score-sample-size {
-    fill: steelblue;
 }
 
 #t-slider {
@@ -196,15 +206,12 @@
     fill: steelblue;
 }
 
-#sample-graph-title {
-    fill: #6bbfe3;
-    font-weight: bold;
-    text-anchor: middle;
-}
-
 #sample-graph-pg {
-    width: 300px;
+    margin-top: 30px;
+    width: 550px;
     height: 200px;
+    background: #ebebeb;
+    border-radius: 50px;
 }
 
 #graph-alpha {

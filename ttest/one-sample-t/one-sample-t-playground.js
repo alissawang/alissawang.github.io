@@ -4,11 +4,11 @@ import { drawDistribution, empty1DGraph, addTextSvg, graphAreaUnderCurveFromPoin
 import { animateSample, addSquareRootSvg, highlightPArea } from "../utils.js";
 
 const sampleWidth = 400;
-const sampleHeight = 180;
+const sampleHeight = 100;
 const width = 600;
 const height = 350;
-const tScoreWidth = width + 100;
-const tScoreHeight = 80;
+const tScoreWidth = 230;
+const tScoreHeight = 120;
 const sampleMargins = ({
     top: 10,
     right: 30,
@@ -44,12 +44,7 @@ const tScoreSvg = d3.select("#t-score")
 const dfDisplay = document.getElementById("df-display")
 const sampleXRange = d3.range(0, 10.01, 0.01)
 const tDistrXRange = d3.range(-6, 6, 0.01)
-const sampleXGraphValues = empty1DGraph(sampleSvg, sampleXRange, sampleWidth, sampleHeight - 30, sampleMargins)
-sampleSvg.append("text")
-    .attr("id", "sample-graph-title")
-    .text("Sample Values")
-    .attr("x", sampleWidth / 2)
-    .attr("y", 15)
+const sampleXGraphValues = empty1DGraph(sampleSvg, sampleXRange, sampleWidth, sampleHeight, sampleMargins)
 
 function scaleSliderValue(value) {
     return 65 + (value * 28)
@@ -65,8 +60,8 @@ const sdSlider = document.getElementById("sd-slider")
 const sdSliderDisplay = document.getElementById("sd-value")
 const meanSlider = document.getElementById("mean-slider")
 const meanSliderDisplay = document.getElementById("mean-slider-value")
-meanSlider.style.top = `${sampleHeight - 45}px`;
-meanSliderDisplay.style.top = `${sampleHeight - 95}px`;
+meanSlider.style.top = `${sampleHeight - 10}px`;
+meanSliderDisplay.style.top = `${sampleHeight - 65}px`;
 const oneTailButton = document.querySelector("#one-tail-button-pg")
 const twoTailButton = document.querySelector("#two-tail-button-pg")
 var nTails = 1;
@@ -181,21 +176,24 @@ function updateTScore() {
 
 function displayTCalc() {
     tScoreSvg.selectAll(".t-score-input").remove()
-    tScoreSvg.selectAll(".denominator").remove()
-    tScoreSvg.selectAll(".frac-line").remove()
-    tScoreSvg.select("#t-slider").remove()
-    let tScoreX = t > 6 ? tGraphXValues(6) : (t < -6 ? tGraphXValues(-6) : tGraphXValues(t));
-    let tScoreY = 15;
-    addTextSvg(tScoreSvg, "t = ", tScoreX - 40, tScoreY + 10, "t-equals", "t-score-input")
-    addTextSvg(tScoreSvg, sampleMean, tScoreX, tScoreY, "t-score-observed", "t-score-input")
-    addTextSvg(tScoreSvg, "-", tScoreX + 25, tScoreY, "t-score-minus", "t-score-input")
-    addTextSvg(tScoreSvg, h0Mean, tScoreX + 50, tScoreY, "t-score-hypothesized", "t-score-input")
-    tScoreSvg.append("line").attr("class", "frac-line").attr("x1", tScoreX - 5).attr("x2", tScoreX + 55).attr("y1", tScoreY + 5).attr("y2", tScoreY + 5)
+    tDistrSvg.selectAll(".t-score-input").remove()
+    let tScoreX = 50
+    let tScoreY = 45
+    addTextSvg(tScoreSvg, "=", tScoreX - 35, tScoreY + 10, "t-score-equals", "t-score-input")
+    addTextSvg(tScoreSvg, sampleMean, tScoreX, tScoreY - 10, "t-score-observed", "t-score-input")
+    addTextSvg(tScoreSvg, "-", tScoreX + 25, tScoreY - 10, "t-score-minus", "t-score-input")
+    addTextSvg(tScoreSvg, h0Mean, tScoreX + 55, tScoreY - 10, "t-score-hypothesized", "t-score-input")
+    tScoreSvg.append("line").attr("class", "frac-line").attr("x1", tScoreX - 15).attr("x2", tScoreX + 65).attr("y1", tScoreY + 5).attr("y2", tScoreY + 5)
     addTextSvg(tScoreSvg, sd, tScoreX + 20, tScoreY + 25, "t-score-sd", "t-score-input")
     tScoreSvg.append("line").attr("class", "frac-line").attr("x1", tScoreX).attr("x2", tScoreX + 40).attr("y1", tScoreY + 30).attr("y2", tScoreY + 30)
-    addSquareRootSvg(tScoreSvg, tScoreX + 15, tScoreY + 35, n, 20, "t-score-sample-size")
-    addTextSvg(tScoreSvg, "=", tScoreX + 80, tScoreY + 10, "t-score-equals", "t-score-input")
-    addTextSvg(tScoreSvg, roundDecimal(t, 2), tScoreX + 110, tScoreY + 10, "t-score-value", "t-score-input")
+    addSquareRootSvg(tScoreSvg, tScoreX + 20, tScoreY + 35, n, 23, "t-score-sample-size")
+    addTextSvg(tScoreSvg, "=", tScoreX + 95, tScoreY + 10, "t-score-equals", "t-score-input")
+    addTextSvg(tScoreSvg, roundDecimal(t, 2), tScoreX + 140, tScoreY + 10, "t-score-value", "t-score-input")
+
+    let graphTScoreX = t > 6 ? tGraphXValues(6) : (t < -6 ? tGraphXValues(-6) : tGraphXValues(t));
+    let graphTScoreY = height - 20;
+    addTextSvg(tDistrSvg, "t = ", graphTScoreX - 40, graphTScoreY, "t-equals", "t-score-input")
+    addTextSvg(tDistrSvg, roundDecimal(t, 2), graphTScoreX, graphTScoreY, "t-score-value", "t-score-input")
 
     tDistrSvg.select("#t-score-slider").remove()
     tDistrSvg.append("rect")
@@ -203,7 +201,7 @@ function displayTCalc() {
         .style("fill", "steelblue")
         .attr("width", 5)
         .attr("height", 20)
-        .attr("x", tScoreX)
+        .attr("x", graphTScoreX)
         .attr("y", height - margins.bottom - 10)
 }
 

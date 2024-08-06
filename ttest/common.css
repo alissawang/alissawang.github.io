@@ -2,6 +2,13 @@ p {
     padding-left: 10%;
 }
 
+h3 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    text-align: center;
+}
+
 .formula {
     margin: auto;
     width: 50%;

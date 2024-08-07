@@ -3,9 +3,11 @@ p {
 }
 
 h3 {
+    color: #8fc6dd;
     margin-left: auto;
     margin-right: auto;
-    width: 800px;
+    padding-top: 20px;
+    margin-bottom: 0px;
     text-align: center;
 }
 
@@ -49,7 +51,7 @@ h3 {
 .slider-container {
     margin: auto;
     padding-top: 10px;
-    width: 400px;
+    width: 410px;
 }
 
 .slider-symbol {

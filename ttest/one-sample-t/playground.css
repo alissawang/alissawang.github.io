@@ -27,11 +27,20 @@
     cursor: pointer;
 }
 
-.t-score-input, #t-score-sample-size {
+.t-score-frac-line {
+    stroke: gray;
+}
+
+.t-score-input, .t-score-slider-display, #t-score-sample-size {
     fill: #6bbfe3;
     font-size: 23px;
     text-anchor: middle;
     font-weight: bold;
+}
+
+.t-score-input, #t-score-sample-size  {
+    fill: black;
+    opacity: 20%;
 }
 
 #sample-pg {
@@ -46,12 +55,13 @@
     fill-opacity: 30%;
     mix-blend-mode: multiply;
 }
+
 #sliders{
     position: relative;
     margin: auto;
 }
 
-#mean-slider, #sd-slider {
+#mean-slider {
     appearance: none;
     cursor: pointer;
 }
@@ -59,28 +69,14 @@
 #mean-slider {
     position: relative;
     background: none;
-    left: 5px;
-    width: 368px;
-}
-
-#sd-slider {
-    background: #6bbfe3;
-    height: 2px;
+    left: 45px;
+    width: 307px;
 }
 
 #mean-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 25px;
     width: 6px;
-    border: none;
-    cursor: pointer;
-    background: #6bbfe3;
-}
-
-#sd-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 15px;
-    width: 2px;
     border: none;
     cursor: pointer;
     background: #6bbfe3;
@@ -93,22 +89,11 @@
     font-size: 15px;
 }
 
-#select-sd {
-    position: relative;
-    top: 20px;
-    width: 200px;
-    margin: auto;
-}
-
-#sd-slider {
-    width: 90px;
-}
-
 #df-display {
     position: relative;
     float: right;
-    margin-top: 40px;
-    left: 100px;
+    top: 40px;
+    left: 60px;
     color: #6bbfe3;;
     font-weight: bold;
     top: 20px;
@@ -118,25 +103,25 @@
     color: #6bbfe3;
     position: relative;
     float: right;
-    top: 75px;
-    left: 123px;
+    top: 40px;
+    left: 83px;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 1.5px;
 }
 
 #t-score-container {
-    width: 500px;
+    width: 250px;
     height: 150px;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
+    background: #ebebeb;
+    border-radius: 40px;
 }
 
 #t-score-image {
-    margin-left: 100px;
     float: left;
-    opacity: 50%;
+    margin-left: 20px;
+    margin-top: 10px;
+    opacity: 20%;
 }
 
 #t-score {
@@ -150,13 +135,14 @@
 #t-distr-container {
     width: 800px;
     height: 500px;
-    margin-top: 50px;
-    margin-left: auto;
+    margin-top: 20px;
+    margin-left: 100px;
     margin-right: auto;
 }
 
 #t-distribution {
     margin-top: 30px;
+    height: 300px;
 }
 
 #t-slider {
@@ -166,9 +152,11 @@
 }
 
 #tail-switch-pg {
-    margin: auto;
-    float: left;
-    margin-left: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
 }
 
 #tail-switch-pg button {
@@ -198,28 +186,36 @@
 }
 
 #p-area {
-    fill: steelblue;
+    fill: #8fc6dd;
     opacity: 30%;
 }
 
 #p-value-text {
-    fill: steelblue;
+    fill: #8fc6dd;
+    font-weight: bold;
 }
 
 #sample-graph-pg {
-    margin-top: 30px;
     width: 550px;
-    height: 200px;
+    height: 220px;
     background: #ebebeb;
     border-radius: 50px;
 }
 
 #graph-alpha {
     fill: red;
+    font-weight: bold;
 }
 
 #graph-alpha-line {
     stroke: red;
     stroke-width: 3px;
     stroke-dasharray: 4,2;
+}
+
+#conclusion-text {
+    fill: #6bbfe3;
+    font-size: 15;
+    font-weight: bold;
+    text-anchor: middle;
 }

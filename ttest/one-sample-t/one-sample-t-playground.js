@@ -4,19 +4,17 @@ import { drawDistribution, empty1DGraph, addTextSvg, graphAreaUnderCurveFromPoin
 import { animateSample, addSquareRootSvg, highlightPArea } from "../utils.js";
 
 const sampleWidth = 400;
-const sampleHeight = 100;
-const width = 600;
-const height = 350;
-const tScoreWidth = 230;
-const tScoreHeight = 120;
+const sampleHeight = 40;
+const width = 480;
+const height = 280;
 const sampleMargins = ({
-    top: 10,
-    right: 30,
+    top: 0,
+    right: 50,
     bottom: 20,
-    left: 10
+    left: 50
 })
 const margins = ({
-    top: 20,
+    top: 15,
     right: 20,
     bottom: 80,
     left: 20
@@ -37,17 +35,18 @@ const tDistrSvg = d3.select("#t-distribution")
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-const tScoreSvg = d3.select("#t-score")
+const tScoreSvg = d3.select("#t-score-display")
     .append("svg")
-    .attr("width", tScoreWidth)
-    .attr("height", tScoreHeight)
+    .attr("width", 150)
+    .attr("height", 130)
 const dfDisplay = document.getElementById("df-display")
+const tScoreContainer = document.getElementById("t-score-container")
 const sampleXRange = d3.range(0, 10.01, 0.01)
 const tDistrXRange = d3.range(-6, 6, 0.01)
 const sampleXGraphValues = empty1DGraph(sampleSvg, sampleXRange, sampleWidth, sampleHeight, sampleMargins)
 
 function scaleSliderValue(value) {
-    return 65 + (value * 28)
+    return 30 + (value * 30)
 }
 
 const h0Slider = document.getElementById("h0-slider")
@@ -60,8 +59,8 @@ const sdSlider = document.getElementById("sd-slider")
 const sdSliderDisplay = document.getElementById("sd-value")
 const meanSlider = document.getElementById("mean-slider")
 const meanSliderDisplay = document.getElementById("mean-slider-value")
-meanSlider.style.top = `${sampleHeight - 10}px`;
-meanSliderDisplay.style.top = `${sampleHeight - 65}px`;
+meanSlider.style.top = `${sampleHeight}px`;
+meanSliderDisplay.style.top = `${sampleHeight - 50}px`;
 const oneTailButton = document.querySelector("#one-tail-button-pg")
 const twoTailButton = document.querySelector("#two-tail-button-pg")
 var nTails = 1;
@@ -87,6 +86,7 @@ h0Slider.oninput = function() {
     d3.select("#t-score-hypothesized").text(h0Mean)
     updateTScore()
     displayTCalc()
+    graphAlpha()
     graphPArea(tFunction, t, nTails)
 }
 
@@ -120,6 +120,7 @@ meanSlider.oninput = function() {
     graphNewSample(sampleSvg, sampleMean, n, sd)
     updateTScore()
     displayTCalc()
+    graphAlpha()
     graphPArea(tFunction, t)
 }
 
@@ -176,24 +177,25 @@ function updateTScore() {
 
 function displayTCalc() {
     tScoreSvg.selectAll(".t-score-input").remove()
-    tDistrSvg.selectAll(".t-score-input").remove()
-    let tScoreX = 50
-    let tScoreY = 45
+    tDistrSvg.selectAll(".t-score-slider-display").remove()
+    tScoreSvg.selectAll("#t-score-sample-size").remove()
+
+    let tScoreX = 45
+    let tScoreY = 53
     addTextSvg(tScoreSvg, "=", tScoreX - 35, tScoreY + 10, "t-score-equals", "t-score-input")
     addTextSvg(tScoreSvg, sampleMean, tScoreX, tScoreY - 10, "t-score-observed", "t-score-input")
     addTextSvg(tScoreSvg, "-", tScoreX + 25, tScoreY - 10, "t-score-minus", "t-score-input")
     addTextSvg(tScoreSvg, h0Mean, tScoreX + 55, tScoreY - 10, "t-score-hypothesized", "t-score-input")
-    tScoreSvg.append("line").attr("class", "frac-line").attr("x1", tScoreX - 15).attr("x2", tScoreX + 65).attr("y1", tScoreY + 5).attr("y2", tScoreY + 5)
-    addTextSvg(tScoreSvg, sd, tScoreX + 20, tScoreY + 25, "t-score-sd", "t-score-input")
-    tScoreSvg.append("line").attr("class", "frac-line").attr("x1", tScoreX).attr("x2", tScoreX + 40).attr("y1", tScoreY + 30).attr("y2", tScoreY + 30)
-    addSquareRootSvg(tScoreSvg, tScoreX + 20, tScoreY + 35, n, 23, "t-score-sample-size")
-    addTextSvg(tScoreSvg, "=", tScoreX + 95, tScoreY + 10, "t-score-equals", "t-score-input")
-    addTextSvg(tScoreSvg, roundDecimal(t, 2), tScoreX + 140, tScoreY + 10, "t-score-value", "t-score-input")
+    tScoreSvg.append("line").attr("class", "t-score-frac-line").attr("x1", tScoreX - 15).attr("x2", tScoreX + 65).attr("y1", tScoreY + 5).attr("y2", tScoreY + 5)
+    addTextSvg(tScoreSvg, sd, tScoreX + 25, tScoreY + 30, "t-score-sd", "t-score-input")
+    tScoreSvg.append("line").attr("class", "t-score-frac-line").attr("x1", tScoreX + 2).attr("x2", tScoreX + 48).attr("y1", tScoreY + 35).attr("y2", tScoreY + 35)
+    addSquareRootSvg(tScoreSvg, tScoreX + 22, tScoreY + 43, n, 23, "t-score-sample-size")
 
     let graphTScoreX = t > 6 ? tGraphXValues(6) : (t < -6 ? tGraphXValues(-6) : tGraphXValues(t));
-    let graphTScoreY = height - 20;
-    addTextSvg(tDistrSvg, "t = ", graphTScoreX - 40, graphTScoreY, "t-equals", "t-score-input")
-    addTextSvg(tDistrSvg, roundDecimal(t, 2), graphTScoreX, graphTScoreY, "t-score-value", "t-score-input")
+    let graphTScoreY = height - margins.bottom + 60;
+    addTextSvg(tDistrSvg, "t = ", graphTScoreX - 40, graphTScoreY, "", "t-score-slider-display")
+    addTextSvg(tDistrSvg, roundDecimal(t, 2), graphTScoreX, graphTScoreY, "t-score-value", "t-score-slider-display")
+    tScoreContainer.style.marginLeft = `${60 + graphTScoreX}px`
 
     tDistrSvg.select("#t-score-slider").remove()
     tDistrSvg.append("rect")
@@ -228,12 +230,13 @@ function graphNewSample(svg, sampleMean, n, sd) {
         .attr("id", `sample-pg-points`)
         .attr("class", "dynamic")
         .attr("cx", d => sampleXGraphValues(d))
-        .attr("cy", (sampleHeight / 2) + 10)
+        .attr("cy", (sampleHeight / 2) - 10)
 }
 
 function graphPArea(tFunction, t, nTails) {
     tDistrSvg.selectAll("#p-area").remove()
     tDistrSvg.selectAll("#p-value-text").remove()
+    tDistrSvg.selectAll("#conclusion-text").remove()
     graphAreaUnderCurveFromPoint(
         tDistrSvg, 
         tFunction, 
@@ -272,23 +275,29 @@ function graphPArea(tFunction, t, nTails) {
         tDistrSvg.selectAll("#p-area")
             .style("fill", "red")
     }
+    let conclusion = (p <= alpha) ? "Reject" : "Fail to reject"
+    let conclusionColor = (p <= alpha) ? "red" : "#6bbfe3"
     tDistrSvg.append("text")
         .text(`p = ${roundDecimal(p, 3)}`)
         .attr("id", "p-value-text")
         .attr("x", tGraphXValues(t) + 30)
         .attr("y", tGraphYValues(tFunction(t)) - 10)
+    tDistrSvg.append("text")
+        .text(`${conclusion} h0`)
+        .attr("id", "conclusion-text")
+        .style("fill", conclusionColor)
+        .attr("x", tGraphXValues(0))
+        .attr("y", margins.top)
 }
 
 function graphAlpha() {
     let targetArea = nTails == 1? alpha : alpha / 2
     let criticalValue = reverseLookupAreaUnderCurve(tFunction, d3.extent(tDistrXRange)[1], 0.01, targetArea)
+    if (sampleMean < h0Mean) {
+        criticalValue *= -1
+    }
     tDistrSvg.selectAll("#graph-alpha").remove()
     tDistrSvg.selectAll("#graph-alpha-line").remove()
-    tDistrSvg.append("text")
-        .text(`α = ${alpha}`)
-        .attr("id", "graph-alpha")
-        .attr("x", tGraphXValues(criticalValue))
-        .attr("y", height - margins.bottom + 35)
     tDistrSvg.append("line")
         .attr("id", "graph-alpha-line")
         .attr("x1", tGraphXValues(criticalValue))

@@ -80,3 +80,15 @@ export function closestInArray(dataArray, target) {
     let sortedArray = dataArray.sort((a, b) => a - b)
     return sortedArray.reduce((prev, current) => Math.abs(target - current) < Math.abs(target - prev) ? current : prev)
 }
+
+export function constrainValue(value, min, max) {
+    if (value > max) {
+        value = max
+    }
+
+    if (value < min) {
+        value = min
+    }
+
+    return value
+}

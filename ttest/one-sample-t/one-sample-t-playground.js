@@ -1,4 +1,4 @@
-import { seedSampleNormalDistribution, forceArrayMean, sampleNormalDistribution } from "../../utils/data.js";
+import { seedSampleNormalDistribution, forceArrayMean, sampleNormalDistribution, constrainValue } from "../../utils/data.js";
 import { studentsTPdf, tScore, roundDecimal, areaUnderCurve, reverseLookupAreaUnderCurve } from "../../utils/math.js";
 import { drawDistribution, empty1DGraph, addTextSvg, graphAreaUnderCurveFromPoint } from "../../utils/graph.js";
 import { animateSample, addSquareRootSvg, highlightPArea } from "../utils.js";
@@ -15,9 +15,9 @@ const sampleMargins = ({
 })
 const margins = ({
     top: 15,
-    right: 20,
+    right: 55,
     bottom: 80,
-    left: 20
+    left: 40
 })
 
 var h0Mean = 5
@@ -177,7 +177,8 @@ function updateTScore() {
 
 function displayTCalc() {
     tScoreSvg.selectAll(".t-score-input").remove()
-    tDistrSvg.selectAll(".t-score-slider-display").remove()
+    tDistrSvg.selectAll("#t-score-slider-display").remove()
+    tDistrSvg.selectAll("#t-score-triangle").remove()
     tScoreSvg.selectAll("#t-score-sample-size").remove()
 
     let tScoreX = 45
@@ -193,14 +194,20 @@ function displayTCalc() {
 
     let graphTScoreX = t > 6 ? tGraphXValues(6) : (t < -6 ? tGraphXValues(-6) : tGraphXValues(t));
     let graphTScoreY = height - margins.bottom + 60;
-    addTextSvg(tDistrSvg, "t = ", graphTScoreX - 40, graphTScoreY, "", "t-score-slider-display")
-    addTextSvg(tDistrSvg, roundDecimal(t, 2), graphTScoreX, graphTScoreY, "t-score-value", "t-score-slider-display")
-    tScoreContainer.style.marginLeft = `${60 + graphTScoreX}px`
+    addTextSvg(tDistrSvg, `t = ${roundDecimal(t, 2)}`, graphTScoreX - 40, graphTScoreY, "t-score-slider-display")
+    tScoreContainer.style.marginLeft = `${70 + graphTScoreX}px`
+    var triangle = d3.symbol()
+        .type(d3.symbolTriangle)
+        .size(80)
+    tDistrSvg.append("path")
+        .attr("id", "t-score-triangle")
+        .attr("d", triangle)
+        .attr("transform", `translate(${graphTScoreX},${height- margins.bottom + 75})`)
 
     tDistrSvg.select("#t-score-slider").remove()
     tDistrSvg.append("rect")
         .attr("id", "t-score-slider")
-        .style("fill", "steelblue")
+        .style("fill", "#6bbfe3")
         .attr("width", 5)
         .attr("height", 20)
         .attr("x", graphTScoreX)
@@ -273,14 +280,18 @@ function graphPArea(tFunction, t, nTails) {
     }
     if (p <= alpha) {
         tDistrSvg.selectAll("#p-area")
-            .style("fill", "red")
+            .style("fill", "#d67e7e")
+            .style("opacity", "100%")
     }
     let conclusion = (p <= alpha) ? "Reject" : "Fail to reject"
-    let conclusionColor = (p <= alpha) ? "red" : "#6bbfe3"
+    let conclusionColor = (p <= alpha) ? "#c44545" : "#6bbfe3"
+    
+    let pXOffset = t > 0 ? 30 : -90
+    let pX = constrainValue(tGraphXValues(t) + pXOffset, margins.left + 10, width - margins.right - 60)
     tDistrSvg.append("text")
         .text(`p = ${roundDecimal(p, 3)}`)
         .attr("id", "p-value-text")
-        .attr("x", tGraphXValues(t) + 30)
+        .attr("x", pX)
         .attr("y", tGraphYValues(tFunction(t)) - 10)
     tDistrSvg.append("text")
         .text(`${conclusion} h0`)

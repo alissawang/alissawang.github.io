@@ -27,11 +27,12 @@
     cursor: pointer;
 }
 
-.t-score-frac-line {
-    stroke: gray;
+.t-score-frac-line, .frac-line {
+    stroke: black;
+    opacity: 20%;
 }
 
-.t-score-input, .t-score-slider-display, #t-score-sample-size {
+.t-score-input, #t-score-sample-size {
     fill: #6bbfe3;
     font-size: 23px;
     text-anchor: middle;
@@ -146,9 +147,20 @@
 }
 
 #t-slider {
-    fill: steelblue;
+    fill: #6bbfe3;
     margin: auto;
     width: 600px;
+}
+
+#t-score-slider-display {
+    fill: #6bbfe3;
+    font-size: 23px;
+    text-anchor: left;
+    font-weight: bold;
+}
+
+#t-score-triangle {
+    fill: #e0e0e0;
 }
 
 #tail-switch-pg {
@@ -202,13 +214,8 @@
     border-radius: 50px;
 }
 
-#graph-alpha {
-    fill: red;
-    font-weight: bold;
-}
-
 #graph-alpha-line {
-    stroke: red;
+    stroke: #c44545;
     stroke-width: 3px;
     stroke-dasharray: 4,2;
 }

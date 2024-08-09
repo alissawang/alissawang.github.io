@@ -27,16 +27,28 @@
     cursor: pointer;
 }
 
-.t-score-input {
-    fill: steelblue;
-    font-size: 20px;
+.t-score-frac-line, .frac-line {
+    stroke: black;
+    opacity: 20%;
+}
+
+.t-score-input, #t-score-sample-size {
+    fill: #6bbfe3;
+    font-size: 23px;
     text-anchor: middle;
+    font-weight: bold;
+}
+
+.t-score-input, #t-score-sample-size  {
+    fill: black;
+    opacity: 20%;
 }
 
 #sample-pg {
-    height: 100px;
     width: 400px;
-    margin: auto;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #sample-pg-points {
@@ -51,13 +63,15 @@
 }
 
 #mean-slider {
-    position: relative;
-    top: 85px;
-    left: 70px;
-    width: 300px;
     appearance: none;
-    background: none;
     cursor: pointer;
+}
+
+#mean-slider {
+    position: relative;
+    background: none;
+    left: 45px;
+    width: 307px;
 }
 
 #mean-slider::-webkit-slider-thumb {
@@ -73,57 +87,142 @@
     position: relative;
     font-family: sans-serif;
     color: #6bbfe3;
-    font-size: 20px;
-    top: 30px;
+    font-size: 15px;
 }
 
 #df-display {
     position: relative;
     float: right;
-    margin-top: 40px;
-    left: 50px;
+    top: 40px;
+    left: 60px;
     color: #6bbfe3;;
     font-weight: bold;
-    top: 80px;
+    top: 20px;
 }
 
 #df-formula {
     color: #6bbfe3;
     position: relative;
     float: right;
-    top: 135px;
-    left: 73px;
+    top: 40px;
+    left: 83px;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 1.5px;
 }
 
-#t-distribution {
-    height: 500px;
+#t-score-container {
+    width: 250px;
+    height: 150px;
+    background: #ebebeb;
+    border-radius: 40px;
+}
+
+#t-score-image {
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    opacity: 20%;
 }
 
 #t-score {
-    position: relative;
-    top: 370px;
+    float: left;
 }
 
 #t-equals, #t-score-equals {
     fill: black;
 }
 
-#t-score-sample-size {
-    fill: steelblue;
+#t-distr-container {
+    width: 800px;
+    height: 500px;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: auto;
+}
+
+#t-distribution {
+    margin-top: 30px;
+    height: 300px;
 }
 
 #t-slider {
-    fill: steelblue;
+    fill: #6bbfe3;
+    margin: auto;
+    width: 600px;
+}
+
+#t-score-slider-display {
+    fill: #6bbfe3;
+    font-size: 23px;
+    text-anchor: left;
+    font-weight: bold;
+}
+
+#t-score-triangle {
+    fill: #e0e0e0;
+}
+
+#tail-switch-pg {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#tail-switch-pg button {
+    margin-left: 0px;
+    border: none;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: #afdbed;
+    color: #e8f5fa;
+    width: 100px;
+    height: 30px;
+}
+
+#one-tail-button-pg, #two-tail-button-pg {
+    cursor: pointer;
+    position: relative;
+}
+
+#one-tail-button-pg.active {
+    background-color: #8fc6dd;
+    color: white;
+}
+
+#two-tail-button-pg.active {
+    background-color: #8fc6dd;
+    color: white;
 }
 
 #p-area {
-    fill: steelblue;
+    fill: #8fc6dd;
     opacity: 30%;
 }
 
 #p-value-text {
-    fill: steelblue;
+    fill: #8fc6dd;
+    font-weight: bold;
+}
+
+#sample-graph-pg {
+    width: 550px;
+    height: 220px;
+    background: #ebebeb;
+    border-radius: 50px;
+}
+
+#graph-alpha-line {
+    stroke: #c44545;
+    stroke-width: 3px;
+    stroke-dasharray: 4,2;
+}
+
+#conclusion-text {
+    fill: #6bbfe3;
+    font-size: 15;
+    font-weight: bold;
+    text-anchor: middle;
 }

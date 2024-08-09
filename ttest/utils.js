@@ -96,7 +96,7 @@ export function addSquareRootSvg(svg, x, y, number, fontSize = null, id="") {
             .text(number)
             .attr("class", "denominator")
             .attr("id", id)
-            .attr("x", x)
+            .attr("x", x + 10)
             .attr("y", y + fontSize)
             .style("font-size", fontSize)
     }

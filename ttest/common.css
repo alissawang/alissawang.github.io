@@ -1,10 +1,14 @@
-h1 {
-    padding-left: 10%;
-    padding-top: 5%;
-}
-
 p {
     padding-left: 10%;
+}
+
+h3 {
+    color: #8fc6dd;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    margin-bottom: 0px;
+    text-align: center;
 }
 
 .formula {
@@ -47,7 +51,7 @@ p {
 .slider-container {
     margin: auto;
     padding-top: 10px;
-    width: 400px;
+    width: 410px;
 }
 
 .slider-symbol {

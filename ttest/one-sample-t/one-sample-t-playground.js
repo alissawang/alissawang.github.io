@@ -177,9 +177,10 @@ function updateTScore() {
 
 function displayTCalc() {
     tScoreSvg.selectAll(".t-score-input").remove()
-    tDistrSvg.selectAll("#t-score-slider-display").remove()
-    tDistrSvg.selectAll("#t-score-triangle").remove()
+    tScoreSvg.selectAll("line").remove()
     tScoreSvg.selectAll("#t-score-sample-size").remove()
+    tDistrSvg.selectAll("#t-score-triangle").remove()
+    tDistrSvg.selectAll("#t-score-slider-display").remove()
 
     let tScoreX = 45
     let tScoreY = 53

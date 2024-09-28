@@ -1,9 +1,3 @@
-#tab-sections {
-    justify-content: center;
-    display: flex;
-    margin-bottom: 50px;
-}
-
 #section-1 {
     display: block;
 }
@@ -19,31 +13,4 @@
 
 #page2, #page3, #page4 {
     display: none;
-}
-
-.tab-sections {
-    overflow: hidden;
-    justify-content: center;
-    display: flex;
-    margin-bottom: 50px;
-}
-
-.tab-sections button{
-    float: left;
-    background-color: #fafafa;;
-    border: none;
-    outline: none;
-    padding: 10px 16px;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-.tab-sections button:hover {
-    background-color: none;
-    border-bottom: solid #ebebeb;
-}
-
-.tab-sections button.active {
-    background-color: none;
-    border-bottom: solid 4px #e6e6e6;
 }

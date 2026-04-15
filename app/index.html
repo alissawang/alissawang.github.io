@@ -912,7 +912,7 @@
       tag.addEventListener('click', () => {
         const isSelected = tag.classList.toggle('selected');
         const key = tag.dataset.tag;
-        document.querySelectorAll('.feed-card, .video-card').forEach(card => {
+        document.querySelectorAll('.feed-card, .video-card, .article-card').forEach(card => {
           if (card.dataset.tag === key) {
             card.style.display = isSelected ? '' : 'none';
           }

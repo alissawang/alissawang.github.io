@@ -583,8 +583,10 @@
       tag.addEventListener('click', () => {
         const isSelected = tag.classList.toggle('selected');
         const key = tag.dataset.tag;
-        document.querySelectorAll(`[data-tag="${key}"]:not(.tag)`).forEach(card => {
-          card.style.display = isSelected ? '' : 'none';
+        document.querySelectorAll('.feed-card, .video-card').forEach(card => {
+          if (card.dataset.tag === key) {
+            card.style.display = isSelected ? '' : 'none';
+          }
         });
       });
     });

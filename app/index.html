@@ -363,6 +363,106 @@
       background: #e0e0e0;
       border-radius: 6px;
     }
+
+    /* Article cards */
+    .article-card {
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .article-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .article-img-bg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .article-img-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 55%;
+    }
+
+    .article-card-body {
+      padding: 0 16px;
+    }
+
+    .article-headline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.22;
+      margin-bottom: 8px;
+    }
+
+    .article-byline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+
+    .article-excerpt {
+      font-size: 14px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .article-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.18);
+      margin: 0 0 10px;
+    }
+
+    .article-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+    }
+
+    .article-category {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .article-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 999px;
+      height: 30px;
+      min-width: 30px;
+      padding: 0 9px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .action-btn.icon-only {
+      width: 30px;
+      padding: 0;
+    }
   </style>
 </head>
 <body>
@@ -433,101 +533,175 @@
     <!-- Tag Bubbles -->
     <div class="tag-row" role="list">
       <div class="tag selected" data-tag="lighten" role="listitem">Lighten the Mood</div>
-      <div class="tag selected" data-tag="blind-spots" role="listitem">Blind Spots</div>
-      <div class="tag selected" data-tag="learn" role="listitem">Learn Something New</div>
-      <div class="tag selected" data-tag="dig-deeper" role="listitem">Dig Deeper</div>
-      <div class="tag selected" data-tag="catch-up" role="listitem">Catch Up</div>
+      <div class="tag" data-tag="blind-spots" role="listitem">Blind Spots</div>
+      <div class="tag" data-tag="learn" role="listitem">Learn Something New</div>
+      <div class="tag" data-tag="dig-deeper" role="listitem">Dig Deeper</div>
+      <div class="tag" data-tag="catch-up" role="listitem">Catch Up</div>
     </div>
 
     <!-- Content Area -->
     <div class="content">
-      <!-- Video Card (grayed out skeleton) -->
-      <div class="video-card" data-tag="lighten">
-        <div class="video-card-skel-headline"></div>
-        <div class="video-card-skel-headline short"></div>
-        <div class="video-card-skel-meta"></div>
-        <div class="video-card-skel-bar"></div>
+
+      <!-- ── Lighten the Mood cards ── -->
+
+      <!-- Card 1: Philadelphia Dining -->
+      <div class="article-card" data-tag="lighten" style="background:#2a1a08">
+        <div class="article-img-wrap">
+          <div class="article-img-bg" style="background:linear-gradient(170deg,#e8a030 0%,#c26820 35%,#8b3e10 65%,#4a1e08 100%)"></div>
+          <div class="article-img-fade" style="background:linear-gradient(transparent,#2a1a08)"></div>
+        </div>
+        <div class="article-card-body">
+          <h2 class="article-headline">Philadelphia's dining scene is better than ever. Here's where to eat.</h2>
+          <p class="article-byline">By Elazar Sontag • 6 days ago</p>
+          <p class="article-excerpt">Indonesian breakfast delights, a proper Sunday roast and Philadelphia's other favorite sandwich are on our food critic's can't-miss list.</p>
+          <hr class="article-divider">
+          <div class="article-footer">
+            <span class="article-category">Dining</span>
+            <div class="article-actions">
+              <button class="action-btn icon-only" aria-label="Save">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              </button>
+              <button class="action-btn" aria-label="Comments">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                133
+              </button>
+              <button class="action-btn icon-only" aria-label="Listen">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </button>
+              <button class="action-btn icon-only" aria-label="More">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Page indicator dots -->
-      <div class="page-dots">
-        <div class="dot"></div>
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+      <!-- Card 2: Springtime Gardening -->
+      <div class="article-card" data-tag="lighten" style="background:#182010">
+        <div class="article-img-wrap">
+          <div class="article-img-bg" style="background:linear-gradient(170deg,#78b84a 0%,#4a8828 30%,#2e5c18 55%,#7a6018 80%,#c89828 100%)"></div>
+          <div class="article-img-fade" style="background:linear-gradient(transparent,#182010)"></div>
+        </div>
+        <div class="article-card-body">
+          <h2 class="article-headline">This simple springtime activity is surprisingly good for your brain</h2>
+          <p class="article-byline">By Cheyenne Buckingham • 1 week ago</p>
+          <p class="article-excerpt">Gardening isn't just a hobby: It can challenge your brain and help reduce your stress levels, two factors that may help stave off cognitive de…</p>
+          <hr class="article-divider">
+          <div class="article-footer">
+            <span class="article-category">Well+Being</span>
+            <div class="article-actions">
+              <button class="action-btn icon-only" aria-label="Save">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              </button>
+              <button class="action-btn" aria-label="Comments">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                46
+              </button>
+              <button class="action-btn icon-only" aria-label="Listen">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </button>
+              <button class="action-btn icon-only" aria-label="More">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Placeholder feed cards -->
-      <div class="feed">
-
-        <!-- Wide image card: Technology & AI -->
-        <div class="feed-card feed-card-wide" data-tag="blind-spots">
-          <div class="card-wide-img"></div>
-          <div class="card-text">
-            <div class="card-tag-pill"></div>
-            <div class="card-headline-line"></div>
-            <div class="card-headline-line short"></div>
-            <div class="card-meta-line"></div>
+      <!-- Card 3: Beaded Glassware -->
+      <div class="article-card" data-tag="lighten" style="background:#081820">
+        <div class="article-img-wrap">
+          <div class="article-img-bg" style="background:linear-gradient(90deg,#20a8b8 0%,#9050c0 22%,#e03888 44%,#e8a010 66%,#28b848 88%,#20a8b8 100%)"></div>
+          <div class="article-img-fade" style="background:linear-gradient(transparent,#081820)"></div>
+        </div>
+        <div class="article-card-body">
+          <h2 class="article-headline">Have you seen this beaded glassware at restaurants? Of course you have.</h2>
+          <p class="article-byline">By Emily Heil • 3 days ago</p>
+          <p class="article-excerpt">The colorful, textured style seems to be in every restaurant and home kitchen, and even showed up on "Heated Rivalry." Here's how it got there.</p>
+          <hr class="article-divider">
+          <div class="article-footer">
+            <span class="article-category">Food</span>
+            <div class="article-actions">
+              <button class="action-btn icon-only" aria-label="Save">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              </button>
+              <button class="action-btn" aria-label="Comments">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                214
+              </button>
+              <button class="action-btn icon-only" aria-label="Listen">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </button>
+              <button class="action-btn icon-only" aria-label="More">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </div>
           </div>
         </div>
-
-        <!-- Standard card: DC/MD/VA -->
-        <div class="feed-card" data-tag="learn">
-          <div class="card-text">
-            <div class="card-tag-pill"></div>
-            <div class="card-headline-line"></div>
-            <div class="card-headline-line short"></div>
-            <div class="card-meta-line"></div>
-          </div>
-          <div class="card-thumb"></div>
-        </div>
-
-        <!-- Standard card: Figure Skating -->
-        <div class="feed-card" data-tag="dig-deeper">
-          <div class="card-text">
-            <div class="card-tag-pill"></div>
-            <div class="card-headline-line"></div>
-            <div class="card-headline-line short"></div>
-            <div class="card-meta-line"></div>
-          </div>
-          <div class="card-thumb"></div>
-        </div>
-
-        <!-- Wide image card: Uplifting -->
-        <div class="feed-card feed-card-wide" data-tag="catch-up">
-          <div class="card-wide-img"></div>
-          <div class="card-text">
-            <div class="card-tag-pill"></div>
-            <div class="card-headline-line"></div>
-            <div class="card-headline-line short"></div>
-            <div class="card-meta-line"></div>
-          </div>
-        </div>
-
-        <!-- Standard card: Supreme Court -->
-        <div class="feed-card" data-tag="lighten">
-          <div class="card-text">
-            <div class="card-tag-pill"></div>
-            <div class="card-headline-line"></div>
-            <div class="card-headline-line short"></div>
-            <div class="card-meta-line"></div>
-          </div>
-          <div class="card-thumb"></div>
-        </div>
-
-        <!-- Standard card: Middle East (second story) -->
-        <div class="feed-card" data-tag="blind-spots">
-          <div class="card-text">
-            <div class="card-tag-pill"></div>
-            <div class="card-headline-line"></div>
-            <div class="card-headline-line short"></div>
-            <div class="card-meta-line"></div>
-          </div>
-          <div class="card-thumb"></div>
-        </div>
-
       </div>
+
+      <!-- Card 4: Parrot Submarine -->
+      <div class="article-card" data-tag="lighten" style="background:#100c18">
+        <div class="article-img-wrap">
+          <div class="article-img-bg" style="background:linear-gradient(170deg,#50b8cc 0%,#2878a8 30%,#185880 55%,#0e3858 80%)"></div>
+          <div class="article-img-fade" style="background:linear-gradient(transparent,#100c18)"></div>
+        </div>
+        <div class="article-card-body">
+          <h2 class="article-headline">Parrot goes on underwater adventure in his custom-built submarine</h2>
+          <p class="article-byline">By Kyle Melnick • 4 days ago</p>
+          <p class="article-excerpt">"He enjoyed it," said the owner of Bebe the parrot, who has also come along for skydiving, skiing and 500-mile bike rides.</p>
+          <hr class="article-divider">
+          <div class="article-footer">
+            <span class="article-category">The Optimist</span>
+            <div class="article-actions">
+              <button class="action-btn icon-only" aria-label="Save">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              </button>
+              <button class="action-btn" aria-label="Comments">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                144
+              </button>
+              <button class="action-btn icon-only" aria-label="Listen">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </button>
+              <button class="action-btn icon-only" aria-label="More">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Skeleton cards for other tags (hidden by default) ── -->
+      <div class="feed-card feed-card-wide" data-tag="blind-spots" style="display:none">
+        <div class="card-wide-img"></div>
+        <div class="card-text"><div class="card-tag-pill"></div><div class="card-headline-line"></div><div class="card-headline-line short"></div><div class="card-meta-line"></div></div>
+      </div>
+      <div class="feed-card" data-tag="blind-spots" style="display:none">
+        <div class="card-text"><div class="card-tag-pill"></div><div class="card-headline-line"></div><div class="card-headline-line short"></div><div class="card-meta-line"></div></div>
+        <div class="card-thumb"></div>
+      </div>
+      <div class="feed-card" data-tag="learn" style="display:none">
+        <div class="card-text"><div class="card-tag-pill"></div><div class="card-headline-line"></div><div class="card-headline-line short"></div><div class="card-meta-line"></div></div>
+        <div class="card-thumb"></div>
+      </div>
+      <div class="feed-card feed-card-wide" data-tag="learn" style="display:none">
+        <div class="card-wide-img"></div>
+        <div class="card-text"><div class="card-tag-pill"></div><div class="card-headline-line"></div><div class="card-headline-line short"></div><div class="card-meta-line"></div></div>
+      </div>
+      <div class="feed-card" data-tag="dig-deeper" style="display:none">
+        <div class="card-text"><div class="card-tag-pill"></div><div class="card-headline-line"></div><div class="card-headline-line short"></div><div class="card-meta-line"></div></div>
+        <div class="card-thumb"></div>
+      </div>
+      <div class="feed-card" data-tag="catch-up" style="display:none">
+        <div class="card-text"><div class="card-tag-pill"></div><div class="card-headline-line"></div><div class="card-headline-line short"></div><div class="card-meta-line"></div></div>
+        <div class="card-thumb"></div>
+      </div>
+      <div class="feed-card feed-card-wide" data-tag="catch-up" style="display:none">
+        <div class="card-wide-img"></div>
+        <div class="card-text"><div class="card-tag-pill"></div><div class="card-headline-line"></div><div class="card-headline-line short"></div><div class="card-meta-line"></div></div>
+      </div>
+
     </div>
 
     <!-- Bottom Navigation -->

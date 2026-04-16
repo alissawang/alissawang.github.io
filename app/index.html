@@ -1195,7 +1195,26 @@
       btn.textContent = '×';
       btn.addEventListener('click', e => {
         e.stopPropagation();
-        card.style.display = 'none';
+        const h = card.offsetHeight;
+
+        // Phase 1: slide left + fade
+        card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+        card.style.transform = 'translateX(-110%)';
+        card.style.opacity = '0';
+
+        // Phase 2: collapse height so cards below slide up
+        setTimeout(() => {
+          card.style.transition = 'max-height 0.28s ease, margin-bottom 0.28s ease';
+          card.style.overflow = 'hidden';
+          card.style.maxHeight = h + 'px';
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            card.style.maxHeight = '0';
+            card.style.marginBottom = '0';
+          }));
+        }, 300);
+
+        // Phase 3: fully hide
+        setTimeout(() => { card.style.display = 'none'; }, 620);
       });
       card.appendChild(btn);
     });

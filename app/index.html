@@ -910,12 +910,22 @@
   <script>
     document.querySelectorAll('.tag').forEach(tag => {
       tag.addEventListener('click', () => {
-        const isSelected = tag.classList.toggle('selected');
+        if (tag.classList.contains('selected')) return;
+
+        // Deselect current tag and hide its cards
+        document.querySelectorAll('.tag.selected').forEach(active => {
+          active.classList.remove('selected');
+          const oldKey = active.dataset.tag;
+          document.querySelectorAll('.feed-card, .video-card, .article-card').forEach(card => {
+            if (card.dataset.tag === oldKey) card.style.display = 'none';
+          });
+        });
+
+        // Select clicked tag and show its cards
+        tag.classList.add('selected');
         const key = tag.dataset.tag;
         document.querySelectorAll('.feed-card, .video-card, .article-card').forEach(card => {
-          if (card.dataset.tag === key) {
-            card.style.display = isSelected ? '' : 'none';
-          }
+          if (card.dataset.tag === key) card.style.display = '';
         });
       });
     });

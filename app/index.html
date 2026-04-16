@@ -149,8 +149,24 @@
     /* Main content */
     .content {
       flex: 1;
-      overflow-y: auto;
+      position: relative;
+      overflow: hidden;
       background: #fff;
+    }
+
+    .feed-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      transform: translateX(100%);
+      background: #111;
+    }
+
+    .feed-panel.active {
+      transform: translateX(0);
     }
 
     /* Video card (skeleton) */
@@ -567,7 +583,7 @@
     <!-- Content Area -->
     <div class="content">
 
-      <!-- ── Lighten the Mood cards ── -->
+      <div class="feed-panel active" data-panel="lighten">
 
       <!-- Card 1: Philadelphia Dining -->
       <div class="article-card" data-tag="lighten" style="background:#2a1a08">
@@ -697,10 +713,11 @@
         </div>
       </div>
 
-      <!-- ── Blind Spots cards ── -->
+      </div>
+      <div class="feed-panel" data-panel="blind-spots">
 
       <!-- Card 1: 32 best things D.C. -->
-      <div class="article-card" data-tag="blind-spots" style="background:#222a18;display:none">
+      <div class="article-card" data-tag="blind-spots" style="background:#222a18">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#8fba60 0%,#5a8830 30%,#3a6018 55%,#222a18 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#222a18)"></div>
@@ -731,7 +748,7 @@
       </div>
 
       <!-- Card 2: Zoo baby elephant -->
-      <div class="article-card" data-tag="blind-spots" style="background:#1e1208;display:none">
+      <div class="article-card" data-tag="blind-spots" style="background:#1e1208">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#c8b090 0%,#907060 35%,#504030 60%,#1e1208 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#1e1208)"></div>
@@ -763,7 +780,7 @@
       </div>
 
       <!-- Card 3: Live Chat — Elazar Sontag (special layout) -->
-      <div class="article-card" data-tag="blind-spots" style="background:#0a4850;display:none">
+      <div class="article-card" data-tag="blind-spots" style="background:#0a4850">
         <div style="display:flex;align-items:center;gap:14px;padding:16px;background:#1a1a1a">
           <div style="width:88px;height:88px;flex-shrink:0;border-radius:3px;background:linear-gradient(160deg,#c8a070,#805040)"></div>
           <div>
@@ -788,7 +805,7 @@
       </div>
 
       <!-- Card 4: Ozempic personality -->
-      <div class="article-card" data-tag="blind-spots" style="background:#201c18;display:none">
+      <div class="article-card" data-tag="blind-spots" style="background:#201c18">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#d8d0c8 0%,#908880 35%,#504840 60%,#201c18 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#201c18)"></div>
@@ -820,7 +837,7 @@
       </div>
 
       <!-- Card 5: Texas camp flood -->
-      <div class="article-card" data-tag="blind-spots" style="background:#1e0c0c;display:none">
+      <div class="article-card" data-tag="blind-spots" style="background:#1e0c0c">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#c87850 0%,#984030 35%,#681818 60%,#1e0c0c 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#1e0c0c)"></div>
@@ -850,10 +867,11 @@
           </div>
         </div>
       </div>
-      <!-- ── Dig Deeper cards ── -->
+      </div>
+      <div class="feed-panel" data-panel="dig-deeper">
 
       <!-- Card 1: Eric Swalwell -->
-      <div class="article-card" data-tag="dig-deeper" style="background:#2e1208;display:none">
+      <div class="article-card" data-tag="dig-deeper" style="background:#2e1208">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#c87050 0%,#904030 35%,#582018 65%,#2e1208 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#2e1208)"></div>
@@ -885,7 +903,7 @@
       </div>
 
       <!-- Card 2: Viktor Orban (Opinion — no save button) -->
-      <div class="article-card" data-tag="dig-deeper" style="background:#220808;display:none">
+      <div class="article-card" data-tag="dig-deeper" style="background:#220808">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#c81020 0%,#880010 30%,#400010 60%,#220808 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#220808)"></div>
@@ -914,7 +932,7 @@
       </div>
 
       <!-- Card 3: Trump Christlike image (AI-GENERATED badge) -->
-      <div class="article-card" data-tag="dig-deeper" style="background:#281408;display:none">
+      <div class="article-card" data-tag="dig-deeper" style="background:#281408">
         <div class="article-img-wrap" style="position:relative">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#e8a030 0%,#c05820 30%,#702808 60%,#281408 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#281408)"></div>
@@ -947,7 +965,7 @@
       </div>
 
       <!-- Card 4: Iran / Strait of Hormuz -->
-      <div class="article-card" data-tag="dig-deeper" style="background:#080c18;display:none">
+      <div class="article-card" data-tag="dig-deeper" style="background:#080c18">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#d0d8e0 0%,#7898b8 30%,#304878 60%,#080c18 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#080c18)"></div>
@@ -979,7 +997,7 @@
       </div>
 
       <!-- Card 5: Pope Leo / Trump -->
-      <div class="article-card" data-tag="dig-deeper" style="background:#100c08;display:none">
+      <div class="article-card" data-tag="dig-deeper" style="background:#100c08">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#e03820 0%,#c89020 35%,#607838 65%,#100c08 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#100c08)"></div>
@@ -1010,10 +1028,11 @@
         </div>
       </div>
 
-      <!-- ── Catch Up cards ── -->
+      </div>
+      <div class="feed-panel" data-panel="catch-up">
 
       <!-- Card 1: Israeli/Lebanese ceasefire -->
-      <div class="article-card" data-tag="catch-up" style="display:none">
+      <div class="article-card" data-tag="catch-up">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#707868 0%,#484e40 35%,#282e20 60%,#111 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#111)"></div>
@@ -1045,7 +1064,7 @@
       </div>
 
       <!-- Card 2: D.C. arches (light architectural drawing image) -->
-      <div class="article-card" data-tag="catch-up" style="display:none">
+      <div class="article-card" data-tag="catch-up">
         <div class="article-img-wrap" style="background:#e8e4dc;display:flex;align-items:center;justify-content:center;border:8px solid #111">
           <div style="width:85%;height:85%;border:1px solid #bbb;background:#f0ece4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px">
             <div style="width:90%;height:120px;background:linear-gradient(180deg,#c8dce8 0%,#d8ceb8 40%,#c8bca8 100%);border-radius:1px;opacity:0.9"></div>
@@ -1079,7 +1098,7 @@
       </div>
 
       <!-- Card 3: Trump Christian supporters -->
-      <div class="article-card" data-tag="catch-up" style="display:none">
+      <div class="article-card" data-tag="catch-up">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#d0c080 0%,#908040 30%,#504828 55%,#111 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#111)"></div>
@@ -1111,7 +1130,7 @@
       </div>
 
       <!-- Card 4: California governor's race (Opinion — no save button) -->
-      <div class="article-card" data-tag="catch-up" style="display:none">
+      <div class="article-card" data-tag="catch-up">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#c09050 0%,#806030 35%,#503818 60%,#111 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#111)"></div>
@@ -1139,10 +1158,11 @@
         </div>
       </div>
 
-      <!-- ── What's Coming cards ── -->
+      </div>
+      <div class="feed-panel" data-panel="whats-coming">
 
       <!-- Card 1: RFK Jr. health agenda -->
-      <div class="article-card" data-tag="whats-coming" style="display:none">
+      <div class="article-card" data-tag="whats-coming">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#c8b090 0%,#907060 35%,#504030 60%,#111 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#111)"></div>
@@ -1174,7 +1194,7 @@
       </div>
 
       <!-- Card 2: Five weeks of free buses (Opinion) -->
-      <div class="article-card" data-tag="whats-coming" style="display:none">
+      <div class="article-card" data-tag="whats-coming">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#d08030 0%,#805020 35%,#402808 60%,#111 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#111)"></div>
@@ -1203,7 +1223,7 @@
       </div>
 
       <!-- Card 3: Iran deal (Opinion) -->
-      <div class="article-card" data-tag="whats-coming" style="display:none">
+      <div class="article-card" data-tag="whats-coming">
         <div class="article-img-wrap">
           <div class="article-img-bg" style="background:linear-gradient(170deg,#a09080 0%,#706050 35%,#403828 60%,#111 100%)"></div>
           <div class="article-img-fade" style="background:linear-gradient(transparent,#111)"></div>
@@ -1228,7 +1248,8 @@
         </div>
       </div>
 
-    </div>
+      </div><!-- end feed-panel whats-coming -->
+    </div><!-- end content -->
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
@@ -1278,6 +1299,7 @@
     </div>
   </div>
   <script>
+    // Dismiss button on each card
     document.querySelectorAll('.article-card').forEach(card => {
       const btn = document.createElement('button');
       btn.className = 'card-dismiss';
@@ -1286,13 +1308,9 @@
       btn.addEventListener('click', e => {
         e.stopPropagation();
         const h = card.offsetHeight;
-
-        // Phase 1: slide left + fade
         card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
         card.style.transform = 'translateX(-110%)';
         card.style.opacity = '0';
-
-        // Phase 2: collapse height so cards below slide up
         setTimeout(() => {
           card.style.transition = 'max-height 0.28s ease, margin-bottom 0.28s ease';
           card.style.overflow = 'hidden';
@@ -1302,32 +1320,48 @@
             card.style.marginBottom = '0';
           }));
         }, 300);
-
-        // Phase 3: fully hide
         setTimeout(() => { card.style.display = 'none'; }, 620);
       });
       card.appendChild(btn);
     });
 
+    // Tag selection with horizontal panel slide
     document.querySelectorAll('.tag').forEach(tag => {
       tag.addEventListener('click', () => {
         if (tag.classList.contains('selected')) return;
 
-        // Deselect current tag and hide its cards
-        document.querySelectorAll('.tag.selected').forEach(active => {
-          active.classList.remove('selected');
-          const oldKey = active.dataset.tag;
-          document.querySelectorAll('.feed-card, .video-card, .article-card').forEach(card => {
-            if (card.dataset.tag === oldKey) card.style.display = 'none';
-          });
-        });
+        const newKey = tag.dataset.tag;
+        const oldTag = document.querySelector('.tag.selected');
+        const oldKey = oldTag?.dataset.tag;
 
-        // Select clicked tag and show its cards
+        if (oldTag) oldTag.classList.remove('selected');
         tag.classList.add('selected');
-        const key = tag.dataset.tag;
-        document.querySelectorAll('.feed-card, .video-card, .article-card').forEach(card => {
-          if (card.dataset.tag === key) card.style.display = '';
-        });
+
+        const oldPanel = oldKey ? document.querySelector(`.feed-panel[data-panel="${oldKey}"]`) : null;
+        const newPanel = document.querySelector(`.feed-panel[data-panel="${newKey}"]`);
+
+        // Position new panel off-screen right instantly
+        newPanel.style.transition = 'none';
+        newPanel.style.transform = 'translateX(100%)';
+        newPanel.scrollTop = 0;
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          // Slide old out left, new in from right
+          if (oldPanel) {
+            oldPanel.style.transition = 'transform 0.35s ease';
+            oldPanel.style.transform = 'translateX(-100%)';
+          }
+          newPanel.style.transition = 'transform 0.35s ease';
+          newPanel.style.transform = 'translateX(0)';
+
+          // After animation: reset old panel to right for reuse
+          setTimeout(() => {
+            if (oldPanel) {
+              oldPanel.style.transition = 'none';
+              oldPanel.style.transform = 'translateX(100%)';
+            }
+          }, 360);
+        }));
       });
     });
   </script>

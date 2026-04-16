@@ -371,6 +371,26 @@
       overflow: hidden;
       margin-bottom: 8px;
       background: #111 !important;
+      position: relative;
+    }
+
+    .card-dismiss {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 26px;
+      height: 26px;
+      background: rgba(0,0,0,0.35);
+      border: none;
+      border-radius: 50%;
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
     }
 
     .article-img-bg {
@@ -1173,6 +1193,18 @@
     </div>
   </div>
   <script>
+    document.querySelectorAll('.article-card').forEach(card => {
+      const btn = document.createElement('button');
+      btn.className = 'card-dismiss';
+      btn.setAttribute('aria-label', 'Dismiss');
+      btn.textContent = '×';
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        card.style.display = 'none';
+      });
+      card.appendChild(btn);
+    });
+
     document.querySelectorAll('.tag').forEach(tag => {
       tag.addEventListener('click', () => {
         if (tag.classList.contains('selected')) return;

@@ -187,6 +187,18 @@ body {
     background: linear-gradient(160deg, #2a2a2a 0%, #1a1a1a 60%, #111 100%);
 }
 
+.photo-g1 {
+    background: linear-gradient(to bottom, #9ab0be 0%, #8a9a78 45%, #7a6a50 100%);
+}
+
+.photo-g2 {
+    background: linear-gradient(to bottom, #c8dde8 0%, #8ab5c8 50%, #507080 100%);
+}
+
+.photo-g3 {
+    background: linear-gradient(135deg, #1e3a4a 0%, #152a3a 55%, #0f1f2e 100%);
+}
+
 figcaption {
     font-size: 12px;
     line-height: 1.5;
@@ -270,6 +282,71 @@ figcaption {
 
 .article-body p:last-child {
     margin-bottom: 0;
+}
+
+/* ── Visual / Poll Card ── */
+.card-visual {
+    padding-top: 36px;
+}
+
+.headline-center {
+    text-align: center;
+    font-size: 30px;
+    line-height: 1.15;
+    margin-bottom: 0;
+}
+
+.bubble-chart {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+    margin: 28px 0;
+}
+
+.bubble-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.bubble-col-right {
+    padding-top: 48px;
+}
+
+.bubble {
+    border-radius: 50px;
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.bubble-blue {
+    background: #b8dde2;
+    color: #111;
+}
+
+.bubble-peach {
+    background: #f5d5b0;
+    color: #111;
+}
+
+.subheadline-center {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    color: #111;
+    margin-bottom: 24px;
+}
+
+.byline-visual {
+    margin-bottom: 6px;
+}
+
+.date-visual {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 6px;
 }
 
 /* ── Divider ── */

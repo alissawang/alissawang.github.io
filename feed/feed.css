@@ -1,0 +1,211 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    background: #fff;
+    color: #111;
+    min-height: 100vh;
+}
+
+/* ── Header ── */
+.feed-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 14px 20px;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.wp-logo {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 800;
+    font-size: 22px;
+    font-style: italic;
+    color: #111;
+    letter-spacing: -0.5px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.header-comments {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ── Feed ── */
+.feed {
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+/* ── Article Card ── */
+.card {
+    padding: 28px 20px 24px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ── Exclusive Badge ── */
+.badge-exclusive {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #111;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    width: fit-content;
+}
+
+.wp-logo-sm {
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+/* ── Category ── */
+.category {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #111;
+    margin-bottom: 12px;
+}
+
+/* ── Headline ── */
+.headline {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #111;
+    margin-bottom: 14px;
+}
+
+/* ── Deck/Subtitle ── */
+.deck {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+/* ── Date ── */
+.date {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 14px;
+}
+
+/* ── Reading Time Pill ── */
+.read-time-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1.5px solid #222;
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: 14px;
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background 0.15s;
+}
+
+.read-time-pill:hover {
+    background: #f2f2f2;
+}
+
+/* ── Article Figure & Photo ── */
+.article-figure {
+    margin-bottom: 16px;
+}
+
+.photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    position: relative;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Gradient fallbacks shown when images are absent or fail to load */
+.photo-1 {
+    background: radial-gradient(ellipse at 40% 60%, #3b4a7a 0%, #1a1f3a 50%, #0d1020 100%);
+}
+
+.photo-2 {
+    background: radial-gradient(ellipse at 50% 80%, #c94a00 0%, #6b1a00 40%, #0d0600 100%);
+}
+
+.photo-3 {
+    background: linear-gradient(160deg, #2a2a2a 0%, #1a1a1a 60%, #111 100%);
+}
+
+figcaption {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #888;
+    margin-top: 8px;
+}
+
+/* ── Byline ── */
+.byline {
+    font-size: 14px;
+    color: #333;
+}
+
+.author {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+}
+
+/* ── Divider ── */
+.divider {
+    height: 8px;
+    background: #f0f0f0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}

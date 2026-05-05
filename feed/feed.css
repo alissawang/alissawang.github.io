@@ -171,6 +171,10 @@ body {
 }
 
 /* Gradient fallbacks shown when images are absent or fail to load */
+.photo-0 {
+    background: linear-gradient(to bottom, #b0c4ce 0%, #7a9aaa 45%, #4a7080 100%);
+}
+
 .photo-1 {
     background: radial-gradient(ellipse at 40% 60%, #3b4a7a 0%, #1a1f3a 50%, #0d1020 100%);
 }
@@ -200,6 +204,22 @@ figcaption {
     text-decoration: underline;
     text-underline-offset: 2px;
     cursor: pointer;
+}
+
+/* ── Article Body Text ── */
+.article-body {
+    margin-top: 20px;
+}
+
+.article-body p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: #222;
+    margin-bottom: 22px;
+}
+
+.article-body p:last-child {
+    margin-bottom: 0;
 }
 
 /* ── Divider ── */

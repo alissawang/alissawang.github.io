@@ -11,46 +11,6 @@ body {
     min-height: 100vh;
 }
 
-/* ── Header ── */
-.feed-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: #fff;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 14px 20px;
-}
-
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 480px;
-    margin: 0 auto;
-}
-
-.wp-logo {
-    font-family: "Playfair Display", Georgia, serif;
-    font-weight: 800;
-    font-size: 22px;
-    font-style: italic;
-    color: #111;
-    letter-spacing: -0.5px;
-}
-
-.header-actions {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    font-size: 14px;
-    color: #555;
-}
-
-.header-comments {
-    font-size: 14px;
-    font-weight: 600;
-}
-
 /* ── Feed ── */
 .feed {
     max-width: 480px;
@@ -233,7 +193,7 @@ figcaption {
     padding: 10px 16px;
     background: #fff;
     position: sticky;
-    top: 51px;
+    top: 0;
     z-index: 90;
     overflow-x: auto;
     scrollbar-width: none;

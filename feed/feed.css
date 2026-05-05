@@ -224,7 +224,6 @@ figcaption {
     gap: 8px;
     padding: 10px 16px;
     background: #fff;
-    border-bottom: 1px solid #e8e8e8;
     position: sticky;
     top: 51px;
     z-index: 90;

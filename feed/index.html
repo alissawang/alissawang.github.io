@@ -48,14 +48,14 @@
 
         <div class="divider"></div>
 
-        <nav class="tab-bar">
-            <button class="tab active" data-tab="tab-why">Why is This Happening?</button>
-            <button class="tab" data-tab="tab-ground">View From the Ground</button>
-            <button class="tab" data-tab="tab-next">What Happens Next</button>
+        <nav class="bubble-bar">
+            <button class="bubble-nav active" data-section="tab-why">Why is This Happening?</button>
+            <button class="bubble-nav" data-section="tab-ground">View From the Ground</button>
+            <button class="bubble-nav" data-section="tab-next">What Happens Next</button>
         </nav>
 
-        <!-- Tab: Why is This Happening? -->
-        <div id="tab-why" class="tab-panel active">
+        <!-- Section: Why is This Happening? -->
+        <div id="tab-why" class="feed-section">
 
             <!-- Article 1 -->
             <article class="card">
@@ -119,8 +119,8 @@
 
         </div>
 
-        <!-- Tab: View From the Ground -->
-        <div id="tab-ground" class="tab-panel">
+        <!-- Section: View From the Ground -->
+        <div id="tab-ground" class="feed-section">
 
             <!-- Ground Article 1 -->
             <article class="card">
@@ -205,22 +205,39 @@
 
         </div>
 
-        <!-- Tab: What Happens Next -->
-        <div id="tab-next" class="tab-panel"></div>
+        <!-- Section: What Happens Next -->
+        <div id="tab-next" class="feed-section"></div>
 
     </main>
 
     <script>
-        const tabs = document.querySelectorAll('.tab');
-        const panels = document.querySelectorAll('.tab-panel');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById(tab.dataset.tab).classList.add('active');
+        const sections = ['tab-why', 'tab-ground', 'tab-next'].map(id => document.getElementById(id));
+        const bubbles = document.querySelectorAll('.bubble-nav');
+
+        function stickyH() {
+            return document.querySelector('.feed-header').offsetHeight +
+                   document.querySelector('.bubble-bar').offsetHeight;
+        }
+
+        function updateBubbles() {
+            const threshold = stickyH() + 8;
+            let active = 0;
+            sections.forEach((sec, i) => {
+                if (sec && sec.getBoundingClientRect().top <= threshold) active = i;
+            });
+            bubbles.forEach((b, i) => b.classList.toggle('active', i === active));
+        }
+
+        bubbles.forEach((bubble, i) => {
+            bubble.addEventListener('click', () => {
+                if (!sections[i]) return;
+                const y = sections[i].getBoundingClientRect().top + window.scrollY - stickyH();
+                window.scrollTo({ top: y, behavior: 'smooth' });
             });
         });
+
+        window.addEventListener('scroll', updateBubbles, { passive: true });
+        updateBubbles();
     </script>
 </body>
 </html>

@@ -238,29 +238,31 @@
 
     <script src="placeholder.js"></script>
     <script>
+        const bar = document.querySelector('.bubble-bar');
         const sections = ['tab-why', 'tab-ground', 'tab-next'].map(id => document.getElementById(id));
         const bubbles = document.querySelectorAll('.bubble-nav');
 
-        function stickyH() {
-            return document.querySelector('.bubble-bar').offsetHeight;
-        }
+        // Scroll so the section top lands exactly at the bar's bottom edge
+        bubbles.forEach((bubble, i) => {
+            bubble.addEventListener('click', () => {
+                const sec = sections[i];
+                if (!sec) return;
+                window.scrollBy({
+                    top: sec.getBoundingClientRect().top - bar.getBoundingClientRect().bottom,
+                    behavior: 'smooth'
+                });
+            });
+        });
 
+        // Highlight whichever section's top has passed the bar's bottom edge
         function updateBubbles() {
-            const threshold = stickyH() + 8;
+            const barBottom = bar.getBoundingClientRect().bottom + 8;
             let active = 0;
             sections.forEach((sec, i) => {
-                if (sec && sec.getBoundingClientRect().top <= threshold) active = i;
+                if (sec && sec.getBoundingClientRect().top <= barBottom) active = i;
             });
             bubbles.forEach((b, i) => b.classList.toggle('active', i === active));
         }
-
-        bubbles.forEach((bubble, i) => {
-            bubble.addEventListener('click', () => {
-                if (!sections[i]) return;
-                const y = sections[i].getBoundingClientRect().top + window.scrollY - stickyH();
-                window.scrollTo({ top: y, behavior: 'smooth' });
-            });
-        });
 
         window.addEventListener('scroll', updateBubbles, { passive: true });
         updateBubbles();
